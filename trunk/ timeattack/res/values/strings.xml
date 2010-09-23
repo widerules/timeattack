@@ -20,4 +20,5 @@
 <string name="launch_time">Launch time : </string>
 <string name="arrival_time">Arrival time : </string>
 <string name="remaining_time">Remaining time : </string>
+<string name="date">Date : </string>
 </resources>

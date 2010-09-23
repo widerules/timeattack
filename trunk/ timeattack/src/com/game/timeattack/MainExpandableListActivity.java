@@ -60,11 +60,12 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			Log.d(TAG, "Message received:" + msg.what);
 			switch (msg.what) {
 			case ADD_UPDATE_DATA:
-				boolean alreadyIn = updateDatas.contains((UpdateData) msg.obj);
-				Log.d(TAG, "Object already inside : " + alreadyIn);
-				if (!alreadyIn) {
-					updateDatas.add((UpdateData) msg.obj);
-				}
+				// boolean alreadyIn = updateDatas.contains((UpdateData)
+				// msg.obj);
+				// Log.d(TAG, "Object already inside : " + alreadyIn);
+				// if (!alreadyIn) {
+				updateDatas.add((UpdateData) msg.obj);
+				// }
 				break;
 			case START_UPDATE:
 				KILL_ALL_THREADS = false;
@@ -100,7 +101,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			for (Iterator<UpdateData> iterator = updateDatas.iterator(); iterator
 					.hasNext();) {
 				UpdateData tmp = (UpdateData) iterator.next();
-				tmp.v.setText(calcRemainingTime(tmp.d, tmp.h, tmp.m, tmp.s));
+				tmp.v.setText(calcRemainingTime(0, 0, tmp.day, tmp.h, tmp.m,
+						tmp.s));
 				mHandler.removeCallbacks(this);
 			}
 			if (!KILL_ALL_THREADS) {
@@ -192,25 +194,25 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			/**
 			 * launchtime
 			 */
-			cal.add(Calendar.HOUR_OF_DAY, -h);
-			cal.add(Calendar.MINUTE, -m);
-			cal.add(Calendar.SECOND, -s);
-			cal.add(Calendar.SECOND, -2 * d);
+			Utils.addToCalendar(cal, 0, -h, -m, -s - 2 * d);
+			int launchH = Utils.sToI(Utils.getFromCalendar(cal, "%tH"));
+			int launchM = Utils.sToI(Utils.getFromCalendar(cal, "%tM"));
+			int launchS = Utils.sToI(Utils.getFromCalendar(cal, "%tS"));
+			// cal.add(Calendar.HOUR_OF_DAY, -h);
+			// cal.add(Calendar.MINUTE, -m);
+			// cal.add(Calendar.SECOND, -s);
+			// cal.add(Calendar.SECOND, -2 * d);
 
 			/**
 			 * update thread
 			 */
 			TextView remainingTime = holder.remainingTime;
-			UpdateData updateData = new UpdateData(remainingTime, 0, attack_h,
-					attack_m, attack_s + d);
+			UpdateData updateData = new UpdateData(remainingTime, 0, 0, 0,
+					launchH, launchM, launchS + d);
 			Message msg = new Message();
 			msg.what = ADD_UPDATE_DATA;
 			msg.obj = updateData;
 			mHandler.sendMessage(msg);
-		}
-
-		private void calcLaunchTime() {
-
 		}
 
 		@Override
@@ -221,9 +223,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			if (holder == null) {
 				holder = new ParentViewHolder();
 				holder.name = (TextView) v.findViewById(R.id.a_name);
-				holder.h = (TextView) v.findViewById(R.id.a_h);
-				holder.m = (TextView) v.findViewById(R.id.a_m);
-				holder.s = (TextView) v.findViewById(R.id.a_s);
+				holder.time = (TextView) v.findViewById(R.id.a_time);
+				holder.date = (TextView) v.findViewById(R.id.a_date);
 				holder.edit = (ImageView) v.findViewById(R.id.edit_group);
 				holder.del = (ImageView) v.findViewById(R.id.del_group);
 				holder.add = (ImageView) v.findViewById(R.id.add);
@@ -231,17 +232,22 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 			int groupId = Utils.getIntFromCol(cursor, Attack._ID);
 			String name = Utils.getStringFromCol(cursor, Attack.NAME);
+			int year = Utils.getIntFromCol(cursor, Attack.YEAR);
+			int month = Utils.getIntFromCol(cursor, Attack.MONTH);
+			int day = Utils.getIntFromCol(cursor, Attack.DAY);
 			int h = Utils.getIntFromCol(cursor, Attack.H);
 			int m = Utils.getIntFromCol(cursor, Attack.M);
 			int s = Utils.getIntFromCol(cursor, Attack.S);
 
 			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, year);
+			cal.set(Calendar.MONTH, month);
+			cal.set(Calendar.DAY_OF_MONTH, day);
 			cal.set(Calendar.HOUR_OF_DAY, h);
 			cal.set(Calendar.MINUTE, m);
 			cal.set(Calendar.SECOND, s);
-			Formatter formatter = new Formatter();
-			formatter.format("%tr", cal);
-			holder.h.setText(formatter.toString());
+			holder.time.setText("" + Utils.getFromCalendar(cal, "%tr"));
+			holder.date.setText("" + Utils.getFromCalendar(cal, "%tF"));
 
 			holder.groupId = groupId;
 			holder.name.setText(name);
@@ -356,12 +362,15 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 	public class UpdateData {
 		public TextView v;
-		public int d, h, m, s;
+		public int year, month, day, h, m, s;
 
-		public UpdateData(TextView v, int d, int h, int m, int s) {
+		public UpdateData(TextView v, int year, int month, int d, int h, int m,
+				int s) {
 			super();
 			this.v = v;
-			this.d = d;
+			this.year = year;
+			this.month = month;
+			this.day = d;
 			this.h = h;
 			this.m = m;
 			this.s = s;
@@ -402,7 +411,7 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 	static class ParentViewHolder implements Holder {
 		int groupId;
-		TextView name, h, m, s;
+		TextView name, time, date;
 		ImageView edit, del, add;
 
 		@Override
@@ -439,8 +448,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 		setContentView(R.layout.expandablelist);
 
 		Cursor cursor = managedQuery(Attack.CONTENT_URI, new String[] {
-				Attack._ID, Attack.NAME, Attack.H, Attack.M, Attack.S }, null,
-				null, null);
+				Attack._ID, Attack.NAME, Attack.YEAR, Attack.MONTH, Attack.DAY,
+				Attack.H, Attack.M, Attack.S }, null, null, null);
 
 		MyCursorTreeAdapter adapter = new MyCursorTreeAdapter(cursor, this);
 		setListAdapter(adapter);
@@ -602,12 +611,13 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	/**
 	 * in: launch time
 	 * 
-	 * @param d
+	 * @param day
 	 * @param h
 	 * @param m
 	 * @param s
 	 */
-	private String calcRemainingTime(int d, int h, int m, int s) {
+	private String calcRemainingTime(int year, int month, int day, int h,
+			int m, int s) {
 		Formatter currentFormatter = new Formatter();
 		Formatter launchFormatter = new Formatter();
 		Formatter diffFormatter = new Formatter();

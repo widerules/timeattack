@@ -2,7 +2,6 @@ package com.game.timeattack.provider;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +19,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.game.timeattack.Utils;
 import com.game.timeattack.provider.TimeAttack.Attack;
 import com.game.timeattack.provider.TimeAttack.Fleet;
 
@@ -32,7 +32,7 @@ public class MyContentProvider extends ContentProvider {
 	private static final String tag = "MyContentProvider";
 	private static final String pre = "DBOpenHelper: ";
 	private static final String DATABASE_NAME = "timeattackdb";
-	private static final int DATABASE_VERSION = 5;
+	private static final int DATABASE_VERSION = 6;
 
 	private static final UriMatcher uriMatcher;
 
@@ -146,8 +146,21 @@ public class MyContentProvider extends ContentProvider {
 
 		switch (uriMatcher.match(uri)) {
 		case ATTACKS:
+			Calendar cal = Calendar.getInstance();
+
 			if (values.containsKey(Attack.NAME) == false) {
 				values.put(Attack.NAME, "Attack name");
+			}
+			if (values.containsKey(Attack.YEAR) == false) {
+				values.put(Attack.YEAR, "" + Utils.getFromCalendar(cal, "%tY"));
+			}
+			if (values.containsKey(Attack.MONTH) == false) {
+				values
+						.put(Attack.MONTH, ""
+								+ Utils.getFromCalendar(cal, "%tm"));
+			}
+			if (values.containsKey(Attack.DAY) == false) {
+				values.put(Attack.DAY, "" + Utils.getFromCalendar(cal, "%td"));
 			}
 			if (values.containsKey(Attack.H) == false) {
 				values.put(Attack.H, "01");
@@ -317,6 +330,9 @@ public class MyContentProvider extends ContentProvider {
 		sAttackProjectionMap = new HashMap<String, String>();
 		sAttackProjectionMap.put(Attack._ID, Attack._ID);
 		sAttackProjectionMap.put(Attack.NAME, Attack.NAME);
+		sAttackProjectionMap.put(Attack.YEAR, Attack.YEAR);
+		sAttackProjectionMap.put(Attack.MONTH, Attack.MONTH);
+		sAttackProjectionMap.put(Attack.DAY, Attack.DAY);
 		sAttackProjectionMap.put(Attack.H, Attack.H);
 		sAttackProjectionMap.put(Attack.M, Attack.M);
 		sAttackProjectionMap.put(Attack.S, Attack.S);
@@ -345,68 +361,42 @@ public class MyContentProvider extends ContentProvider {
 	}
 
 	public void calcChild(SQLiteDatabase aDb, int agroupId, int achildId) {
-		Calendar cal = Calendar.getInstance();
-		String[] projection = { Attack.H, Attack.M, Attack.S };
+		String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
+				Attack.H, Attack.M, Attack.S };
 		String selection = Attack._ID + "=" + agroupId;
 		Cursor cursor = aDb.query(Attack.TABLE_NAME, projection, selection,
 				null, null, null, null);
-		cursor.moveToFirst();
-		int h1 = new Integer(cursor.getString(cursor
-				.getColumnIndexOrThrow(Attack.H)));
-		int h2 = new Integer(cursor.getString(cursor
-				.getColumnIndexOrThrow(Attack.M)));
-		int h3 = new Integer(cursor.getString(cursor
-				.getColumnIndexOrThrow(Attack.S)));
+		int attackYear = Utils.getIntFromCol(cursor, Attack.YEAR);
+		int attackMonth = Utils.getIntFromCol(cursor, Attack.MONTH);
+		int attackDay = Utils.getIntFromCol(cursor, Attack.DAY);
+		int attackH = Utils.getIntFromCol(cursor, Attack.H);
+		int attackM = Utils.getIntFromCol(cursor, Attack.M);
+		int attackS = Utils.getIntFromCol(cursor, Attack.S);
 		String[] projection2 = { Fleet.H, Fleet.M, Fleet.S, Fleet.DELTA };
 		String selection2 = Fleet._ID + "=" + achildId;
 		Cursor cursor2 = aDb.query(Fleet.TABLE_NAME, projection2, selection2,
 				null, null, null, null);
-		cursor2.moveToFirst();
-		String h = cursor2.getString(cursor2.getColumnIndexOrThrow(Fleet.H));
-		String m = cursor2.getString(cursor2.getColumnIndexOrThrow(Fleet.M));
-		String s = cursor2.getString(cursor2.getColumnIndexOrThrow(Fleet.S));
-		String d = cursor2
-				.getString(cursor2.getColumnIndexOrThrow(Fleet.DELTA));
-		int hh;
-		try {
-			hh = new Integer(h);
-		} catch (Exception e3) {
-			hh = 0;
-		}
-		int mm;
-		try {
-			mm = new Integer(m);
-		} catch (Exception e2) {
-			mm = 0;
-		}
-		int ss;
-		try {
-			ss = new Integer(s);
-		} catch (Exception e1) {
-			ss = 0;
-		}
-		int dd;
-		try {
-			dd = new Integer(d);
-		} catch (Exception e) {
-			dd = 0;
-		}
+		int fleetH = Utils.getIntFromCol(cursor2, Fleet.H);
+		int fleetM = Utils.getIntFromCol(cursor2, Fleet.M);
+		int fleetS = Utils.getIntFromCol(cursor2, Fleet.S);
+		int fleetDelta = Utils.getIntFromCol(cursor2, Fleet.DELTA);
 
-		cal.set(Calendar.HOUR_OF_DAY, h1);
-		cal.set(Calendar.MINUTE, h2);
-		cal.set(Calendar.SECOND, h3);
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, attackYear);
+		cal.set(Calendar.MONTH, attackMonth);
+		cal.set(Calendar.DAY_OF_MONTH, attackDay);
+		cal.set(Calendar.HOUR_OF_DAY, attackH);
+		cal.set(Calendar.MINUTE, attackM);
+		cal.set(Calendar.SECOND, attackS);
 
-		cal.add(Calendar.HOUR_OF_DAY, -hh);
-		cal.add(Calendar.MINUTE, -mm);
-		cal.add(Calendar.SECOND, -ss);
-
-		cal.add(Calendar.SECOND, -dd);
-		Formatter formatter = new Formatter();
-		formatter.format("%tr", cal);
-
-		// Date time = cal.getTime();
-		String timeToLaunch = formatter.toString();
-		// String timeToLaunch = simpleDateFormat.format(time);
+		// cal.add(Calendar.HOUR_OF_DAY, -hh);
+		// cal.add(Calendar.MINUTE, -mm);
+		// cal.add(Calendar.SECOND, -ss);
+		//
+		// cal.add(Calendar.SECOND, -dd);
+		cal = Utils.addToCalendar(cal, 0, -fleetH, -fleetM, -fleetS
+				- fleetDelta);
+		String timeToLaunch = Utils.formatCalendar(cal, "%tr");
 		ContentValues values = new ContentValues();
 		values.put(Fleet.LAUNCH_TIME, timeToLaunch);
 		String where = "_id=" + achildId;

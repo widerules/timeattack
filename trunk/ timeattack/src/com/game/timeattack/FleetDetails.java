@@ -166,14 +166,17 @@ public class FleetDetails extends Activity implements OnClickListener,
 		case R.id.travel_duration_edittext:
 			intent.putExtra("HIDE_DELTA", true);
 			intent.putExtra("HIDE_NAME", true);
+			intent.putExtra("HIDE_DATE", true);
 			break;
 		case R.id.delta_edittext:
 			intent.putExtra("HIDE_H_M_S", true);
 			intent.putExtra("HIDE_NAME", true);
+			intent.putExtra("HIDE_DATE", true);
 			break;
 		case R.id.fleet_name_edittext:
 			intent.putExtra("HIDE_DELTA", true);
 			intent.putExtra("HIDE_H_M_S", true);
+			intent.putExtra("HIDE_DATE", true);
 			break;
 		default:
 			throw new IllegalArgumentException("Button not handled");
