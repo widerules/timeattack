@@ -155,12 +155,12 @@ public class MyContentProvider extends ContentProvider {
 				values.put(Attack.YEAR, "" + Utils.getFromCalendar(cal, "%tY"));
 			}
 			if (values.containsKey(Attack.MONTH) == false) {
-				values
-						.put(Attack.MONTH, ""
-								+ Utils.getFromCalendar(cal, "%tm"));
+				int month = Utils.sToI(Utils.getFromCalendar(cal, "%tm"));
+				values.put(Attack.MONTH, "" + month);
 			}
 			if (values.containsKey(Attack.DAY) == false) {
-				values.put(Attack.DAY, "" + Utils.getFromCalendar(cal, "%td"));
+				int day = Utils.sToI(Utils.getFromCalendar(cal, "%td"));
+				values.put(Attack.DAY, "" + (day + 1));
 			}
 			if (values.containsKey(Attack.H) == false) {
 				values.put(Attack.H, "01");
@@ -366,6 +366,7 @@ public class MyContentProvider extends ContentProvider {
 		String selection = Attack._ID + "=" + agroupId;
 		Cursor cursor = aDb.query(Attack.TABLE_NAME, projection, selection,
 				null, null, null, null);
+		cursor.moveToFirst();
 		int attackYear = Utils.getIntFromCol(cursor, Attack.YEAR);
 		int attackMonth = Utils.getIntFromCol(cursor, Attack.MONTH);
 		int attackDay = Utils.getIntFromCol(cursor, Attack.DAY);
@@ -376,6 +377,7 @@ public class MyContentProvider extends ContentProvider {
 		String selection2 = Fleet._ID + "=" + achildId;
 		Cursor cursor2 = aDb.query(Fleet.TABLE_NAME, projection2, selection2,
 				null, null, null, null);
+		cursor2.moveToFirst();
 		int fleetH = Utils.getIntFromCol(cursor2, Fleet.H);
 		int fleetM = Utils.getIntFromCol(cursor2, Fleet.M);
 		int fleetS = Utils.getIntFromCol(cursor2, Fleet.S);
@@ -383,12 +385,14 @@ public class MyContentProvider extends ContentProvider {
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, attackYear);
-		cal.set(Calendar.MONTH, attackMonth);
+		cal.set(Calendar.MONTH, attackMonth - 1);
 		cal.set(Calendar.DAY_OF_MONTH, attackDay);
 		cal.set(Calendar.HOUR_OF_DAY, attackH);
 		cal.set(Calendar.MINUTE, attackM);
 		cal.set(Calendar.SECOND, attackS);
 
+		Log.d(TAG, "new time to launch:" + attackYear + " " + attackMonth + " "
+				+ attackDay);
 		// cal.add(Calendar.HOUR_OF_DAY, -hh);
 		// cal.add(Calendar.MINUTE, -mm);
 		// cal.add(Calendar.SECOND, -ss);
@@ -396,7 +400,9 @@ public class MyContentProvider extends ContentProvider {
 		// cal.add(Calendar.SECOND, -dd);
 		cal = Utils.addToCalendar(cal, 0, -fleetH, -fleetM, -fleetS
 				- fleetDelta);
-		String timeToLaunch = Utils.formatCalendar(cal, "%tr");
+		String timeToLaunch = Utils.formatCalendar(cal, "%td") + " "
+				+ Utils.formatCalendar(cal, "%tb") + " "
+				+ Utils.formatCalendar(cal, "%tr");
 		ContentValues values = new ContentValues();
 		values.put(Fleet.LAUNCH_TIME, timeToLaunch);
 		String where = "_id=" + achildId;

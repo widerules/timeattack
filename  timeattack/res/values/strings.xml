@@ -19,6 +19,7 @@
 <string name="name">Name : </string>
 <string name="launch_time">Launch time : </string>
 <string name="arrival_time">Arrival time : </string>
-<string name="remaining_time">Remaining time : </string>
+<string name="remaining_time">Remaining : </string>
 <string name="date">Date : </string>
+<string name="already_launched">Already launched</string>
 </resources>

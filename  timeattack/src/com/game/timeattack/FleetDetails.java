@@ -1,7 +1,6 @@
 package com.game.timeattack;
 
 import java.util.Calendar;
-import java.util.Formatter;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -77,23 +76,31 @@ public class FleetDetails extends Activity implements OnClickListener,
 			mAfter.setChecked(true);
 		}
 
-		String[] projection = { Attack.NAME, Attack.H, Attack.M, Attack.S };
+		String[] projection = { Attack.NAME, Attack.YEAR, Attack.MONTH,
+				Attack.DAY, Attack.H, Attack.M, Attack.S };
 		String selection = Attack._ID + "=" + mGroupId;
 		Cursor attackCursor = getContentResolver().query(Attack.CONTENT_URI,
 				projection, selection, null, null);
 		attackCursor.moveToFirst();
 		String name = Utils.getStringFromCol(attackCursor, Attack.NAME);
+		int year = Utils.getIntFromCol(attackCursor, Attack.YEAR);
+		int month = Utils.getIntFromCol(attackCursor, Attack.MONTH);
+		int day = Utils.getIntFromCol(attackCursor, Attack.DAY);
 		int h = Utils.getIntFromCol(attackCursor, Attack.H);
 		int m = Utils.getIntFromCol(attackCursor, Attack.M);
 		int s = Utils.getIntFromCol(attackCursor, Attack.S);
-		Formatter formatter = new Formatter();
 		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month - 1);
+		calendar.set(Calendar.DAY_OF_MONTH, day);
 		calendar.set(Calendar.HOUR_OF_DAY, h);
 		calendar.set(Calendar.MINUTE, m);
 		calendar.set(Calendar.SECOND, s);
 		TextView timeOfTheAttack = (TextView) findViewById(R.id.time_of_the_attack);
 		TextView namelabel = (TextView) findViewById(R.id.attack_name);
-		timeOfTheAttack.setText(formatter.format("%tr", calendar).toString());
+		String dateAndTime = Utils.formatCalendar(calendar, "%tF") + " "
+				+ Utils.formatCalendar(calendar, "%tr");
+		timeOfTheAttack.setText(dateAndTime);
 		namelabel.setText(name);
 	}
 
@@ -113,35 +120,6 @@ public class FleetDetails extends Activity implements OnClickListener,
 		cursor.moveToFirst();
 		mName.setText(cursor
 				.getString(cursor.getColumnIndexOrThrow(Fleet.NAME)));
-		String h = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.H));
-		String m = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.M));
-		String s = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.S));
-		Formatter formatter = new Formatter();
-		Calendar calendar = Calendar.getInstance();
-
-		int hh;
-		try {
-			hh = new Integer(h);
-		} catch (Exception e3) {
-			hh = 0;
-		}
-		int mm;
-		try {
-			mm = new Integer(m);
-		} catch (Exception e2) {
-			mm = 0;
-		}
-		int ss;
-		try {
-			ss = new Integer(s);
-		} catch (Exception e1) {
-			ss = 0;
-		}
-		calendar.set(Calendar.HOUR_OF_DAY, hh);
-		calendar.set(Calendar.MINUTE, mm);
-		calendar.set(Calendar.SECOND, ss);
-
-		mDuration.setText(formatter.format("%tT", calendar).toString());
 		String d = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.DELTA));
 		int delta;
 		try {
@@ -149,7 +127,26 @@ public class FleetDetails extends Activity implements OnClickListener,
 		} catch (Exception e) {
 			delta = 0;
 		}
+		if (delta < 0) {
+			mAfter.setChecked(true);
+		}
 		mDelta.setText("" + Math.abs(delta));
+		Calendar cal = Calendar.getInstance();
+		cal.setLenient(true);
+		// cal.set(Calendar.HOUR_OF_DAY, Utils.getIntFromCol(cursor, Fleet.H));
+		cal.set(Calendar.MINUTE, Utils.getIntFromCol(cursor, Fleet.M));
+		cal.set(Calendar.SECOND, Utils.getIntFromCol(cursor, Fleet.S));
+		String h = Utils.getStringFromCol(cursor, Fleet.H);
+		if (h.length() < 2) {
+			if (h.length() == 0) {
+				h = "00";
+			} else {
+				h = "0" + h;
+			}
+		}
+		String duration = h + ":" + Utils.formatCalendar(cal, "%tM") + ":"
+				+ Utils.formatCalendar(cal, "%tS");
+		mDuration.setText(duration);
 
 		mLaunchAt.setText(cursor.getString(cursor
 				.getColumnIndexOrThrow(Fleet.LAUNCH_TIME)));
