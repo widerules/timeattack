@@ -61,7 +61,7 @@ public class TimeAttack {
 		/**
 		 * The default sort order for this table
 		 */
-		public static final String DEFAULT_SORT_ORDER = "delta ASC";
+		public static final String DEFAULT_SORT_ORDER = "delta DESC";
 
 		/**
 		 * The MIME type of {@link #CONTENT_URI} providing a directory of

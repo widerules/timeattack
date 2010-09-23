@@ -101,8 +101,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			for (Iterator<UpdateData> iterator = updateDatas.iterator(); iterator
 					.hasNext();) {
 				UpdateData tmp = (UpdateData) iterator.next();
-				tmp.v.setText(calcRemainingTime(0, 0, tmp.day, tmp.h, tmp.m,
-						tmp.s));
+				tmp.v.setText(calcRemainingTime(tmp.year, tmp.month, tmp.day,
+						tmp.h, tmp.m, tmp.s));
 				mHandler.removeCallbacks(this);
 			}
 			if (!KILL_ALL_THREADS) {
@@ -156,45 +156,48 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			holder.timeToLaunch.setText(launchTime);
 			v.setTag(holder);
 
-			int h = Utils.getIntFromCol(cursor, Fleet.H);
-			int m = Utils.getIntFromCol(cursor, Fleet.M);
-			int s = Utils.getIntFromCol(cursor, Fleet.S);
-			int d = Utils.sToI(delta);
+			int fleetH = Utils.getIntFromCol(cursor, Fleet.H);
+			int fleetM = Utils.getIntFromCol(cursor, Fleet.M);
+			int fleetS = Utils.getIntFromCol(cursor, Fleet.S);
+			int fleetDelta = Utils.sToI(delta);
 
-			String[] projection = { Attack.H, Attack.M, Attack.S };
+			String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
+					Attack.H, Attack.M, Attack.S };
 			String selection = Attack._ID + "=" + groupId;
 			Cursor cursor2 = getContentResolver().query(Attack.CONTENT_URI,
 					projection, selection, null, null);
 			cursor2.moveToFirst();
+			int attack_year = Utils.getIntFromCol(cursor2, Attack.YEAR);
+			int attack_month = Utils.getIntFromCol(cursor2, Attack.MONTH);
+			int attack_day = Utils.getIntFromCol(cursor2, Attack.DAY);
 			int attack_h = Utils.getIntFromCol(cursor2, Attack.H);
 			int attack_m = Utils.getIntFromCol(cursor2, Attack.M);
 			int attack_s = Utils.getIntFromCol(cursor2, Attack.S);
 
 			/**
-			 * launchtime
-			 */
-			cal = Calendar.getInstance();
-			cal.set(Calendar.HOUR_OF_DAY, h);
-			cal.set(Calendar.MINUTE, m);
-			cal.set(Calendar.SECOND, s);
-
-			/**
 			 * Arrival time
 			 */
 			cal = Calendar.getInstance();
-			Formatter formatter = new Formatter();
+			cal.set(Calendar.YEAR, attack_year);
+			cal.set(Calendar.MONTH, attack_month - 1);
+			cal.set(Calendar.DAY_OF_MONTH, attack_day);
 			cal.set(Calendar.HOUR_OF_DAY, attack_h);
 			cal.set(Calendar.MINUTE, attack_m);
 			cal.set(Calendar.SECOND, attack_s);
-			cal.add(Calendar.SECOND, d);
-			formatter = new Formatter();
-			formatter.format("%tr", cal);
-			holder.arrivalTime.setText(formatter.toString());
+			cal.add(Calendar.SECOND, -fleetDelta);
+			String arrivalTime = Utils.formatCalendar(cal, "%td") + " "
+					+ Utils.formatCalendar(cal, "%tb") + " "
+					+ Utils.formatCalendar(cal, "%tr");
+			holder.arrivalTime.setText(arrivalTime);
 
 			/**
 			 * launchtime
 			 */
-			Utils.addToCalendar(cal, 0, -h, -m, -s - 2 * d);
+			Utils.addToCalendar(cal, 0, -fleetH, -fleetM, -fleetS - 2
+					* fleetDelta);
+			int launchYear = Utils.sToI(Utils.getFromCalendar(cal, "%tY"));
+			int launchMonth = Utils.sToI(Utils.getFromCalendar(cal, "%tm"));
+			int launchDay = Utils.sToI(Utils.getFromCalendar(cal, "%td"));
 			int launchH = Utils.sToI(Utils.getFromCalendar(cal, "%tH"));
 			int launchM = Utils.sToI(Utils.getFromCalendar(cal, "%tM"));
 			int launchS = Utils.sToI(Utils.getFromCalendar(cal, "%tS"));
@@ -207,8 +210,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			 * update thread
 			 */
 			TextView remainingTime = holder.remainingTime;
-			UpdateData updateData = new UpdateData(remainingTime, 0, 0, 0,
-					launchH, launchM, launchS + d);
+			UpdateData updateData = new UpdateData(remainingTime, launchYear,
+					launchMonth, launchDay, launchH, launchM, launchS);
 			Message msg = new Message();
 			msg.what = ADD_UPDATE_DATA;
 			msg.obj = updateData;
@@ -241,7 +244,7 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.YEAR, year);
-			cal.set(Calendar.MONTH, month);
+			cal.set(Calendar.MONTH, month - 1);
 			cal.set(Calendar.DAY_OF_MONTH, day);
 			cal.set(Calendar.HOUR_OF_DAY, h);
 			cal.set(Calendar.MINUTE, m);
@@ -280,7 +283,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 					intent = new Intent(getApplicationContext(), Edit1.class);
 					intent.putExtra("groupId", h.getGroupId());
 					intent.putExtra("code", EDITION_ADD_CHILD);
-					intent.putExtra("childId", -1);
+					intent.putExtra("childId", -2);
+					intent.putExtra("HIDE_DATE", true);
 					startActivity(intent);
 					break;
 				case R.id.edit:
@@ -624,11 +628,14 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 		Calendar currentCal = Calendar.getInstance();
 		Calendar launchCal = Calendar.getInstance();
+		launchCal.set(Calendar.YEAR, year);
+		launchCal.set(Calendar.MONTH, month - 1);
+		launchCal.set(Calendar.DAY_OF_MONTH, day);
 		launchCal.set(Calendar.HOUR_OF_DAY, h);
 		launchCal.set(Calendar.MINUTE, m);
 		launchCal.set(Calendar.SECOND, s);
 		if (currentCal.after(launchCal)) {
-			launchCal.add(Calendar.DAY_OF_MONTH, 1);
+			return getString(R.string.already_launched) + " ";
 		}
 		currentFormatter.format("%tF, %tr", currentCal, currentCal);
 		launchFormatter.format("%tF, %tr", launchCal, launchCal);
@@ -648,14 +655,14 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 		newCal.add(Calendar.MILLISECOND, (int) difference);
 		diffFormatter.format("%tF, %tr", newCal, newCal);
 
-		Log.d(TAG, "difference=" + difference + ", \n"
-				+ diffFormatter.toString());
+		// Log.d(TAG, "difference=" + difference + ", \n"
+		// + diffFormatter.toString());
 		diffFormatter = new Formatter();
 		diffFormatter.format("%te", newCal);
 		int newDay = Utils.sToI(diffFormatter.toString()) - 1;
 		diffFormatter = new Formatter();
 		diffFormatter.format("%tk:%tM:%tS", newCal, newCal, newCal);
 		String result = newDay + "d " + diffFormatter.toString();
-		return result;
+		return result + " ";
 	}
 }

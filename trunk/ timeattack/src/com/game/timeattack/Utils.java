@@ -8,12 +8,10 @@ import android.database.Cursor;
 public class Utils {
 
 	public static int getIntFromCol(Cursor cursor, String colName) {
-		cursor.moveToFirst();
 		return sToI(getStringFromCol(cursor, colName));
 	}
 
 	public static String getStringFromCol(Cursor cursor, String colName) {
-		cursor.moveToFirst();
 		return cursor.getString(cursor.getColumnIndexOrThrow(colName));
 	}
 

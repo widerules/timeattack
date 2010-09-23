@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -63,7 +64,7 @@ public class Edit1 extends Activity implements OnClickListener {
 		HIDE_NAME = extras.getBoolean("HIDE_NAME");
 		HIDE_DATE = extras.getBoolean("HIDE_DATE");
 
-		if (!HIDE_NAME || !HIDE_DELTA) {
+		if (!HIDE_NAME || !HIDE_DELTA || !HIDE_H_M_S) {
 			getWindow().setSoftInputMode(
 					WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 		}
@@ -77,6 +78,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			values.put(Attack.H, "6");
 			values.put(Attack.M, "0");
 			values.put(Attack.S, "0");
+
 			Uri uri = getContentResolver().insert(Attack.CONTENT_URI, values);
 			newGroupId = new Integer((uri.getPathSegments().get(1)));
 			Log.d(TAG, "new group ID=" + newGroupId);
@@ -142,6 +144,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			throw new IllegalArgumentException("Wrong Code");
 		}
 
+		cursor.moveToFirst();
 		String name = Utils.getStringFromCol(cursor, Attack.NAME);
 		String h = Utils.getStringFromCol(cursor, Attack.H);
 		String m = Utils.getStringFromCol(cursor, Attack.M);
@@ -152,7 +155,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			int month = Utils.getIntFromCol(cursor, Attack.MONTH);
 			int day = Utils.getIntFromCol(cursor, Attack.DAY);
 			cal.set(Calendar.YEAR, year);
-			cal.set(Calendar.MONTH, month);
+			cal.set(Calendar.MONTH, month - 1);
 			cal.set(Calendar.DAY_OF_MONTH, day);
 
 			date = (TextView) findViewById(R.id.date);
@@ -188,7 +191,6 @@ public class Edit1 extends Activity implements OnClickListener {
 		for (int i = 0; i < pluses.getChildCount(); i++) {
 			pluses.getChildAt(i).setOnClickListener(this);
 			minuses.getChildAt(i).setOnClickListener(this);
-
 			if ((HIDE_DELTA && i == 3) || (HIDE_H_M_S && i < 3)) {
 				titles.getChildAt(i).setVisibility(View.GONE);
 				pluses.getChildAt(i).setVisibility(View.GONE);
@@ -205,6 +207,19 @@ public class Edit1 extends Activity implements OnClickListener {
 		dateMinus = (Button) findViewById(R.id.date_dec);
 		dateMinus.setOnClickListener(this);
 
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (newlyInsertedChildId != -1) {
+			getContentResolver().delete(Fleet.CONTENT_URI,
+					Fleet._ID + "=" + newlyInsertedChildId, null);
+		}
+		if (newlyInsertedGroupId != -1) {
+			getContentResolver().delete(Attack.CONTENT_URI,
+					Fleet._ID + "=" + newlyInsertedGroupId, null);
+		}
 	}
 
 	@Override
@@ -260,6 +275,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			this.finish();
 			break;
 		case R.id.ok:
+			checkTextValues();
 			Intent data = getIntent();
 			data.putExtra("groupPosition", groupId);
 			data.putExtra("childPosition", childId);
@@ -283,6 +299,14 @@ public class Edit1 extends Activity implements OnClickListener {
 				values.put(Attack.H, mH.getText().toString());
 				values.put(Attack.M, mM.getText().toString());
 				values.put(Attack.S, mS.getText().toString());
+
+				CharSequence dateString = date.getText();
+				CharSequence yearS = dateString.subSequence(0, 4);
+				CharSequence monthS = dateString.subSequence(5, 7);
+				CharSequence dayS = dateString.subSequence(8, 10);
+				values.put(Attack.YEAR, (String) yearS);
+				values.put(Attack.MONTH, (String) monthS);
+				values.put(Attack.DAY, (String) dayS);
 				int updatedgroup = getContentResolver().update(
 						Attack.CONTENT_URI, values, Attack._ID + "=" + groupId,
 						null);
@@ -294,10 +318,19 @@ public class Edit1 extends Activity implements OnClickListener {
 				values.put(Attack.H, mH.getText().toString());
 				values.put(Attack.M, mM.getText().toString());
 				values.put(Attack.S, mS.getText().toString());
+
+				CharSequence dateString = date.getText();
+				CharSequence yearS = dateString.subSequence(0, 4);
+				CharSequence monthS = dateString.subSequence(5, 7);
+				CharSequence dayS = dateString.subSequence(8, 10);
+				values.put(Attack.YEAR, (String) yearS);
+				values.put(Attack.MONTH, (String) monthS);
+				values.put(Attack.DAY, (String) dayS);
 				int updatedgroup = getContentResolver().update(
 						Attack.CONTENT_URI, values,
 						Attack._ID + "=" + newGroupId, null);
 				Log.d(TAG, "URI Updated=" + updatedgroup);
+				newlyInsertedGroupId = -1;
 			} else if (code == EDITION_ADD_CHILD) {
 				values = new ContentValues();
 				values.put(Fleet.NAME, mName.getText().toString());
@@ -311,14 +344,17 @@ public class Edit1 extends Activity implements OnClickListener {
 				Log.d(TAG, "groupId=" + groupId + " newChildId=" + newChildId);
 				// calcChild(groupId, newChildId);
 				Log.d(TAG, "URI Updated=" + updatedchild);
+				newlyInsertedChildId = -1;
 			}
 			finish();
 			break;
 		case R.id.date_inc:
-			date.setText(changeDate(1));
+			String newDate = changeDate(1);
+			date.setText(newDate);
 			break;
 		case R.id.date_dec:
-			date.setText(changeDate(-1));
+			String newDate2 = changeDate(-1);
+			date.setText(newDate2);
 			break;
 		default:
 			throw new IllegalArgumentException("Wrong Button");
@@ -335,9 +371,13 @@ public class Edit1 extends Activity implements OnClickListener {
 		int day = Utils.sToI((String) dayS);
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.MONTH, month - 1);
 		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.add(Calendar.DAY_OF_WEEK_IN_MONTH, i);
+		Log.d(TAG, "calA=" + cal);
+
+		cal.add(Calendar.DAY_OF_YEAR, i);
+
+		Log.d(TAG, "calB=" + cal + "\n" + Utils.getFromCalendar(cal, "%tF"));
 		return Utils.getFromCalendar(cal, "%tF");
 	}
 
@@ -369,4 +409,35 @@ public class Edit1 extends Activity implements OnClickListener {
 		mS.setText("" + time.getSeconds());
 	}
 
+	private void checkTextValues() {
+		Editable h, m, s, d;
+		// int hVal, mVal, sVal, dVal;
+		h = mH.getText();
+		m = mM.getText();
+		s = mS.getText();
+		if (mD != null) {
+			d = mD.getText();
+			if (d.length() == 0) {
+				d.insert(0, "0");
+			}
+		}
+		if (h.length() == 0) {
+			h.insert(0, "0");
+		}
+		if (m.length() == 0) {
+			m.insert(0, "0");
+		}
+		if (s.length() == 0) {
+			s.insert(0, "0");
+		}
+		if (Utils.sToI(m.toString()) > 60) {
+			m.clear();
+			m.insert(0, "0");
+		}
+		if (Utils.sToI(s.toString()) > 60) {
+			s.clear();
+			s.insert(0, "0");
+		}
+
+	}
 }

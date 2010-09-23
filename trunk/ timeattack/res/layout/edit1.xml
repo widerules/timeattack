@@ -86,27 +86,25 @@
 			android:hint="h"
 			android:text="0"
 			android:layout_weight="1"
-			android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number"></EditText>
+			android:layout_width="fill_parent" android:selectAllOnFocus="true" android:inputType="number" android:maxLength="2"></EditText>
 		<EditText
 			android:layout_height="wrap_content"
 			android:hint="m"
 			android:id="@+id/m"
-			android:text="0"
 			android:layout_weight="1"
-		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number"></EditText>
+		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number" android:text="0"></EditText>
 		<EditText
 			android:layout_height="wrap_content"
 			android:hint="s"
 			android:id="@+id/s"
-			android:text="0"
 			android:layout_weight="1"
-		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number"></EditText>
+		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number" android:text="0"></EditText>
 		<EditText
 			android:layout_height="wrap_content"
 			android:text="0"
 			android:layout_weight="1"
 			android:id="@+id/d"
-		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number"></EditText>
+		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="5" android:inputType="numberSigned"></EditText>
 	</TableRow>
 	<TableRow
 		android:layout_height="wrap_content"
