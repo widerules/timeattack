@@ -34,48 +34,20 @@ android:layout_marginBottom="10dip" android:layout_width="wrap_content">
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="0"
-		android:id="@+id/a_h"
 		android:layout_toRightOf="@+id/time_of_the_attack"
 		android:layout_alignBaseline="@+id/time_of_the_attack"
-	style="@style/TextCode"></TextView>
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="h"
-		android:id="@+id/label_h"
-		android:layout_toRightOf="@+id/a_h"
-		android:layout_alignBaseline="@+id/time_of_the_attack"
-	style="@style/TextCode" android:visibility="gone"></TextView>
-	<TextView
+	style="@style/TextCode" android:id="@+id/a_time"></TextView><TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="0"
-		android:layout_weight="1"
-		android:id="@+id/a_m"
-		android:layout_toRightOf="@+id/label_h"
-		android:layout_alignBaseline="@+id/time_of_the_attack"
-	style="@style/TextCode" android:visibility="gone"></TextView>
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="m"
-		android:id="@+id/label_m"
-		android:layout_toRightOf="@+id/a_m"
-		android:layout_alignBaseline="@+id/time_of_the_attack"
-	style="@style/TextCode" android:visibility="gone"></TextView><TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="0"
-		android:layout_weight="1"
-		android:layout_alignBaseline="@+id/time_of_the_attack"
-	android:id="@+id/a_s" android:layout_toRightOf="@+id/label_m" style="@style/TextCode" android:visibility="gone"></TextView><TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:layout_alignBaseline="@+id/time_of_the_attack"
-	android:id="@+id/label_s" android:layout_toRightOf="@+id/a_s" android:text="s" style="@style/TextCode" android:visibility="gone"></TextView>
+		android:layout_toRightOf="@+id/time_of_the_attack"
+		style="@style/TextCode" android:layout_alignBaseline="@+id/date_of_the_attack" android:id="@+id/a_date"></TextView>
 	
-	<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:focusable="false" android:layout_alignParentRight="true" android:src="@drawable/add" android:id="@+id/add" android:layout_marginRight="70dip"></ImageView><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:focusable="false" android:src="@drawable/edit" android:layout_alignParentRight="true" android:id="@+id/edit_group" android:layout_marginRight="35dip"></ImageView><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:focusable="false" android:src="@drawable/del" android:layout_alignParentRight="true" android:id="@+id/del_group"></ImageView></RelativeLayout>
+	
+	
+	
+	<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:focusable="false" android:layout_alignParentRight="true" android:src="@drawable/add" android:id="@+id/add" android:layout_marginRight="70dip"></ImageView><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:focusable="false" android:src="@drawable/edit" android:layout_alignParentRight="true" android:id="@+id/edit_group" android:layout_marginRight="35dip"></ImageView><ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:focusable="false" android:src="@drawable/del" android:layout_alignParentRight="true" android:id="@+id/del_group"></ImageView>
+
+
+</RelativeLayout>
 </LinearLayout>

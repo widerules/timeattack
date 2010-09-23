@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -31,13 +32,17 @@ public class Edit1 extends Activity implements OnClickListener {
 	private static boolean HIDE_DELTA = false;
 	private static boolean HIDE_H_M_S = false;
 	private static boolean HIDE_NAME = false;
+	private static boolean HIDE_DATE = false;
 	final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("kk:mm:ss");
 	final static String TAG = "Edit1";
 	EditText mName, mH, mM, mS, mD;
-	Button cancel, ok;
+	Button cancel, ok, datePlus, dateMinus;
 	TableRow pluses, textValues, minuses, titles;
+	TextView date;
 	private int CODE_OK = 1;
 	int groupId, childId, code, newGroupId, newChildId;
+	private int newlyInsertedChildId = -1;
+	private int newlyInsertedGroupId = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +61,9 @@ public class Edit1 extends Activity implements OnClickListener {
 		HIDE_DELTA = extras.getBoolean("HIDE_DELTA");
 		HIDE_H_M_S = extras.getBoolean("HIDE_H_M_S");
 		HIDE_NAME = extras.getBoolean("HIDE_NAME");
+		HIDE_DATE = extras.getBoolean("HIDE_DATE");
 
-		if (!HIDE_NAME) {
+		if (!HIDE_NAME || !HIDE_DELTA) {
 			getWindow().setSoftInputMode(
 					WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 		}
@@ -74,14 +80,17 @@ public class Edit1 extends Activity implements OnClickListener {
 			Uri uri = getContentResolver().insert(Attack.CONTENT_URI, values);
 			newGroupId = new Integer((uri.getPathSegments().get(1)));
 			Log.d(TAG, "new group ID=" + newGroupId);
-			String[] projection3 = { Attack.NAME, Attack.H, Attack.M, Attack.S };
+			String[] projection3 = { Attack.NAME, Attack.YEAR, Attack.MONTH,
+					Attack.DAY, Attack.H, Attack.M, Attack.S };
 			String selection3 = Attack._ID + "=" + newGroupId;
 			cursor = getContentResolver().query(Attack.CONTENT_URI,
 					projection3, selection3, null, null);
+			newlyInsertedGroupId = newGroupId;
 			break;
 		case EDITION_GROUP:
 			HIDE_DELTA = true;
-			String[] projection2 = { Attack.NAME, Attack.H, Attack.M, Attack.S };
+			String[] projection2 = { Attack.NAME, Attack.YEAR, Attack.MONTH,
+					Attack.DAY, Attack.H, Attack.M, Attack.S };
 			String selection2 = Attack._ID + "=" + groupId;
 			cursor = getContentResolver().query(Attack.CONTENT_URI,
 					projection2, selection2, null, null);
@@ -107,6 +116,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			d = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.DELTA));
 			mD = (EditText) findViewById(R.id.d);
 			mD.setText(d);
+			newlyInsertedChildId = newChildId;
 			break;
 		case EDITION_CHILD:
 			String[] projection = { Fleet.NAME, Fleet.H, Fleet.M, Fleet.S,
@@ -132,12 +142,22 @@ public class Edit1 extends Activity implements OnClickListener {
 			throw new IllegalArgumentException("Wrong Code");
 		}
 
-		cursor.moveToFirst();
-		String name = cursor.getString(cursor
-				.getColumnIndexOrThrow(Attack.NAME));
-		String h = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.H));
-		String m = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.M));
-		String s = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.S));
+		String name = Utils.getStringFromCol(cursor, Attack.NAME);
+		String h = Utils.getStringFromCol(cursor, Attack.H);
+		String m = Utils.getStringFromCol(cursor, Attack.M);
+		String s = Utils.getStringFromCol(cursor, Attack.S);
+		if (childId == -1) {
+			Calendar cal = Calendar.getInstance();
+			int year = Utils.getIntFromCol(cursor, Attack.YEAR);
+			int month = Utils.getIntFromCol(cursor, Attack.MONTH);
+			int day = Utils.getIntFromCol(cursor, Attack.DAY);
+			cal.set(Calendar.YEAR, year);
+			cal.set(Calendar.MONTH, month);
+			cal.set(Calendar.DAY_OF_MONTH, day);
+
+			date = (TextView) findViewById(R.id.date);
+			date.setText(Utils.getFromCalendar(cal, "%tF"));
+		}
 
 		Log.d(TAG, "received: code=" + code + " name=" + name + " groupId="
 				+ groupId + " childId=" + childId);
@@ -157,6 +177,10 @@ public class Edit1 extends Activity implements OnClickListener {
 			label.setVisibility(View.GONE);
 			mName.setVisibility(View.GONE);
 		}
+		if (HIDE_DATE) {
+			RelativeLayout date = (RelativeLayout) findViewById(R.id.datelayout);
+			date.setVisibility(View.GONE);
+		}
 		titles = (TableRow) findViewById(R.id.titles);
 		pluses = (TableRow) findViewById(R.id.pluses);
 		textValues = (TableRow) findViewById(R.id.values);
@@ -165,26 +189,22 @@ public class Edit1 extends Activity implements OnClickListener {
 			pluses.getChildAt(i).setOnClickListener(this);
 			minuses.getChildAt(i).setOnClickListener(this);
 
-			// if (((code == EDITION_GROUP) || (code == EDITION_ADD_GROUP))
-			// && (i > 2)) {
 			if ((HIDE_DELTA && i == 3) || (HIDE_H_M_S && i < 3)) {
 				titles.getChildAt(i).setVisibility(View.GONE);
 				pluses.getChildAt(i).setVisibility(View.GONE);
 				minuses.getChildAt(i).setVisibility(View.GONE);
 				textValues.getChildAt(i).setVisibility(View.GONE);
 			}
-
-			// titles.getChildAt(i).setVisibility(View.GONE);
-			// pluses.getChildAt(i).setVisibility(View.GONE);
-			// minuses.getChildAt(i).setVisibility(View.GONE);
-			// textValues.getChildAt(i).setVisibility(View.GONE);
-			// }
-
 		}
 		cancel = (Button) findViewById(R.id.cancel);
 		cancel.setOnClickListener(this);
 		ok = (Button) findViewById(R.id.ok);
 		ok.setOnClickListener(this);
+		datePlus = (Button) findViewById(R.id.date_inc);
+		datePlus.setOnClickListener(this);
+		dateMinus = (Button) findViewById(R.id.date_dec);
+		dateMinus.setOnClickListener(this);
+
 	}
 
 	@Override
@@ -228,6 +248,14 @@ public class Edit1 extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.cancel:
+			if (newlyInsertedChildId != -1) {
+				getContentResolver().delete(Fleet.CONTENT_URI,
+						Fleet._ID + "=" + newlyInsertedChildId, null);
+			}
+			if (newlyInsertedGroupId != -1) {
+				getContentResolver().delete(Attack.CONTENT_URI,
+						Fleet._ID + "=" + newlyInsertedGroupId, null);
+			}
 			setResult(-1, null);
 			this.finish();
 			break;
@@ -286,9 +314,31 @@ public class Edit1 extends Activity implements OnClickListener {
 			}
 			finish();
 			break;
+		case R.id.date_inc:
+			date.setText(changeDate(1));
+			break;
+		case R.id.date_dec:
+			date.setText(changeDate(-1));
+			break;
 		default:
 			throw new IllegalArgumentException("Wrong Button");
 		}
+	}
+
+	private String changeDate(int i) {
+		CharSequence dateString = date.getText();
+		CharSequence yearS = dateString.subSequence(0, 4);
+		CharSequence monthS = dateString.subSequence(5, 7);
+		CharSequence dayS = dateString.subSequence(8, 10);
+		int year = Utils.sToI((String) yearS);
+		int month = Utils.sToI((String) monthS);
+		int day = Utils.sToI((String) dayS);
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.add(Calendar.DAY_OF_WEEK_IN_MONTH, i);
+		return Utils.getFromCalendar(cal, "%tF");
 	}
 
 	private void changeTime(int seconds) {

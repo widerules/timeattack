@@ -4,7 +4,12 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="250dip">
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Name" android:id="@+id/label_name"></TextView><EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/name" android:hint="Name" android:selectAllOnFocus="true" android:lines="1" android:inputType="textNoSuggestions"></EditText><TableRow
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Name" android:id="@+id/label_name"></TextView><EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/name" android:hint="Name" android:selectAllOnFocus="true" android:lines="1" android:inputType="textNoSuggestions"></EditText><RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/datelayout"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/label_date" android:text="@string/date" android:layout_marginTop="15dip"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@+id/label_date" android:id="@+id/date" android:text="2010-01-01" android:layout_marginTop="15dip"></TextView>
+<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@+id/date" android:layout_alignParentRight="true"><Button android:layout_height="wrap_content" android:layout_toRightOf="@+id/date" android:text="-" android:id="@+id/date_dec" android:layout_width="fill_parent" android:layout_weight="1"></Button><Button android:layout_height="wrap_content" android:id="@+id/date_inc" android:text="+" android:layout_toRightOf="@+id/date_dec" android:layout_alignParentRight="true" android:layout_width="fill_parent" android:layout_weight="1"></Button></LinearLayout>
+
+
+</RelativeLayout><TableRow
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
 	android:id="@+id/titles">
@@ -37,11 +42,12 @@
 			android:text="@string/delta"
 		></TextView>
 	
+
 </TableRow>
 	<TableRow
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
-	android:id="@+id/pluses">
+	android:id="@+id/pluses" android:visibility="gone">
 		<Button
 			android:layout_height="wrap_content"
 			android:text="+"
@@ -105,7 +111,7 @@
 	<TableRow
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
-	android:id="@+id/minuses">
+	android:id="@+id/minuses" android:visibility="gone">
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -131,5 +137,6 @@
 	android:id="@+id/d_dec"
 android:text="-5"></Button>
 </TableRow><TableRow android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_marginTop="10dip"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/cancel" android:layout_weight="1" android:text="@string/cancel"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ok" android:layout_weight="1" android:text="@string/ok"></Button></TableRow>
+
 
 </TableLayout>
