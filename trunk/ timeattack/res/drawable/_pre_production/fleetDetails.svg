@@ -1,0 +1,1426 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="fleetDetails.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3856">
+      <stop
+         style="stop-color:#00ff30;stop-opacity:0.78048778;"
+         offset="0"
+         id="stop3858" />
+      <stop
+         style="stop-color:#08ff00;stop-opacity:0;"
+         offset="1"
+         id="stop3860" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2840"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5250"
+       id="linearGradient3674"
+       x1="24"
+       y1="42"
+       x2="24"
+       y2="6"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient5250">
+      <stop
+         style="stop-color:#787878;stop-opacity:1;"
+         offset="0"
+         id="stop5252" />
+      <stop
+         style="stop-color:#a3a3a3;stop-opacity:1;"
+         offset="1"
+         id="stop5254" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective2840-1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       id="linearGradient5270">
+      <stop
+         id="stop5272"
+         offset="0"
+         style="stop-color:#a3a3a3;stop-opacity:1;" />
+      <stop
+         id="stop5274"
+         offset="1"
+         style="stop-color:#787878;stop-opacity:1;" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective3794"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3819"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3833"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3847"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3982"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5250"
+       id="linearGradient4137"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-1.4285713e-6,8.5714284e-6)"
+       x1="24"
+       y1="42"
+       x2="24"
+       y2="6" />
+    <inkscape:perspective
+       id="perspective4163"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4242"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4267"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4306"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4421"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4454"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4476"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3743"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3798"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3827"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3890"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       id="linearGradient3856-0">
+      <stop
+         style="stop-color:#00ff30;stop-opacity:0.78048778;"
+         offset="0"
+         id="stop3858-3" />
+      <stop
+         style="stop-color:#08ff00;stop-opacity:0;"
+         offset="1"
+         id="stop3860-6" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective4034"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4123"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4151"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4178"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4282"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4296"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2998"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="24.47304"
+     inkscape:cy="657.3303"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="964"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3609"
+       width="480"
+       height="800"
+       x="63.290863"
+       y="110.9336"
+       rx="2.7142856"
+       ry="2.7142856"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       style="fill:#d5d5d5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect2816"
+       width="480"
+       height="414.26404"
+       x="62.411987"
+       y="229.06323"
+       rx="2.7142856"
+       ry="5.6221542"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       ry="2.7142856"
+       rx="2.7142856"
+       y="111.92037"
+       x="62.411987"
+       height="117.14286"
+       width="480"
+       id="rect3611"
+       style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="78.432007"
+       y="209.6136"
+       id="text3629"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3631"
+         x="78.432007"
+         y="209.6136">Attack</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="338.32394"
+       y="209.6136"
+       id="text3633"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3635"
+         x="338.32394"
+         y="209.6136">06:00:00</tspan></text>
+    <path
+       style="fill:url(#linearGradient4137);fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline"
+       d="m 684.39971,129.42037 c -11.63742,0 -21.07143,9.43401 -21.07143,21.07143 0,11.63743 9.43401,21.07143 21.07143,21.07143 11.63743,0 21.07143,-9.434 21.07143,-21.07143 0,-11.63742 -9.434,-21.07143 -21.07143,-21.07143 z m 0,7.60913 c 7.43503,0 13.4623,6.02729 13.4623,13.4623 0,7.43503 -6.02727,13.4623 -13.4623,13.4623 -7.43501,0 -13.4623,-6.02727 -13.4623,-13.4623 0,-7.43501 6.02729,-13.4623 13.4623,-13.4623 z m -4.42646,5.1581 c -0.77808,0.0279 -1.70964,0.46586 -2.4876,1.24381 l -0.14633,0.14633 c -1.24471,1.24472 -1.62288,2.87675 -0.8414,3.65823 l 3.21925,3.25583 -3.21925,3.21924 c -0.78148,0.78148 -0.40331,2.41352 0.8414,3.65824 l 0.14633,0.14633 c 1.24472,1.24472 2.87675,1.62287 3.65823,0.84139 l 3.25583,-3.25583 3.21924,3.25583 c 0.7815,0.78148 2.41353,0.40333 3.65824,-0.84139 l 0.14633,-0.14633 c 1.24472,-1.24472 1.62288,-2.87676 0.84139,-3.65824 l -3.25583,-3.21924 3.25583,-3.25583 c 0.78149,-0.78148 0.40333,-2.41351 -0.84139,-3.65823 l -0.14633,-0.14633 c -1.24471,-1.24472 -2.87674,-1.62288 -3.65824,-0.8414 l -3.21924,3.21925 -3.25583,-3.21925 c -0.29306,-0.29306 -0.70378,-0.41912 -1.17063,-0.40241 z"
+       id="path3600"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <path
+       id="path4286"
+       d="m 488.29087,130.07646 c -21.38133,0 -38.71429,17.33298 -38.71429,38.71428 0,21.38132 17.33296,38.71429 38.71429,38.71429 21.38132,0 38.71428,-17.33297 38.71428,-38.71429 0,-21.3813 -17.33296,-38.71428 -38.71428,-38.71428 z m -4.77207,17.20634 9.54414,0 c 1.35629,0 2.48686,1.06336 2.48686,2.41965 l 0,11.82937 11.82936,0 c 1.35629,0 2.41964,1.13056 2.41964,2.48685 l 0,9.54415 c 0,1.35629 -1.06335,2.41964 -2.41964,2.41964 l -11.82936,0 0,11.82937 c 0,1.35629 -1.13057,2.48685 -2.48686,2.48685 l -9.54414,0 c -1.35629,0 -2.41965,-1.13056 -2.41965,-2.48685 l 0,-11.82937 -11.82936,0 c -1.3563,0 -2.48686,-1.06335 -2.48686,-2.41964 l 0,-9.54415 c 0,-1.35629 1.13056,-2.48685 2.48686,-2.48685 l 11.82936,0 0,-11.82937 c 0,-1.35629 1.06336,-2.41965 2.41965,-2.41965 z"
+       style="fill:none;stroke:none;display:inline"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       ry="2.7142856"
+       rx="2.7142856"
+       y="110.9336"
+       x="-476.70914"
+       height="800"
+       width="480"
+       id="rect3702"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       style="fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3704"
+       width="480"
+       height="50.472794"
+       x="-477.58801"
+       y="111.92037"
+       rx="2.7142856"
+       ry="2.7142856"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       ry="2.7142856"
+       rx="2.7142856"
+       y="161.06323"
+       x="-477.58801"
+       height="84.842613"
+       width="480"
+       id="rect3710"
+       style="fill:#bfbfbf;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-456.50772"
+       y="145.60599"
+       id="text3706"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3708"
+         x="-456.50772"
+         y="145.60599">Time Attack</tspan></text>
+    <g
+       id="g3755"
+       transform="matrix(0.09446266,0,0,0.09446266,-333.32235,189.10093)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <path
+         transform="matrix(1.0573477,0,0,1.0573477,-254.34119,-93.94986)"
+         d="m -496.99509,229.08786 c 0,155.65182 -126.18073,281.83255 -281.83255,281.83255 -155.65182,0 -281.83256,-126.18073 -281.83256,-281.83255 0,-155.651819 126.18074,-281.83255 281.83256,-281.83255 155.65182,0 281.83255,126.180731 281.83255,281.83255 z"
+         sodipodi:ry="281.83255"
+         sodipodi:rx="281.83255"
+         sodipodi:cy="229.08786"
+         sodipodi:cx="-778.82764"
+         id="path3726"
+         style="fill:#fff5f5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         sodipodi:type="arc" />
+      <rect
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+         rx="74.76577"
+         ry="74.76577"
+         y="-892.48792"
+         x="-1029.1245"
+         height="397.32669"
+         width="149.53154"
+         id="rect3712"
+         style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+         style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect3714"
+         width="149.53154"
+         height="397.32669"
+         x="-644.69275"
+         y="631.79779"
+         ry="74.76577"
+         rx="74.76577" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-387.14288"
+       y="195.21931"
+       id="text3760"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3762"
+         x="-387.14288"
+         y="195.21931">Attack name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-387.14288"
+       y="226.6479"
+       id="text3764"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3766"
+         x="-387.14288"
+         y="226.6479">First Blood:</tspan></text>
+    <text
+       id="text3768"
+       y="226.6479"
+       x="-115.45145"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         y="226.6479"
+         x="-115.45145"
+         id="tspan3770"
+         sodipodi:role="line">06:00:00</tspan></text>
+    <rect
+       style="fill:#404040;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3772"
+       width="480"
+       height="207.69975"
+       x="-477.58801"
+       y="247.06323"
+       rx="2.7142856"
+       ry="6.644732"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-300.13098"
+       y="289.50504"
+       id="text3778"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3780"
+         x="-300.13098"
+         y="289.50504">Fleet Name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-402.28571"
+       y="331.34177"
+       id="text3782"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3784"
+         x="-402.28571"
+         y="331.34177">Launch time : </tspan></text>
+    <text
+       id="text3768-7"
+       y="331.34177"
+       x="-115.45145"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         y="331.34177"
+         x="-115.45145"
+         id="tspan3770-4"
+         sodipodi:role="line">05:00:00</tspan></text>
+    <image
+       y="8.3416853"
+       x="-257.74365"
+       id="image3821"
+       height="36"
+       width="36"
+       xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/edit.png"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <image
+       y="8.3416853"
+       x="-295.21466"
+       id="image3835"
+       height="36"
+       width="36"
+       xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/add.png"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <image
+       y="8.3416853"
+       x="-220.27263"
+       id="image3849"
+       height="36"
+       width="36"
+       xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/del.png"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       style="fill:#bfbfbf;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3861"
+       width="100"
+       height="100"
+       x="-534.28571"
+       y="-329.06638"
+       rx="2.5"
+       ry="3.9936604" />
+    <rect
+       ry="3.9936604"
+       rx="2.5"
+       y="-194.78065"
+       x="-537.14282"
+       height="100"
+       width="100"
+       id="rect3863"
+       style="fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <rect
+       style="fill:#404040;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3865"
+       width="100"
+       height="100"
+       x="-537.14282"
+       y="-54.780647"
+       rx="2.5"
+       ry="3.9936604" />
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="75.309265"
+       y="394.46484"
+       id="text3647"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         x="75.309265"
+         y="394.46484"
+         id="tspan3885">Travel Duration : </tspan></text>
+    <text
+       id="text4141"
+       y="500.60742"
+       x="79.706192"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         id="tspan4143"
+         y="500.60742"
+         x="79.706192"
+         sodipodi:role="line">Delta : </tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:0.99999994;stroke-opacity:1"
+       id="rect2951"
+       width="454.28571"
+       height="70"
+       x="78.421059"
+       y="240.93361"
+       ry="14.807692"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="91.749451"
+       y="288.60742"
+       id="text3778-9"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3780-4"
+         x="91.749451"
+         y="288.60742">Fleet Name</tspan></text>
+    <rect
+       ry="14.807692"
+       y="346.93359"
+       x="368.42108"
+       height="70"
+       width="164.28571"
+       id="rect3725"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:1;stroke-opacity:1"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       id="text4180"
+       y="394.46484"
+       x="383.34491"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         y="394.46484"
+         x="383.34491"
+         id="tspan4182"
+         sodipodi:role="line">05:01:01</tspan></text>
+    <rect
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3733"
+       width="480"
+       height="117.14286"
+       x="62.411987"
+       y="645.92041"
+       rx="2.7142856"
+       ry="2.7142856" />
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="387.28375"
+       y="718.36963"
+       id="text4188"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan4190"
+         x="387.28375"
+         y="718.36963">05:01:01</tspan></text>
+    <rect
+       style="fill:#404040;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4192"
+       width="460"
+       height="2"
+       x="73.206772"
+       y="536.46667"
+       rx="230"
+       ry="1"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="81.592911"
+       y="604.56946"
+       id="text4044-8"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan4046-8"
+         x="81.592911"
+         y="604.56946">Alarm :</tspan></text>
+    <g
+       id="g4007-2"
+       transform="matrix(0.20000001,0,0,0.20000001,481.71706,541.00497)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <rect
+         ry="7.0625739"
+         rx="7.0625739"
+         y="202.36218"
+         x="51.42857"
+         height="146.42857"
+         width="144.28572"
+         id="rect3996-4"
+         style="fill:#9a9a9a;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <g
+         transform="translate(0,-20.357116)"
+         id="g4002-5">
+        <rect
+           transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect3714-0-5"
+           width="33.193047"
+           height="88.198677"
+           x="292.66522"
+           y="79.294357"
+           ry="16.596523"
+           rx="16.596523" />
+        <rect
+           rx="16.596523"
+           ry="16.596523"
+           y="236.37308"
+           x="134.57637"
+           height="88.198677"
+           width="33.193047"
+           id="rect3998-1"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           transform="matrix(-0.70710678,0.70710678,0.70710678,0.70710678,0,0)" />
+        <rect
+           rx="16.596523"
+           ry="16.596523"
+           y="51.010086"
+           x="292.66519"
+           height="88.198677"
+           width="33.193047"
+           id="rect4000-7"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" />
+      </g>
+    </g>
+    <rect
+       ry="1"
+       rx="230"
+       y="434.46671"
+       x="73.206772"
+       height="2"
+       width="460"
+       id="rect4296"
+       style="fill:#404040;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="78.414429"
+       y="156.08272"
+       id="text3629-1"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3631-5"
+         x="78.414429"
+         y="156.08272">Attack name : </tspan></text>
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       id="text4438"
+       y="374.16705"
+       x="-403.57477"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="374.16705"
+         x="-403.57477"
+         id="tspan4440"
+         sodipodi:role="line">Arrival time : </tspan></text>
+    <g
+       id="g3943"
+       transform="translate(38.073776,20)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <rect
+         ry="14.807692"
+         y="432.93359"
+         x="204.42108"
+         height="70"
+         width="104.28571"
+         id="rect3727"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:1;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         id="text4184"
+         y="480.59863"
+         x="259.15909"
+         style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="480.59863"
+           x="259.15909"
+           id="tspan4186"
+           sodipodi:role="line">45</tspan></text>
+      <text
+         id="text3729"
+         y="480.59863"
+         x="317.42856"
+         style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="480.59863"
+           x="317.42856"
+           id="tspan3731"
+           sodipodi:role="line">s</tspan></text>
+    </g>
+    <g
+       id="g3950"
+       transform="translate(40,20)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <rect
+         ry="14.807692"
+         y="540.2193"
+         x="202.49486"
+         height="70"
+         width="104.28571"
+         id="rect3727-1"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:1;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         id="text4184-7"
+         y="587.88434"
+         x="257.23288"
+         style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="587.88434"
+           x="257.23288"
+           id="tspan4186-4"
+           sodipodi:role="line">45</tspan></text>
+      <text
+         id="text3729-0"
+         y="587.88434"
+         x="315.50235"
+         style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="587.88434"
+           x="315.50235"
+           id="tspan3731-9"
+           sodipodi:role="line">s</tspan></text>
+    </g>
+    <g
+       id="g3981"
+       transform="translate(0,21.2857)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <text
+         id="text3769-2"
+         y="453.79077"
+         x="407.29327"
+         style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="453.79077"
+           x="407.29327"
+           id="tspan3771-4"
+           sodipodi:role="line">Before</tspan></text>
+      <text
+         id="text3769-5-5"
+         y="494.10071"
+         x="407.24188"
+         style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="494.10071"
+           x="407.24188"
+           id="tspan3771-1-8"
+           sodipodi:role="line">After</tspan></text>
+      <g
+         transform="translate(48.72183,-111.42858)"
+         id="g3872-8">
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:2.75999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="path3815-7-1"
+           sodipodi:cx="686.42859"
+           sodipodi:cy="505.93362"
+           sodipodi:rx="49.285713"
+           sodipodi:ry="49.285713"
+           d="m 735.7143,505.93362 c 0,27.21975 -22.06596,49.28572 -49.28571,49.28572 -27.21975,0 -49.28571,-22.06597 -49.28571,-49.28572 0,-27.21974 22.06596,-49.28571 49.28571,-49.28571 27.21975,0 49.28571,22.06597 49.28571,49.28571 z"
+           transform="matrix(0.36231882,0,0,0.36231882,208.43686,374.7672)" />
+        <path
+           d="m 735.7143,505.93362 c 0,27.21975 -22.06596,49.28572 -49.28571,49.28572 -27.21975,0 -49.28571,-22.06597 -49.28571,-49.28572 0,-27.21974 22.06596,-49.28571 49.28571,-49.28571 27.21975,0 49.28571,22.06597 49.28571,49.28571 z"
+           sodipodi:ry="49.285713"
+           sodipodi:rx="49.285713"
+           sodipodi:cy="505.93362"
+           sodipodi:cx="686.42859"
+           id="path3817-1-2"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:4.05191517;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:type="arc"
+           transform="matrix(0.24679688,0,0,0.24679688,287.73443,433.21363)" />
+      </g>
+      <g
+         transform="translate(48.72183,-111.42858)"
+         id="g3876-1">
+        <path
+           transform="matrix(0.36231882,0,0,0.36231882,208.43686,414.7672)"
+           d="m 735.7143,505.93362 c 0,27.21975 -22.06596,49.28572 -49.28571,49.28572 -27.21975,0 -49.28571,-22.06597 -49.28571,-49.28572 0,-27.21974 22.06596,-49.28571 49.28571,-49.28571 27.21975,0 49.28571,22.06597 49.28571,49.28571 z"
+           sodipodi:ry="49.285713"
+           sodipodi:rx="49.285713"
+           sodipodi:cy="505.93362"
+           sodipodi:cx="686.42859"
+           id="path3844-4"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3200;stroke-width:2.75999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:type="arc" />
+        <path
+           transform="matrix(0.24679688,0,0,0.24679688,287.73443,473.21363)"
+           sodipodi:type="arc"
+           style="fill:#6eff81;fill-opacity:1;fill-rule:nonzero;stroke:#00ff30;stroke-width:4.05191517;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="path3846-9"
+           sodipodi:cx="686.42859"
+           sodipodi:cy="505.93362"
+           sodipodi:rx="49.285713"
+           sodipodi:ry="49.285713"
+           d="m 735.7143,505.93362 c 0,27.21975 -22.06596,49.28572 -49.28571,49.28572 -27.21975,0 -49.28571,-22.06597 -49.28571,-49.28572 0,-27.21974 22.06596,-49.28571 49.28571,-49.28571 27.21975,0 49.28571,22.06597 49.28571,49.28571 z" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="79.828239"
+       y="718.36963"
+       id="text3651"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan3653"
+         x="79.828239"
+         y="718.36963">Launch at : </tspan></text>
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       id="text3957"
+       y="431.34177"
+       x="-402.28571"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="431.34177"
+         x="-402.28571"
+         id="tspan3959"
+         sodipodi:role="line">Remaining time : </tspan></text>
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-115.45145"
+       y="431.34177"
+       id="text3961"><tspan
+         sodipodi:role="line"
+         id="tspan3963"
+         x="-115.45145"
+         y="431.34177">01:00:00</tspan></text>
+    <rect
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect3965"
+       width="401.42856"
+       height="2"
+       x="-408.22177"
+       y="394.46671"
+       rx="200.71428"
+       ry="1" />
+    <rect
+       ry="2.7142856"
+       rx="2.7142856"
+       y="765.92041"
+       x="62.411987"
+       height="117.14286"
+       width="480"
+       id="rect4113"
+       style="fill:#d5d5d5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <g
+       id="g4165"
+       transform="translate(46.856316,14)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <text
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         id="text3651-8"
+         y="823.16565"
+         x="211.54187"
+         style="font-size:36px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="823.16565"
+           x="211.54187"
+           id="tspan3653-3"
+           sodipodi:role="line">New Fleet..</tspan></text>
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/add.png"
+         width="68.85714"
+         height="68.85714"
+         id="image3835-8"
+         x="120.57143"
+         y="776.06323" />
+    </g>
+    <g
+       id="g4194"
+       transform="translate(0,-4)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/edit.png"
+         width="36"
+         height="36"
+         id="image3821-2"
+         x="-114.2645"
+         y="170.07646" />
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/del.png"
+         width="36"
+         height="36"
+         id="image3849-9"
+         x="-51.957565"
+         y="170.07646" />
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/add.png"
+         width="36"
+         height="36"
+         id="image3835-6"
+         x="-176.57143"
+         y="170.07646" />
+    </g>
+    <rect
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       style="fill:#bfbfbf;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4199"
+       width="480"
+       height="84.842613"
+       x="-477.58801"
+       y="455.06323"
+       rx="2.7142856"
+       ry="2.7142856" />
+    <g
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       transform="matrix(0,-0.09446266,0.09446266,0,-449.14382,395.29249)"
+       id="g4201">
+      <path
+         sodipodi:type="arc"
+         style="fill:#fff5f5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path4203"
+         sodipodi:cx="-778.82764"
+         sodipodi:cy="229.08786"
+         sodipodi:rx="281.83255"
+         sodipodi:ry="281.83255"
+         d="m -496.99509,229.08786 c 0,155.65182 -126.18073,281.83255 -281.83255,281.83255 -155.65182,0 -281.83256,-126.18073 -281.83256,-281.83255 0,-155.651819 126.18074,-281.83255 281.83256,-281.83255 155.65182,0 281.83255,126.180731 281.83255,281.83255 z"
+         transform="matrix(1.0573477,0,0,1.0573477,-254.34119,-93.94986)" />
+      <rect
+         style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4205"
+         width="149.53154"
+         height="397.32669"
+         x="-1029.1245"
+         y="-892.48792"
+         ry="74.76577"
+         rx="74.76577"
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)" />
+      <rect
+         rx="74.76577"
+         ry="74.76577"
+         y="631.79779"
+         x="-644.69275"
+         height="397.32669"
+         width="149.53154"
+         id="rect4207"
+         style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" />
+    </g>
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       id="text4209"
+       y="489.2193"
+       x="-387.14288"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="489.2193"
+         x="-387.14288"
+         id="tspan4211"
+         sodipodi:role="line">Attack name</tspan></text>
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       id="text4213"
+       y="520.64789"
+       x="-387.14288"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="520.64789"
+         x="-387.14288"
+         id="tspan4215"
+         sodipodi:role="line">First Blood:</tspan></text>
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-115.45145"
+       y="520.64789"
+       id="text4217"><tspan
+         sodipodi:role="line"
+         id="tspan4219"
+         x="-115.45145"
+         y="520.64789">06:00:00</tspan></text>
+    <g
+       transform="translate(0,290)"
+       id="g4221"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <image
+         y="170.07646"
+         x="-114.2645"
+         id="image4223"
+         height="36"
+         width="36"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/edit.png"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         inkscape:export-xdpi="120"
+         inkscape:export-ydpi="120" />
+      <image
+         y="170.07646"
+         x="-51.957565"
+         id="image4225"
+         height="36"
+         width="36"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/del.png"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         inkscape:export-xdpi="120"
+         inkscape:export-ydpi="120" />
+      <image
+         y="170.07646"
+         x="-176.57143"
+         id="image4227"
+         height="36"
+         width="36"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/add.png"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         inkscape:export-xdpi="120"
+         inkscape:export-ydpi="120" />
+    </g>
+    <rect
+       ry="2.7142856"
+       rx="2.7142856"
+       y="541.06323"
+       x="-477.58801"
+       height="84.842613"
+       width="480"
+       id="rect4229"
+       style="fill:#bfbfbf;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <g
+       id="g4231"
+       transform="matrix(0,-0.09446266,0.09446266,0,-449.14382,481.29249)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <path
+         transform="matrix(1.0573477,0,0,1.0573477,-254.34119,-93.94986)"
+         d="m -496.99509,229.08786 c 0,155.65182 -126.18073,281.83255 -281.83255,281.83255 -155.65182,0 -281.83256,-126.18073 -281.83256,-281.83255 0,-155.651819 126.18074,-281.83255 281.83256,-281.83255 155.65182,0 281.83255,126.180731 281.83255,281.83255 z"
+         sodipodi:ry="281.83255"
+         sodipodi:rx="281.83255"
+         sodipodi:cy="229.08786"
+         sodipodi:cx="-778.82764"
+         id="path4233"
+         style="fill:#fff5f5;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         sodipodi:type="arc" />
+      <rect
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+         rx="74.76577"
+         ry="74.76577"
+         y="-892.48792"
+         x="-1029.1245"
+         height="397.32669"
+         width="149.53154"
+         id="rect4235"
+         style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <rect
+         transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+         style="fill:#acacac;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4237"
+         width="149.53154"
+         height="397.32669"
+         x="-644.69275"
+         y="631.79779"
+         ry="74.76577"
+         rx="74.76577" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-387.14288"
+       y="575.2193"
+       id="text4239"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan4241"
+         x="-387.14288"
+         y="575.2193">Attack name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-387.14288"
+       y="606.64789"
+       id="text4243"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         sodipodi:role="line"
+         id="tspan4245"
+         x="-387.14288"
+         y="606.64789">First Blood:</tspan></text>
+    <text
+       id="text4247"
+       y="606.64789"
+       x="-115.45145"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120"><tspan
+         y="606.64789"
+         x="-115.45145"
+         id="tspan4249"
+         sodipodi:role="line">06:00:00</tspan></text>
+    <g
+       id="g4251"
+       transform="translate(0,376)"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120">
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/edit.png"
+         width="36"
+         height="36"
+         id="image4253"
+         x="-114.2645"
+         y="170.07646" />
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/del.png"
+         width="36"
+         height="36"
+         id="image4255"
+         x="-51.957565"
+         y="170.07646" />
+      <image
+         inkscape:export-ydpi="120"
+         inkscape:export-xdpi="120"
+         inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+         xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/add.png"
+         width="36"
+         height="36"
+         id="image4257"
+         x="-176.57143"
+         y="170.07646" />
+    </g>
+    <rect
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       style="fill:#404040;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4259"
+       width="480"
+       height="85.714287"
+       x="-477.58801"
+       y="625.92041"
+       rx="2.7142856"
+       ry="1.9860626" />
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       id="text4263"
+       y="677.22675"
+       x="-328.15247"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="677.22675"
+         x="-328.15247"
+         id="tspan4265"
+         sodipodi:role="line">New Attack...</tspan></text>
+    <image
+       y="640.77753"
+       x="-70.14286"
+       id="image4298"
+       height="56"
+       width="56"
+       xlink:href="file:///C:/Documents%20and%20Settings/wqtg2733/workspace/Time%20Attack/res/drawable/add_white_back.png"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       style="fill:#404040;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="rect4302"
+       width="460"
+       height="2"
+       x="73.206772"
+       y="330.46671"
+       rx="230"
+       ry="1" />
+    <text
+       inkscape:export-ydpi="120"
+       inkscape:export-xdpi="120"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\proto.png"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-115.45145"
+       y="374.16705"
+       id="text4304"><tspan
+         sodipodi:role="line"
+         id="tspan4306"
+         x="-115.45145"
+         y="374.16705">04:59:15</tspan></text>
+    <rect
+       ry="2.5"
+       rx="230"
+       y="314.07648"
+       x="-1021.4286"
+       height="5"
+       width="460"
+       id="rect4296-1"
+       style="fill:#bfbfbf;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\separator.png"
+       inkscape:export-xdpi="93.91304"
+       inkscape:export-ydpi="93.91304" />
+  </g>
+</svg>

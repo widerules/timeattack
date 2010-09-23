@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="wrap_content" android:layout_width="fill_parent">
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Attack name" android:id="@+id/label_attack_name" android:textSize="15sp" android:textColor="@color/white" android:visibility="gone"></TextView>
+
+
+
+<TextView android:layout_below="@+id/label_attack_name" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/attack_name" android:text="Attack" android:textSize="15sp" android:textColor="@color/white"></TextView>
+<TextView android:layout_below="@+id/label_attack_name" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_toRightOf="@+id/attack_name" android:layout_alignParentRight="true" android:gravity="right" android:id="@+id/time_of_the_attack" android:text="00:00:00" android:textSize="15sp" android:textColor="@color/white"></TextView>
+</RelativeLayout>
