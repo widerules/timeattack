@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="time_to_travel">Temps du trajet</string>
+    <string name="attack_time">Heure d\'attaque</string>
+    <string name="hello">Hello World, Main!</string>
+    <string name="app_name">Time Attack</string>
+<string name="hours">Hours</string>
+<string name="minutes">Minutes</string>
+<string name="seconds">Seconds</string>
+<string name="delta">Delta : </string>
+<string name="fleet_name">Fleet Name</string>
+<string name="travel_duration">Travel Duration : </string>
+<string name="before">Before</string>
+<string name="after">After</string>
+<string name="alarm">Alarm :</string>
+<string name="launch_at">Launch at : </string>
+<string name="ok">OK</string>
+<string name="cancel">Cancel</string>
+<string name="name">Name : </string>
+<string name="launch_time">Launch time : </string>
+<string name="arrival_time">Arrival time : </string>
+<string name="remaining_time">Remaining time : </string>
+</resources>
