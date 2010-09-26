@@ -3,14 +3,14 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 >
 	<item
+		android:state_pressed="true"
 		android:drawable="@drawable/selected_shape"
+	></item>
+	<item
 		android:state_focused="true"
+		android:drawable="@drawable/selected_shape"
 	>
 	</item>
-	<item
-		android:drawable="@drawable/selected_shape"
-		android:state_pressed="true"
-	></item>
 	<item
 		android:drawable="@drawable/idle_shape"
 	>

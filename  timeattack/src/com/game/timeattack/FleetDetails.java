@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import com.game.timeattack.provider.TimeAttack.Attack;
 import com.game.timeattack.provider.TimeAttack.Fleet;
 
 public class FleetDetails extends Activity implements OnClickListener,
@@ -76,31 +75,11 @@ public class FleetDetails extends Activity implements OnClickListener,
 			mAfter.setChecked(true);
 		}
 
-		String[] projection = { Attack.NAME, Attack.YEAR, Attack.MONTH,
-				Attack.DAY, Attack.H, Attack.M, Attack.S };
-		String selection = Attack._ID + "=" + mGroupId;
-		Cursor attackCursor = getContentResolver().query(Attack.CONTENT_URI,
-				projection, selection, null, null);
-		attackCursor.moveToFirst();
-		String name = Utils.getStringFromCol(attackCursor, Attack.NAME);
-		int year = Utils.getIntFromCol(attackCursor, Attack.YEAR);
-		int month = Utils.getIntFromCol(attackCursor, Attack.MONTH);
-		int day = Utils.getIntFromCol(attackCursor, Attack.DAY);
-		int h = Utils.getIntFromCol(attackCursor, Attack.H);
-		int m = Utils.getIntFromCol(attackCursor, Attack.M);
-		int s = Utils.getIntFromCol(attackCursor, Attack.S);
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.MONTH, month - 1);
-		calendar.set(Calendar.DAY_OF_MONTH, day);
-		calendar.set(Calendar.HOUR_OF_DAY, h);
-		calendar.set(Calendar.MINUTE, m);
-		calendar.set(Calendar.SECOND, s);
 		TextView timeOfTheAttack = (TextView) findViewById(R.id.time_of_the_attack);
 		TextView namelabel = (TextView) findViewById(R.id.attack_name);
-		String dateAndTime = Utils.formatCalendar(calendar, "%tF") + " "
-				+ Utils.formatCalendar(calendar, "%tr");
+		String dateAndTime=Utils.getAttackTime(this, mGroupId);
 		timeOfTheAttack.setText(dateAndTime);
+		String name=Utils.getAttackName(this, mGroupId);
 		namelabel.setText(name);
 	}
 
