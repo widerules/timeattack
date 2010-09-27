@@ -3,13 +3,24 @@ package com.game.timeattack;
 import java.util.Calendar;
 import java.util.Formatter;
 
-import com.game.timeattack.provider.TimeAttack.Attack;
-import com.game.timeattack.provider.TimeAttack.Fleet;
-
 import android.content.Context;
 import android.database.Cursor;
 
+import com.game.timeattack.provider.TimeAttack.Attack;
+import com.game.timeattack.provider.TimeAttack.Fleet;
+
 public class Utils {
+
+	public static final String FULL_DATE = "%tF";
+	public static final String FULL_12H_TIME = "%tr";
+	public static final String FULL_24H_TIME = "%tT";
+	public static final String YEAR_4_DIGITS = "%tY";
+	public static final String MONTH_2_DIGITS = "%tm";
+	public static final String DAY_2_DIGITS = "%td";
+	public static final String HOUR_OF_DAY_24H = "%tH";
+	public static final String HOUR_OF_DAY_12H = "%tI";
+	public static final String MINUTES = "%tM";
+	public static final String SECONDS = "%tS";
 
 	public static int getIntFromCol(Cursor cursor, String colName) {
 		return sToI(getStringFromCol(cursor, colName));
@@ -37,13 +48,33 @@ public class Utils {
 		return s;
 	}
 
-	public static Calendar addToCalendar(Calendar cal, int days, int hours,
-			int minutes, int seconds) {
+	/**
+	 * 
+	 * @param cal
+	 *            ,
+	 * @param year
+	 *            ,
+	 * @param month
+	 *            ,
+	 * @param days
+	 *            ,
+	 * @param hours
+	 *            ,
+	 * @param minutes
+	 *            ,
+	 * @param seconds
+	 *            ,
+	 * @return a calendar with the parameters added
+	 */
+	public static void addToCalendar(Calendar cal, int year, int month,
+			int days, int hours, int minutes, int seconds) {
+		cal.add(Calendar.YEAR, year);
+		cal.add(Calendar.MONTH, month);
 		cal.add(Calendar.DAY_OF_MONTH, days);
 		cal.add(Calendar.HOUR_OF_DAY, hours);
 		cal.add(Calendar.MINUTE, minutes);
 		cal.add(Calendar.SECOND, seconds);
-		return cal;
+		// return cal;
 	}
 
 	public static String formatCalendar(Calendar cal, String format) {
@@ -65,13 +96,13 @@ public class Utils {
 		}
 		return tmp;
 	}
-	
-	public static String getAttackTime(Context context,int groupId){
-		String[] projection = { Attack.YEAR, Attack.MONTH,
-				Attack.DAY, Attack.H, Attack.M, Attack.S };
+
+	public static String getAttackTime(Context context, int groupId) {
+		String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
+				Attack.H, Attack.M, Attack.S };
 		String selection = Attack._ID + "=" + groupId;
-		Cursor attackCursor = context.getContentResolver().query(Attack.CONTENT_URI,
-				projection, selection, null, null);
+		Cursor attackCursor = context.getContentResolver().query(
+				Attack.CONTENT_URI, projection, selection, null, null);
 		attackCursor.moveToFirst();
 		int year = Utils.getIntFromCol(attackCursor, Attack.YEAR);
 		int month = Utils.getIntFromCol(attackCursor, Attack.MONTH);
@@ -86,31 +117,31 @@ public class Utils {
 		calendar.set(Calendar.HOUR_OF_DAY, h);
 		calendar.set(Calendar.MINUTE, m);
 		calendar.set(Calendar.SECOND, s);
-		
-		return Utils.formatCalendar(calendar, "%tF") + " "
-		+ Utils.formatCalendar(calendar, "%tr");
+		return Utils.formatCalendar(calendar, FULL_DATE) + " "
+				+ Utils.formatCalendar(calendar, FULL_12H_TIME);
 	}
-	
-	public static String getAttackName(Context context,int groupId){
-		Cursor attackCursor = context.getContentResolver().query(Attack.CONTENT_URI,
-				new String[] {Attack.NAME}, Attack._ID + "=" + groupId, null, null);
+
+	public static String getAttackName(Context context, int groupId) {
+		Cursor attackCursor = context.getContentResolver().query(
+				Attack.CONTENT_URI, new String[] { Attack.NAME },
+				Attack._ID + "=" + groupId, null, null);
 		attackCursor.moveToFirst();
 		return Utils.getStringFromCol(attackCursor, Attack.NAME);
 	}
-	
-	public static String getFleetLaunchTimeCal(Context context,int groupId, int childId){
-		String[] projection = {Fleet.H,Fleet.M,Fleet.S,Fleet.DELTA};
-		Cursor fleetCursor = context.getContentResolver().query(Fleet.CONTENT_URI, projection, Fleet._ID+"="+childId, null, null);
-		String[] projection2={Attack.YEAR,Attack.MONTH,Attack.DAY, Attack.H, Attack.M, Attack.S};
-		Cursor attackCursor = context.getContentResolver().query(Attack.CONTENT_URI, projection2, Attack._ID+"="+groupId, null, null);
-		
-		
-		
+
+	public static String getFleetLaunchTimeCal(Context context, int groupId,
+			int childId) {
+		String[] projection = { Fleet.H, Fleet.M, Fleet.S, Fleet.DELTA };
+		Cursor fleetCursor = context.getContentResolver().query(
+				Fleet.CONTENT_URI, projection, Fleet._ID + "=" + childId, null,
+				null);
+		String[] projection2 = { Attack.YEAR, Attack.MONTH, Attack.DAY,
+				Attack.H, Attack.M, Attack.S };
+		Cursor attackCursor = context.getContentResolver().query(
+				Attack.CONTENT_URI, projection2, Attack._ID + "=" + groupId,
+				null, null);
+
 		return null;
 	}
 
-//	public static Calendar getFleetLaunchTime(){
-//		
-//	}
-	
 }
