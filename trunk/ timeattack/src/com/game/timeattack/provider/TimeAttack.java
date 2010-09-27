@@ -16,7 +16,7 @@ public class TimeAttack {
 		/**
 		 * The default sort order for this table
 		 */
-		public static final String DEFAULT_SORT_ORDER = "modified DESC";
+		public static final String DEFAULT_SORT_ORDER = "modified ASC";
 
 		/**
 		 * The MIME type of {@link #CONTENT_URI} providing a directory of
@@ -61,7 +61,7 @@ public class TimeAttack {
 		/**
 		 * The default sort order for this table
 		 */
-		public static final String DEFAULT_SORT_ORDER = "delta DESC";
+		public static final String DEFAULT_SORT_ORDER = "launch_time DESC";
 
 		/**
 		 * The MIME type of {@link #CONTENT_URI} providing a directory of

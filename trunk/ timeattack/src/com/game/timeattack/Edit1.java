@@ -159,7 +159,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			cal.set(Calendar.DAY_OF_MONTH, day);
 
 			date = (TextView) findViewById(R.id.date);
-			date.setText(Utils.getFromCalendar(cal, "%tF"));
+			date.setText(Utils.getFromCalendar(cal, Utils.FULL_DATE));
 		}
 
 		Log.d(TAG, "received: code=" + code + " name=" + name + " groupId="
@@ -377,8 +377,9 @@ public class Edit1 extends Activity implements OnClickListener {
 
 		cal.add(Calendar.DAY_OF_YEAR, i);
 
-		Log.d(TAG, "calB=" + cal + "\n" + Utils.getFromCalendar(cal, "%tF"));
-		return Utils.getFromCalendar(cal, "%tF");
+		Log.d(TAG, "calB=" + cal + "\n"
+				+ Utils.getFromCalendar(cal, Utils.FULL_DATE));
+		return Utils.getFromCalendar(cal, Utils.FULL_DATE);
 	}
 
 	private void changeTime(int seconds) {

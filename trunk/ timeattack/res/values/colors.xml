@@ -5,4 +5,5 @@
 <color name="gray">#808080</color>
 <color name="dark_gray">#404040</color><color name="light_blue">#6699ff</color><color name="blue">#3366cc</color><color name="dark_blue">#003399</color>
 <color name="black">#000000</color>
+<color name="red">#CC0000</color>
 </resources>

@@ -152,14 +152,17 @@ public class MyContentProvider extends ContentProvider {
 				values.put(Attack.NAME, "Attack name");
 			}
 			if (values.containsKey(Attack.YEAR) == false) {
-				values.put(Attack.YEAR, "" + Utils.getFromCalendar(cal, "%tY"));
+				values.put(Attack.YEAR, ""
+						+ Utils.getFromCalendar(cal, Utils.YEAR_4_DIGITS));
 			}
 			if (values.containsKey(Attack.MONTH) == false) {
-				int month = Utils.sToI(Utils.getFromCalendar(cal, "%tm"));
+				int month = Utils.sToI(Utils.getFromCalendar(cal,
+						Utils.MONTH_2_DIGITS));
 				values.put(Attack.MONTH, "" + month);
 			}
 			if (values.containsKey(Attack.DAY) == false) {
-				int day = Utils.sToI(Utils.getFromCalendar(cal, "%td"));
+				int day = Utils.sToI(Utils.getFromCalendar(cal,
+						Utils.DAY_2_DIGITS));
 				values.put(Attack.DAY, "" + (day + 1));
 			}
 			if (values.containsKey(Attack.H) == false) {
@@ -393,12 +396,7 @@ public class MyContentProvider extends ContentProvider {
 
 		Log.d(TAG, "new time to launch:" + attackYear + " " + attackMonth + " "
 				+ attackDay);
-		// cal.add(Calendar.HOUR_OF_DAY, -hh);
-		// cal.add(Calendar.MINUTE, -mm);
-		// cal.add(Calendar.SECOND, -ss);
-		//
-		// cal.add(Calendar.SECOND, -dd);
-		cal = Utils.addToCalendar(cal, 0, -fleetH, -fleetM, -fleetS
+		Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS
 				- fleetDelta);
 		String timeToLaunch = Utils.formatCalendar(cal, "%td") + " "
 				+ Utils.formatCalendar(cal, "%tb") + " "
