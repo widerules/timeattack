@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/add" android:title="Ajouter"></item>
-<item android:id="@+id/editchild" android:title="Editer élément"></item><item android:title="Supprimer" android:id="@+id/del"></item>
+<item android:id="@+id/add" android:title="@string/add_new_fleet"></item>
+<item android:id="@+id/editchild" android:title="@string/edit_fleet"></item><item android:id="@+id/del" android:title="@string/delete_fleet"></item>
 
 </menu>

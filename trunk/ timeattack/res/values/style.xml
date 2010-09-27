@@ -15,8 +15,10 @@
 <style name="TextviewFleetStyle" parent="@android:style/TextAppearance.Medium"></style><style name="CustomTitleTheme" parent="android:Theme.Light"><item name="android:windowTitleSize">45dip</item>
 </style>
 
-<style name="WhiteText" parent="@android:style/TextAppearance"><item name="android:textColor">@color/white</item>
+<style parent="@android:style/TextAppearance" name="ChildText"><item name="android:textColor">@color/black</item>
 </style>
-<style name="WhiteText.Italic"><item name="android:textStyle">italic</item>
+<style name="ChildText.Italic"><item name="android:textStyle">italic</item>
+</style>
+<style name="ParentText" parent="@android:style/TextAppearance"><item name="android:textColor">@color/white</item>
 </style>
 </resources>

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Vector;
 
+import android.app.Dialog;
 import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -62,6 +63,8 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 				boolean alreadyIn = updateDatas.contains((UpdateData) msg.obj);
 				Log.d(TAG, "Object already inside : " + alreadyIn);
 				if (!alreadyIn) {
+					updateDatas.add((UpdateData) msg.obj);
+				} else {
 					updateDatas.remove((UpdateData) msg.obj);
 					updateDatas.add((UpdateData) msg.obj);
 				}
@@ -70,7 +73,7 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 				KILL_ALL_THREADS = false;
 				removeCallbacks(thread);
 				thread = new UpdateThread(updateDatas);
-				postDelayed(thread, 250);
+				postDelayed(thread, 100);
 				break;
 			case STOP_UPDATE:
 				KILL_ALL_THREADS = true;
@@ -189,20 +192,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			/**
 			 * launchtime
 			 */
-			// Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS - 2
-			// * fleetDelta);
-			// int launchYear = Utils.sToI(Utils.getFromCalendar(cal,
-			// Utils.YEAR_4_DIGITS));
-			// int launchMonth = Utils.sToI(Utils.getFromCalendar(cal,
-			// Utils.MONTH_2_DIGITS));
-			// int launchDay = Utils.sToI(Utils.getFromCalendar(cal,
-			// Utils.DAY_2_DIGITS));
-			// int launchH = Utils.sToI(Utils.getFromCalendar(cal,
-			// Utils.HOUR_OF_DAY_24H));
-			// int launchM = Utils.sToI(Utils.getFromCalendar(cal,
-			// Utils.MINUTES));
-			// int launchS = Utils.sToI(Utils.getFromCalendar(cal,
-			// Utils.SECONDS));
 			long launchTime2 = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
 
 			/**
@@ -519,15 +508,16 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			intent = new Intent(this, Edit1.class);
 			intent.putExtra("code", EDITION_ADD_CHILD);
 			intent.putExtra("groupId", (int) groupId);
-			intent.putExtra("childId", -1);
+			intent.putExtra("childId", -2);
+			intent.putExtra("HIDE_DATE", true);
 			startActivity(intent);
 			break;
 		case R.id.editchild:
 			Log.d(TAG, "editchild");
-			intent = new Intent(this, Edit1.class);
+			intent = new Intent(this, FleetDetails.class);
 			intent.putExtra("groupId", (int) groupId);
 			intent.putExtra("childId", (int) childId);
-			intent.putExtra("code", EDITION_CHILD);
+			startActivity(intent);
 			Log.d(TAG, "edited Group=" + groupId + " child=" + childId);
 			startActivity(intent);
 			break;
@@ -535,14 +525,13 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			Log.d(TAG, "editgroup");
 			intent = new Intent(this, Edit1.class);
 			intent.putExtra("groupId", (int) groupId);
-			intent.putExtra("childId", (int) childId);
+			intent.putExtra("childId", -1);
 			intent.putExtra("code", EDITION_GROUP);
 			Log.d(TAG, "edited Group=" + groupId + " child=" + childId);
 			startActivity(intent);
 			break;
 		case R.id.del:
 			Log.d(TAG, "del");
-
 			switch (type) {
 			case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
 				int delete = getContentResolver().delete(Fleet.CONTENT_URI,
@@ -583,6 +572,36 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	}
 
 	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		// TODO Auto-generated method stub
+		super.onPrepareDialog(id, dialog);
+	}
+
+	// @Override
+	// protected Dialog onCreateDialog(int id) {
+	// Dialog dialog = null;
+	// switch (id) {
+	// case DELETE_DIALOG_ID:
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// builder.setMessage(R.string.confirm_delete);
+	// builder.setPositiveButton(R.string.yes, new OnClickListener() {
+	//
+	// @Override
+	// public void onClick(DialogInterface dialog, int which) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	// });
+	// dialog = builder.create();
+	// break;
+	//
+	// default:
+	// throw new IllegalArgumentException("Unknown dialog");
+	// }
+	// return dialog;
+	// }
+
+	@Override
 	protected void onPause() {
 		super.onPause();
 		expandedGroups = new ArrayList<Integer>();
@@ -616,19 +635,11 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	 * @param s
 	 */
 	private void calcRemainingTime(UpdateData updateData) {
-
+		updateData.v.setTextColor(getResources().getColor(R.color.black));
 		Calendar currentCal = Calendar.getInstance();
 
 		Calendar launchCal = Calendar.getInstance();
 		launchCal.setTimeInMillis(updateData.launchTime);
-		//		
-		// launchCal.set(Calendar.YEAR, updateData.year);
-		// launchCal.set(Calendar.MONTH, updateData.month - 1);// First month is
-		// 0
-		// launchCal.set(Calendar.DAY_OF_MONTH, updateData.day);
-		// launchCal.set(Calendar.HOUR_OF_DAY, updateData.h);
-		// launchCal.set(Calendar.MINUTE, updateData.m);
-		// launchCal.set(Calendar.SECOND, updateData.s);
 		if (currentCal.after(launchCal)) {
 			updateData.v.setTextColor(getResources().getColor(R.color.white));
 			updateData.v.setText(getString(R.string.already_launched) + " ");
@@ -657,6 +668,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 				+ Utils.getFromCalendar(newCal, Utils.SECONDS);
 		String result = newDay + "d " + time;
 		updateData.v.setText(result + " ");
-		// return result + " ";
 	}
+
 }
