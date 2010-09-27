@@ -112,7 +112,6 @@ public class FleetDetails extends Activity implements OnClickListener,
 		mDelta.setText("" + Math.abs(delta));
 		Calendar cal = Calendar.getInstance();
 		cal.setLenient(true);
-		// cal.set(Calendar.HOUR_OF_DAY, Utils.getIntFromCol(cursor, Fleet.H));
 		cal.set(Calendar.MINUTE, Utils.getIntFromCol(cursor, Fleet.M));
 		cal.set(Calendar.SECOND, Utils.getIntFromCol(cursor, Fleet.S));
 		String h = Utils.getStringFromCol(cursor, Fleet.H);
@@ -183,7 +182,6 @@ public class FleetDetails extends Activity implements OnClickListener,
 				values.put(Fleet.DELTA, -delta);
 				getContentResolver().update(Fleet.CONTENT_URI, values, where,
 						null);
-				// calcChild();
 			}
 			break;
 		case R.id.delta_after:
@@ -191,7 +189,6 @@ public class FleetDetails extends Activity implements OnClickListener,
 				values.put(Fleet.DELTA, -delta);
 				getContentResolver().update(Fleet.CONTENT_URI, values, where,
 						null);
-				// calcChild();
 			}
 			break;
 		default:
@@ -199,56 +196,4 @@ public class FleetDetails extends Activity implements OnClickListener,
 		}
 		update();
 	}
-
-	// public void calcChild() {
-	// Calendar cal = Calendar.getInstance();
-	// String[] projection = { Attack.H, Attack.M, Attack.S };
-	// String selection = Attack._ID + "=" + mGroupId;
-	// Cursor cursor = getContentResolver().query(Attack.CONTENT_URI,
-	// projection, selection, null, null);
-	// cursor.moveToFirst();
-	// int h1 = new Integer(cursor.getString(cursor
-	// .getColumnIndexOrThrow(Attack.H)));
-	// int h2 = new Integer(cursor.getString(cursor
-	// .getColumnIndexOrThrow(Attack.M)));
-	// int h3 = new Integer(cursor.getString(cursor
-	// .getColumnIndexOrThrow(Attack.S)));
-	// String[] projection2 = { Fleet.H, Fleet.M, Fleet.S, Fleet.DELTA };
-	// String selection2 = Fleet._ID + "=" + mChildId;
-	// Cursor cursor2 = getContentResolver().query(Fleet.CONTENT_URI,
-	// projection2, selection2, null, null);
-	// cursor2.moveToFirst();
-	// String h = cursor2.getString(cursor2.getColumnIndexOrThrow(Fleet.H));
-	// String m = cursor2.getString(cursor2.getColumnIndexOrThrow(Fleet.M));
-	// String s = cursor2.getString(cursor2.getColumnIndexOrThrow(Fleet.S));
-	// String d = cursor2
-	// .getString(cursor2.getColumnIndexOrThrow(Fleet.DELTA));
-	// int hh = new Integer(h);
-	// int mm = new Integer(m);
-	// int ss = new Integer(s);
-	// int dd = new Integer(d);
-	// // if (DELTA_NEGATIVE) {
-	// // dd = -dd;
-	// // }
-	//
-	// cal.set(Calendar.HOUR_OF_DAY, h1);
-	// cal.set(Calendar.MINUTE, h2);
-	// cal.set(Calendar.SECOND, h3);
-	//
-	// cal.add(Calendar.HOUR_OF_DAY, -hh);
-	// cal.add(Calendar.MINUTE, -mm);
-	// cal.add(Calendar.SECOND, -ss);
-	//
-	// cal.add(Calendar.SECOND, -dd);
-	//
-	// Date time = cal.getTime();
-	// String timeToLaunch = simpleDateFormat.format(time);
-	// ContentValues values = new ContentValues();
-	// values.put(Fleet.LAUNCH_TIME, timeToLaunch);
-	// String where = "_id=" + mChildId;
-	// int update = getContentResolver().update(Fleet.CONTENT_URI, values,
-	// where, null);
-	// Log.d(TAG, "number of lines modified after calculation:" + update);
-	//
-	// }
 }
