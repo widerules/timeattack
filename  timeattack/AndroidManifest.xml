@@ -5,7 +5,7 @@
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.Light" android:debuggable="true">
         
 
-    <activity android:name="Edit1" android:windowSoftInputMode="adjustUnspecified|adjustResize|adjustPan"></activity>
+    <activity android:name="Edit1"></activity>
 
 
 
@@ -19,7 +19,7 @@
 <activity android:name="FleetDetails" android:windowSoftInputMode="stateAlwaysHidden"></activity>
 
 </application>
-    <uses-sdk android:minSdkVersion="7"/>
+    <uses-sdk android:targetSdkVersion="4" android:minSdkVersion="4"/>
 
 
 <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>

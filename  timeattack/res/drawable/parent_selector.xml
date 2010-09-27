@@ -4,15 +4,15 @@
 >
 	<item
 		android:state_pressed="true"
-		android:drawable="@drawable/selected_shape"
+		android:drawable="@drawable/selected_parent_shape"
 	></item>
 	<item
-		android:state_focused="true"
-		android:drawable="@drawable/selected_shape"
+		android:state_selected="true"
+		android:drawable="@drawable/selected_parent_shape"
 	>
 	</item>
 	<item
-		android:drawable="@drawable/idle_shape"
+		android:drawable="@drawable/idle_parent_shape"
 	>
 	</item>
 </selector>
