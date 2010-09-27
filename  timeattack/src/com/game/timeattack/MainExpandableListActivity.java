@@ -100,8 +100,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			for (Iterator<UpdateData> iterator = updateDatas.iterator(); iterator
 					.hasNext();) {
 				UpdateData tmp = (UpdateData) iterator.next();
-				// tmp.v.setText(calcRemainingTime(tmp.year, tmp.month, tmp.day,
-				// tmp.h, tmp.m, tmp.s));
 				calcRemainingTime(tmp);
 				mHandler.removeCallbacks(this);
 			}
@@ -133,46 +131,44 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 				holder.delta = (TextView) v.findViewById(R.id.delta);
 				holder.timeToLaunch = (TextView) v
 						.findViewById(R.id.time_to_launch);
-				holder.del = (ImageView) v.findViewById(R.id.del);
-				holder.add = (ImageView) v.findViewById(R.id.add);
-				holder.edit = (ImageView) v.findViewById(R.id.edit);
 				holder.arrivalTime = (TextView) v
 						.findViewById(R.id.arrival_time);
 				holder.remainingTime = (TextView) v
 						.findViewById(R.id.remaining_time);
-				holder.travelTime = (TextView) v.findViewById(R.id.travel_time);
 			}
 			int id = Utils.getIntFromCol(cursor, Fleet._ID);
 			int groupId = Utils.getIntFromCol(cursor, Fleet.GROUP_ID);
 			String name = Utils.getStringFromCol(cursor, Fleet.NAME);
 			String delta = Utils.getStringFromCol(cursor, Fleet.DELTA);
-			String launchTime = Utils.getStringFromCol(cursor,
-					Fleet.LAUNCH_TIME);
+			long time = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
+			cal = Calendar.getInstance();
+			cal.setTimeInMillis(time);
+			String launchTime = Utils.getFromCalendar(cal, Utils
+					.formatCalendar(cal, Utils.DAY_2_DIGITS)
+					+ " "
+					+ Utils.formatCalendar(cal, Utils.LOCALIZED_MONTH_ABR)
+					+ " " + Utils.formatCalendar(cal, Utils.FULL_12H_TIME));
 
 			holder.id = id;
 			holder.groupId = groupId;
 			holder.name.setText(name);
 			holder.delta.setText(delta);
 			holder.timeToLaunch.setText(launchTime);
-			v.setTag(holder);
 
-			int fleetH = Utils.getIntFromCol(cursor, Fleet.H);
-			int fleetM = Utils.getIntFromCol(cursor, Fleet.M);
-			int fleetS = Utils.getIntFromCol(cursor, Fleet.S);
 			int fleetDelta = Utils.sToI(delta);
 
 			String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
 					Attack.H, Attack.M, Attack.S };
-			String selection = Attack._ID + "=" + groupId;
-			Cursor cursor2 = getContentResolver().query(Attack.CONTENT_URI,
-					projection, selection, null, null);
-			cursor2.moveToFirst();
-			int attack_year = Utils.getIntFromCol(cursor2, Attack.YEAR);
-			int attack_month = Utils.getIntFromCol(cursor2, Attack.MONTH);
-			int attack_day = Utils.getIntFromCol(cursor2, Attack.DAY);
-			int attack_h = Utils.getIntFromCol(cursor2, Attack.H);
-			int attack_m = Utils.getIntFromCol(cursor2, Attack.M);
-			int attack_s = Utils.getIntFromCol(cursor2, Attack.S);
+			Cursor attackCursor = getContentResolver().query(
+					Attack.CONTENT_URI, projection, Attack._ID + "=" + groupId,
+					null, null);
+			attackCursor.moveToFirst();
+			int attack_year = Utils.getIntFromCol(attackCursor, Attack.YEAR);
+			int attack_month = Utils.getIntFromCol(attackCursor, Attack.MONTH);
+			int attack_day = Utils.getIntFromCol(attackCursor, Attack.DAY);
+			int attack_h = Utils.getIntFromCol(attackCursor, Attack.H);
+			int attack_m = Utils.getIntFromCol(attackCursor, Attack.M);
+			int attack_s = Utils.getIntFromCol(attackCursor, Attack.S);
 
 			/**
 			 * Arrival time
@@ -193,33 +189,34 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			/**
 			 * launchtime
 			 */
-			Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS - 2
-					* fleetDelta);
-			int launchYear = Utils.sToI(Utils.getFromCalendar(cal,
-					Utils.YEAR_4_DIGITS));
-			int launchMonth = Utils.sToI(Utils.getFromCalendar(cal,
-					Utils.MONTH_2_DIGITS));
-			int launchDay = Utils.sToI(Utils.getFromCalendar(cal,
-					Utils.DAY_2_DIGITS));
-			int launchH = Utils.sToI(Utils.getFromCalendar(cal,
-					Utils.HOUR_OF_DAY_24H));
-			int launchM = Utils.sToI(Utils.getFromCalendar(cal, Utils.MINUTES));
-			int launchS = Utils.sToI(Utils.getFromCalendar(cal, Utils.SECONDS));
-			// cal.add(Calendar.HOUR_OF_DAY, -h);
-			// cal.add(Calendar.MINUTE, -m);
-			// cal.add(Calendar.SECOND, -s);
-			// cal.add(Calendar.SECOND, -2 * d);
+			// Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS - 2
+			// * fleetDelta);
+			// int launchYear = Utils.sToI(Utils.getFromCalendar(cal,
+			// Utils.YEAR_4_DIGITS));
+			// int launchMonth = Utils.sToI(Utils.getFromCalendar(cal,
+			// Utils.MONTH_2_DIGITS));
+			// int launchDay = Utils.sToI(Utils.getFromCalendar(cal,
+			// Utils.DAY_2_DIGITS));
+			// int launchH = Utils.sToI(Utils.getFromCalendar(cal,
+			// Utils.HOUR_OF_DAY_24H));
+			// int launchM = Utils.sToI(Utils.getFromCalendar(cal,
+			// Utils.MINUTES));
+			// int launchS = Utils.sToI(Utils.getFromCalendar(cal,
+			// Utils.SECONDS));
+			long launchTime2 = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
 
 			/**
 			 * update thread
 			 */
-			TextView remainingTime = holder.remainingTime;
-			UpdateData updateData = new UpdateData(remainingTime, launchYear,
-					launchMonth, launchDay, launchH, launchM, launchS);
+			TextView remainingTimeView = holder.remainingTime;
+			UpdateData updateData = new UpdateData(remainingTimeView,
+					launchTime2);
 			Message msg = new Message();
 			msg.what = ADD_UPDATE_DATA;
 			msg.obj = updateData;
 			mHandler.sendMessage(msg);
+
+			v.setTag(holder);
 		}
 
 		@Override
@@ -372,18 +369,12 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 	public class UpdateData {
 		public TextView v;
-		public int year, month, day, h, m, s;
+		long launchTime;
 
-		public UpdateData(TextView v, int year, int month, int d, int h, int m,
-				int s) {
+		public UpdateData(TextView v, long launchTime) {
 			super();
 			this.v = v;
-			this.year = year;
-			this.month = month;
-			this.day = d;
-			this.h = h;
-			this.m = m;
-			this.s = s;
+			this.launchTime = launchTime;
 		}
 
 		@Override
@@ -437,9 +428,7 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 	static class ChildViewHolder implements Holder {
 		int id, groupId;
-		TextView name, h, m, s, delta, timeToLaunch, arrivalTime,
-				remainingTime, travelTime;
-		ImageView add, edit, del;
+		TextView name, delta, timeToLaunch, arrivalTime, remainingTime;
 
 		@Override
 		public int getGroupId() {
@@ -629,16 +618,18 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	private void calcRemainingTime(UpdateData updateData) {
 
 		Calendar currentCal = Calendar.getInstance();
-		Calendar launchCal = Calendar.getInstance();
-		launchCal.set(Calendar.YEAR, updateData.year);
-		launchCal.set(Calendar.MONTH, updateData.month - 1);// First month is 0
-		launchCal.set(Calendar.DAY_OF_MONTH, updateData.day);
-		launchCal.set(Calendar.HOUR_OF_DAY, updateData.h);
-		launchCal.set(Calendar.MINUTE, updateData.m);
-		launchCal.set(Calendar.SECOND, updateData.s);
-		if (currentCal.after(launchCal)) {
-			// return getString(R.string.already_launched) + " ";
 
+		Calendar launchCal = Calendar.getInstance();
+		launchCal.setTimeInMillis(updateData.launchTime);
+		//		
+		// launchCal.set(Calendar.YEAR, updateData.year);
+		// launchCal.set(Calendar.MONTH, updateData.month - 1);// First month is
+		// 0
+		// launchCal.set(Calendar.DAY_OF_MONTH, updateData.day);
+		// launchCal.set(Calendar.HOUR_OF_DAY, updateData.h);
+		// launchCal.set(Calendar.MINUTE, updateData.m);
+		// launchCal.set(Calendar.SECOND, updateData.s);
+		if (currentCal.after(launchCal)) {
 			updateData.v.setTextColor(getResources().getColor(R.color.white));
 			updateData.v.setText(getString(R.string.already_launched) + " ");
 			return;

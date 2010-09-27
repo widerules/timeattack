@@ -29,10 +29,9 @@ public class MyContentProvider extends ContentProvider {
 	public static final Uri CONTENT_URI = Uri.parse("content://"
 			+ PROVIDER_NAME);
 
-	private static final String tag = "MyContentProvider";
 	private static final String pre = "DBOpenHelper: ";
 	private static final String DATABASE_NAME = "timeattackdb";
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 7;
 
 	private static final UriMatcher uriMatcher;
 
@@ -55,7 +54,7 @@ public class MyContentProvider extends ContentProvider {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			Log.i(tag, pre + "Creating a new DB");
+			Log.i(TAG, pre + "Creating a new DB");
 
 			db.execSQL(Attack.TABLE_CREATE);
 			db.execSQL(Fleet.TABLE_CREATE);
@@ -63,7 +62,7 @@ public class MyContentProvider extends ContentProvider {
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			Log.w(tag, pre + "Upgrading from version " + oldVersion + " to "
+			Log.w(TAG, pre + "Upgrading from version " + oldVersion + " to "
 					+ newVersion + ", which will destroy all old data");
 			db.execSQL("DROP TABLE IF EXISTS " + Attack.TABLE_NAME);
 			db.execSQL("DROP TABLE IF EXISTS " + Fleet.TABLE_NAME);
@@ -192,7 +191,7 @@ public class MyContentProvider extends ContentProvider {
 				values.put(Fleet.DELTA, "00");
 			}
 			if (values.containsKey(Fleet.LAUNCH_TIME) == false) {
-				values.put(Fleet.LAUNCH_TIME, " ");
+				values.put(Fleet.LAUNCH_TIME, "0");
 			}
 			break;
 		}
@@ -398,11 +397,9 @@ public class MyContentProvider extends ContentProvider {
 				+ attackDay);
 		Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS
 				- fleetDelta);
-		String timeToLaunch = Utils.formatCalendar(cal, "%td") + " "
-				+ Utils.formatCalendar(cal, "%tb") + " "
-				+ Utils.formatCalendar(cal, "%tr");
 		ContentValues values = new ContentValues();
-		values.put(Fleet.LAUNCH_TIME, timeToLaunch);
+		values.put(Fleet.LAUNCH_TIME, Utils.getFromCalendar(cal,
+				Utils.MILLISECONDS_SINCE_EPOCH));
 		String where = "_id=" + achildId;
 		int update = aDb.update(Fleet.TABLE_NAME, values, where, null);
 		Log.d(TAG, "number of lines modified after calculation:" + update);

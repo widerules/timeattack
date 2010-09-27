@@ -77,9 +77,9 @@ public class FleetDetails extends Activity implements OnClickListener,
 
 		TextView timeOfTheAttack = (TextView) findViewById(R.id.time_of_the_attack);
 		TextView namelabel = (TextView) findViewById(R.id.attack_name);
-		String dateAndTime=Utils.getAttackTime(this, mGroupId);
+		String dateAndTime = Utils.getAttackTime(this, mGroupId);
 		timeOfTheAttack.setText(dateAndTime);
-		String name=Utils.getAttackName(this, mGroupId);
+		String name = Utils.getAttackName(this, mGroupId);
 		namelabel.setText(name);
 	}
 
@@ -123,12 +123,16 @@ public class FleetDetails extends Activity implements OnClickListener,
 				h = "0" + h;
 			}
 		}
-		String duration = h + ":" + Utils.formatCalendar(cal, "%tM") + ":"
-				+ Utils.formatCalendar(cal, "%tS");
+		String duration = h + ":" + Utils.formatCalendar(cal, Utils.MINUTES)
+				+ ":" + Utils.formatCalendar(cal, Utils.SECONDS);
 		mDuration.setText(duration);
 
-		mLaunchAt.setText(cursor.getString(cursor
-				.getColumnIndexOrThrow(Fleet.LAUNCH_TIME)));
+		long time = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
+		cal = Calendar.getInstance();
+		cal.setTimeInMillis(time);
+		mLaunchAt.setText(Utils.formatCalendar(cal, Utils.DAY_2_DIGITS) + " "
+				+ Utils.formatCalendar(cal, Utils.LOCALIZED_MONTH_ABR) + " "
+				+ Utils.formatCalendar(cal, Utils.FULL_12H_TIME));
 	}
 
 	@Override

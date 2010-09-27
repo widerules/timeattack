@@ -7,7 +7,6 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.game.timeattack.provider.TimeAttack.Attack;
-import com.game.timeattack.provider.TimeAttack.Fleet;
 
 public class Utils {
 
@@ -21,6 +20,8 @@ public class Utils {
 	public static final String HOUR_OF_DAY_12H = "%tI";
 	public static final String MINUTES = "%tM";
 	public static final String SECONDS = "%tS";
+	public static final String LOCALIZED_MONTH_ABR = "%tb";
+	public static final String MILLISECONDS_SINCE_EPOCH = "%tQ";
 
 	public static int getIntFromCol(Cursor cursor, String colName) {
 		return sToI(getStringFromCol(cursor, colName));
@@ -28,6 +29,17 @@ public class Utils {
 
 	public static String getStringFromCol(Cursor cursor, String colName) {
 		return cursor.getString(cursor.getColumnIndexOrThrow(colName));
+	}
+
+	public static long getLongFromCol(Cursor cursor, String colName) {
+		String string = Utils.getStringFromCol(cursor, colName);
+		Long l;
+		try {
+			l = new Long(string);
+		} catch (Exception e) {
+			l = new Long(0);
+		}
+		return l;
 	}
 
 	public static int sToI(String s) {
@@ -127,21 +139,6 @@ public class Utils {
 				Attack._ID + "=" + groupId, null, null);
 		attackCursor.moveToFirst();
 		return Utils.getStringFromCol(attackCursor, Attack.NAME);
-	}
-
-	public static String getFleetLaunchTimeCal(Context context, int groupId,
-			int childId) {
-		String[] projection = { Fleet.H, Fleet.M, Fleet.S, Fleet.DELTA };
-		Cursor fleetCursor = context.getContentResolver().query(
-				Fleet.CONTENT_URI, projection, Fleet._ID + "=" + childId, null,
-				null);
-		String[] projection2 = { Attack.YEAR, Attack.MONTH, Attack.DAY,
-				Attack.H, Attack.M, Attack.S };
-		Cursor attackCursor = context.getContentResolver().query(
-				Attack.CONTENT_URI, projection2, Attack._ID + "=" + groupId,
-				null, null);
-
-		return null;
 	}
 
 }
