@@ -135,9 +135,6 @@ public class Edit1 extends Activity implements OnClickListener {
 			} catch (NumberFormatException e) {
 				delta = 0;
 			}
-			// if (delta < 0) {
-			// DELTA_NEGATIVE = true;
-			// }
 			mD.setText("" + Math.abs(delta));
 			break;
 		default:

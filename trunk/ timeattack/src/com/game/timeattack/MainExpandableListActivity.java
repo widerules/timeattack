@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Vector;
 
-import android.app.Dialog;
 import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -305,13 +304,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 							Attack._ID + "=" + h.getGroupId(), null);
 					Log.d(TAG, "deleted rows=" + (delete + delete2));
 					break;
-				// case R.id.add_group:
-				// intent = new Intent(getApplicationContext(), Edit1.class);
-				// intent.putExtra("code", EDITION_ADD_GROUP);
-				// intent.putExtra("groupId", -1);
-				// intent.putExtra("childId", -1);
-				// startActivity(intent);
-				// break;
 				default:
 					// throw new IllegalArgumentException("View not handled");
 					intent = new Intent(getApplicationContext(),
@@ -570,36 +562,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 		startActivity(intent);
 		return true;
 	}
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		// TODO Auto-generated method stub
-		super.onPrepareDialog(id, dialog);
-	}
-
-	// @Override
-	// protected Dialog onCreateDialog(int id) {
-	// Dialog dialog = null;
-	// switch (id) {
-	// case DELETE_DIALOG_ID:
-	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	// builder.setMessage(R.string.confirm_delete);
-	// builder.setPositiveButton(R.string.yes, new OnClickListener() {
-	//
-	// @Override
-	// public void onClick(DialogInterface dialog, int which) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	// });
-	// dialog = builder.create();
-	// break;
-	//
-	// default:
-	// throw new IllegalArgumentException("Unknown dialog");
-	// }
-	// return dialog;
-	// }
 
 	@Override
 	protected void onPause() {
