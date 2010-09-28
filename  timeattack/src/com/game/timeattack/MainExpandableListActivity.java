@@ -1,6 +1,5 @@
 package com.game.timeattack;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -41,7 +40,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	private static final int EDITION_ADD_GROUP = 3;
 	private static final int EDITION_ADD_CHILD = 4;
 	ArrayList<Integer> expandedGroups = null;
-	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("kk:mm:ss");
 	private static boolean KILL_ALL_THREADS = false;
 	public static final int ADD_UPDATE_DATA = 1;
 	public static final int START_UPDATE = 2;
@@ -305,11 +303,11 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 					Log.d(TAG, "deleted rows=" + (delete + delete2));
 					break;
 				default:
-					// throw new IllegalArgumentException("View not handled");
-					intent = new Intent(getApplicationContext(),
-							FleetDetails.class);
-					intent.putExtra("groupId", h.getGroupId());
-					startActivity(intent);
+					throw new IllegalArgumentException("View not handled");
+					// intent = new Intent(getApplicationContext(),
+					// FleetDetails.class);
+					// intent.putExtra("groupId", h.getGroupId());
+					// startActivity(intent);
 				}
 			}
 			Log.d(TAG, "action=" + action + " View id=" + viewId);
@@ -345,7 +343,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			View v = inflater.inflate(R.layout.head, parent, false);
 			return v;
 		}
-
 	}
 
 	public class UpdateData {
@@ -588,8 +585,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	}
 
 	/**
-	 * in: launch time
-	 * 
 	 * @param day
 	 * @param h
 	 * @param m
