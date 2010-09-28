@@ -31,7 +31,7 @@ public class MyContentProvider extends ContentProvider {
 
 	private static final String pre = "DBOpenHelper: ";
 	private static final String DATABASE_NAME = "timeattackdb";
-	private static final int DATABASE_VERSION = 7;
+	private static final int DATABASE_VERSION = 10;
 
 	private static final UriMatcher uriMatcher;
 
@@ -147,6 +147,9 @@ public class MyContentProvider extends ContentProvider {
 		case ATTACKS:
 			Calendar cal = Calendar.getInstance();
 
+			// if (values.containsKey(Attack.ATTACK_TIME) == false) {
+			// values.put(Attack.ATTACK_TIME, "0");
+			// }
 			if (values.containsKey(Attack.NAME) == false) {
 				values.put(Attack.NAME, "Attack name");
 			}
@@ -193,6 +196,12 @@ public class MyContentProvider extends ContentProvider {
 			if (values.containsKey(Fleet.LAUNCH_TIME) == false) {
 				values.put(Fleet.LAUNCH_TIME, "0");
 			}
+			if (values.containsKey(Fleet.ALARM) == false) {
+				values.put(Fleet.ALARM, "0");
+			}
+			if (values.containsKey(Fleet.ALARM_ACTIVATED) == false) {
+				values.put(Fleet.ALARM_ACTIVATED, "false");
+			}
 			break;
 		}
 
@@ -237,19 +246,23 @@ public class MyContentProvider extends ContentProvider {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		String lastPathSegment = uri.getLastPathSegment();
 
-		qb.setTables(lastPathSegment);
+		// qb.setTables(lastPathSegment);
 		switch (uriMatcher.match(uri)) {
 		case ATTACKS:
+			qb.setTables(lastPathSegment);
 			qb.setProjectionMap(sAttackProjectionMap);
 			break;
 		case ATTACK_ID:
+			qb.setTables(Attack.TABLE_NAME);
 			qb.setProjectionMap(sAttackProjectionMap);
 			qb.appendWhere(Attack._ID + "=" + uri.getPathSegments().get(1));
 			break;
 		case FLEETS:
+			qb.setTables(lastPathSegment);
 			qb.setProjectionMap(sFleetProjectionMap);
 			break;
 		case FLEET_ID:
+			qb.setTables(Fleet.TABLE_NAME);
 			qb.setProjectionMap(sFleetProjectionMap);
 			qb.appendWhere(Fleet._ID + "=" + uri.getPathSegments().get(1));
 			break;
@@ -332,6 +345,7 @@ public class MyContentProvider extends ContentProvider {
 		sAttackProjectionMap = new HashMap<String, String>();
 		sAttackProjectionMap.put(Attack._ID, Attack._ID);
 		sAttackProjectionMap.put(Attack.NAME, Attack.NAME);
+		// sAttackProjectionMap.put(Attack.ATTACK_TIME, Attack.ATTACK_TIME);
 		sAttackProjectionMap.put(Attack.YEAR, Attack.YEAR);
 		sAttackProjectionMap.put(Attack.MONTH, Attack.MONTH);
 		sAttackProjectionMap.put(Attack.DAY, Attack.DAY);
@@ -348,6 +362,8 @@ public class MyContentProvider extends ContentProvider {
 		sFleetProjectionMap.put(Fleet.S, Fleet.S);
 		sFleetProjectionMap.put(Fleet.DELTA, Fleet.DELTA);
 		sFleetProjectionMap.put(Fleet.LAUNCH_TIME, Fleet.LAUNCH_TIME);
+		sFleetProjectionMap.put(Fleet.ALARM, Fleet.ALARM);
+		sFleetProjectionMap.put(Fleet.ALARM_ACTIVATED, Fleet.ALARM_ACTIVATED);
 
 	}
 
@@ -363,12 +379,15 @@ public class MyContentProvider extends ContentProvider {
 	}
 
 	public void calcChild(SQLiteDatabase aDb, int agroupId, int achildId) {
+		// String[] projection = { Attack.ATTACK_TIME };
 		String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
 				Attack.H, Attack.M, Attack.S };
 		String selection = Attack._ID + "=" + agroupId;
 		Cursor cursor = aDb.query(Attack.TABLE_NAME, projection, selection,
 				null, null, null, null);
 		cursor.moveToFirst();
+		// long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
+
 		int attackYear = Utils.getIntFromCol(cursor, Attack.YEAR);
 		int attackMonth = Utils.getIntFromCol(cursor, Attack.MONTH);
 		int attackDay = Utils.getIntFromCol(cursor, Attack.DAY);
@@ -386,6 +405,7 @@ public class MyContentProvider extends ContentProvider {
 		int fleetDelta = Utils.getIntFromCol(cursor2, Fleet.DELTA);
 
 		Calendar cal = Calendar.getInstance();
+		// cal.setTimeInMillis(attackTime);
 		cal.set(Calendar.YEAR, attackYear);
 		cal.set(Calendar.MONTH, attackMonth - 1);
 		cal.set(Calendar.DAY_OF_MONTH, attackDay);

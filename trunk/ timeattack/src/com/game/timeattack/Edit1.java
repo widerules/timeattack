@@ -75,6 +75,13 @@ public class Edit1 extends Activity implements OnClickListener {
 		case EDITION_ADD_GROUP:
 			values = new ContentValues();
 			values.put(Attack.NAME, "Attack");
+
+			// Calendar cal = Calendar.getInstance();
+			// cal.setTimeInMillis(System.currentTimeMillis());
+			// cal.set(Calendar.HOUR_OF_DAY, 6);
+			// cal.set(Calendar.MINUTE, 0);
+			// cal.set(Calendar.SECOND, 0);
+			// values.put(Attack.ATTACK_TIME, "" + cal.getTimeInMillis());
 			values.put(Attack.H, "6");
 			values.put(Attack.M, "0");
 			values.put(Attack.S, "0");
@@ -82,6 +89,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			Uri uri = getContentResolver().insert(Attack.CONTENT_URI, values);
 			newGroupId = new Integer((uri.getPathSegments().get(1)));
 			Log.d(TAG, "new group ID=" + newGroupId);
+			// String[] projection3 = { Attack.NAME, Attack.ATTACK_TIME };
 			String[] projection3 = { Attack.NAME, Attack.YEAR, Attack.MONTH,
 					Attack.DAY, Attack.H, Attack.M, Attack.S };
 			String selection3 = Attack._ID + "=" + newGroupId;
@@ -91,6 +99,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			break;
 		case EDITION_GROUP:
 			HIDE_DELTA = true;
+			// String[] projection2 = { Attack.NAME, Attack.ATTACK_TIME };
 			String[] projection2 = { Attack.NAME, Attack.YEAR, Attack.MONTH,
 					Attack.DAY, Attack.H, Attack.M, Attack.S };
 			String selection2 = Attack._ID + "=" + groupId;
@@ -143,6 +152,12 @@ public class Edit1 extends Activity implements OnClickListener {
 
 		cursor.moveToFirst();
 		String name = Utils.getStringFromCol(cursor, Attack.NAME);
+		// long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
+		// Calendar cal = Calendar.getInstance();
+		// cal.setTimeInMillis(attackTime);
+		// String h = Utils.getFromCalendar(cal, Utils.HOUR_OF_DAY_24H);
+		// String m = Utils.getFromCalendar(cal, Utils.MINUTES);
+		// String s = Utils.getFromCalendar(cal, Utils.SECONDS);
 		String h = Utils.getStringFromCol(cursor, Attack.H);
 		String m = Utils.getStringFromCol(cursor, Attack.M);
 		String s = Utils.getStringFromCol(cursor, Attack.S);
@@ -290,8 +305,19 @@ public class Edit1 extends Activity implements OnClickListener {
 						null);
 				Log.d(TAG, "URI Updated=" + updatedchild);
 			} else if (code == EDITION_GROUP) {
+				// Uri uri = Uri
+				// .withAppendedPath(Attack.CONTENT_URI, "" + groupId);
+				// Cursor attackCursor = getContentResolver().query(uri, null,
+				// null, null, null);
+				// attackCursor.moveToFirst();
+				// Utils.getLongFromCol(attackCursor, Attack.ATTACK_TIME);
 				values = new ContentValues();
 				values.put(Attack.NAME, mName.getText().toString());
+				// Calendar cal = Calendar.getInstance();
+				// String h = mH.getText().toString();
+				// String m = mM.getText().toString();
+				// String s = mS.getText().toString();
+
 				values.put(Attack.H, mH.getText().toString());
 				values.put(Attack.M, mM.getText().toString());
 				values.put(Attack.S, mS.getText().toString());
@@ -432,6 +458,5 @@ public class Edit1 extends Activity implements OnClickListener {
 			s.clear();
 			s.insert(0, "0");
 		}
-
 	}
 }
