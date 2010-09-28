@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    
+    
+    <string name="app_name">Time Attack</string>
+<string name="hours">Hours</string>
+<string name="minutes">Minutes</string>
+<string name="seconds">Seconds</string>
+<string name="delta">Delta : </string>
+<string name="fleet_name">Fleet Name</string>
+<string name="travel_duration">Travel Duration : </string>
+<string name="before">Before</string>
+<string name="after">After</string>
+<string name="alarm">Alarm :</string>
+<string name="launch_at">Launch at : </string>
+<string name="ok">OK</string>
+<string name="cancel">Cancel</string>
+<string name="name">Name : </string>
+<string name="launch_time">Launch time : </string>
+<string name="arrival_time">Arrival time : </string>
+<string name="remaining_time">Remaining : </string>
+<string name="date">Date : </string>
+<string name="already_launched">Already launched</string>
+<string name="add_new_fleet">Add a new fleet</string>
+<string name="edit_fleet">Edit fleet</string>
+<string name="delete_fleet">Delete fleet</string>
+<string name="edit_attack">Edit attack</string>
+<string name="delete_attack">Delete attack</string>
+<string name="add_new_attack">Add new attack</string>
+<string name="press_menu">Press menu button to add an attack</string>
+<string name="confirm_delete">Are you sure you want to delete this item ?</string>
+<string name="yes">Yes</string>
+<string name="no">No</string>
+</resources>

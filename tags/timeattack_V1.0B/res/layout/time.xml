@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content" android:paddingLeft="10dip" android:paddingRight="10dip"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/h" android:text="0" style="@style/TextCode"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/TextCode" android:text=":" android:layout_toRightOf="@+id/h" android:id="@+id/label1"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/m" android:text="0" style="@style/TextCode" android:layout_toRightOf="@+id/label1"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/TextCode" android:text=":" android:id="@+id/label2" android:layout_toRightOf="@+id/m"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/s" android:text="0" style="@style/TextCode" android:layout_toRightOf="@+id/label2"></TextView>
+</RelativeLayout>

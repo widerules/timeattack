@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/add" android:title="@string/add_new_fleet"></item>
+<item android:id="@+id/editgroup" android:title="@string/edit_attack"></item><item android:id="@+id/del" android:title="@string/delete_attack"></item>
+
+</menu>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="TextCode">
+
+<item name="android:textColor">@color/black</item>
+</style>
+<style
+	name="TextCode.italic"
+>
+	<item name="android:textStyle">italic</item>
+</style>
+
+
+
+<style name="TextviewFleetStyle" parent="@android:style/TextAppearance.Medium"></style><style name="CustomTitleTheme" parent="android:Theme.Light"><item name="android:windowTitleSize">45dip</item>
+</style>
+
+<style parent="@android:style/TextAppearance" name="ChildText"><item name="android:textColor">@color/black</item>
+</style>
+<style name="ChildText.Italic"><item name="android:textStyle">italic</item>
+</style>
+<style name="ParentText" parent="@android:style/TextAppearance"><item name="android:textColor">@color/white</item>
+</style>
+</resources>
