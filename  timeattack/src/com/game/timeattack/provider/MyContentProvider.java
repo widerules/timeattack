@@ -31,7 +31,7 @@ public class MyContentProvider extends ContentProvider {
 
 	private static final String pre = "DBOpenHelper: ";
 	private static final String DATABASE_NAME = "timeattackdb";
-	private static final int DATABASE_VERSION = 10;
+	private static final int DATABASE_VERSION = 12;
 
 	private static final UriMatcher uriMatcher;
 
@@ -145,33 +145,11 @@ public class MyContentProvider extends ContentProvider {
 
 		switch (uriMatcher.match(uri)) {
 		case ATTACKS:
-			Calendar cal = Calendar.getInstance();
-
-			// if (values.containsKey(Attack.ATTACK_TIME) == false) {
-			// values.put(Attack.ATTACK_TIME, "0");
-			// }
+			if (values.containsKey(Attack.ATTACK_TIME) == false) {
+				values.put(Attack.ATTACK_TIME, "0");
+			}
 			if (values.containsKey(Attack.NAME) == false) {
 				values.put(Attack.NAME, "Attack name");
-			}
-			if (values.containsKey(Attack.YEAR) == false) {
-				values.put(Attack.YEAR, ""
-						+ Utils.getFromCalendar(cal, Utils.YEAR_4_DIGITS));
-			}
-			if (values.containsKey(Attack.MONTH) == false) {
-				int month = Utils.sToI(Utils.getFromCalendar(cal,
-						Utils.MONTH_2_DIGITS));
-				values.put(Attack.MONTH, "" + month);
-			}
-			if (values.containsKey(Attack.DAY) == false) {
-				int day = Utils.sToI(Utils.getFromCalendar(cal,
-						Utils.DAY_2_DIGITS));
-				values.put(Attack.DAY, "" + (day + 1));
-			}
-			if (values.containsKey(Attack.H) == false) {
-				values.put(Attack.H, "01");
-			}
-			if (values.containsKey(Attack.M) == false) {
-				values.put(Attack.M, "01");
 			}
 			break;
 		case FLEETS:
@@ -345,13 +323,7 @@ public class MyContentProvider extends ContentProvider {
 		sAttackProjectionMap = new HashMap<String, String>();
 		sAttackProjectionMap.put(Attack._ID, Attack._ID);
 		sAttackProjectionMap.put(Attack.NAME, Attack.NAME);
-		// sAttackProjectionMap.put(Attack.ATTACK_TIME, Attack.ATTACK_TIME);
-		sAttackProjectionMap.put(Attack.YEAR, Attack.YEAR);
-		sAttackProjectionMap.put(Attack.MONTH, Attack.MONTH);
-		sAttackProjectionMap.put(Attack.DAY, Attack.DAY);
-		sAttackProjectionMap.put(Attack.H, Attack.H);
-		sAttackProjectionMap.put(Attack.M, Attack.M);
-		sAttackProjectionMap.put(Attack.S, Attack.S);
+		sAttackProjectionMap.put(Attack.ATTACK_TIME, Attack.ATTACK_TIME);
 
 		sFleetProjectionMap = new HashMap<String, String>();
 		sFleetProjectionMap.put(Fleet._ID, Fleet._ID);
@@ -379,21 +351,13 @@ public class MyContentProvider extends ContentProvider {
 	}
 
 	public void calcChild(SQLiteDatabase aDb, int agroupId, int achildId) {
-		// String[] projection = { Attack.ATTACK_TIME };
-		String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
-				Attack.H, Attack.M, Attack.S };
+		String[] projection = { Attack.ATTACK_TIME };
 		String selection = Attack._ID + "=" + agroupId;
 		Cursor cursor = aDb.query(Attack.TABLE_NAME, projection, selection,
 				null, null, null, null);
 		cursor.moveToFirst();
-		// long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
+		long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
 
-		int attackYear = Utils.getIntFromCol(cursor, Attack.YEAR);
-		int attackMonth = Utils.getIntFromCol(cursor, Attack.MONTH);
-		int attackDay = Utils.getIntFromCol(cursor, Attack.DAY);
-		int attackH = Utils.getIntFromCol(cursor, Attack.H);
-		int attackM = Utils.getIntFromCol(cursor, Attack.M);
-		int attackS = Utils.getIntFromCol(cursor, Attack.S);
 		String[] projection2 = { Fleet.H, Fleet.M, Fleet.S, Fleet.DELTA };
 		String selection2 = Fleet._ID + "=" + achildId;
 		Cursor cursor2 = aDb.query(Fleet.TABLE_NAME, projection2, selection2,
@@ -405,16 +369,8 @@ public class MyContentProvider extends ContentProvider {
 		int fleetDelta = Utils.getIntFromCol(cursor2, Fleet.DELTA);
 
 		Calendar cal = Calendar.getInstance();
-		// cal.setTimeInMillis(attackTime);
-		cal.set(Calendar.YEAR, attackYear);
-		cal.set(Calendar.MONTH, attackMonth - 1);
-		cal.set(Calendar.DAY_OF_MONTH, attackDay);
-		cal.set(Calendar.HOUR_OF_DAY, attackH);
-		cal.set(Calendar.MINUTE, attackM);
-		cal.set(Calendar.SECOND, attackS);
+		cal.setTimeInMillis(attackTime);
 
-		Log.d(TAG, "new time to launch:" + attackYear + " " + attackMonth + " "
-				+ attackDay);
 		Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS
 				- fleetDelta);
 		ContentValues values = new ContentValues();

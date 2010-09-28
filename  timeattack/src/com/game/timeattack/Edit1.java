@@ -71,40 +71,53 @@ public class Edit1 extends Activity implements OnClickListener {
 		Cursor cursor = null;
 		ContentValues values;
 		String d;
+		String h, m, s, name = "";
+		Calendar cal = null;
+		long attackTime;
 		switch (code) {
 		case EDITION_ADD_GROUP:
 			values = new ContentValues();
 			values.put(Attack.NAME, "Attack");
 
-			// Calendar cal = Calendar.getInstance();
-			// cal.setTimeInMillis(System.currentTimeMillis());
-			// cal.set(Calendar.HOUR_OF_DAY, 6);
-			// cal.set(Calendar.MINUTE, 0);
-			// cal.set(Calendar.SECOND, 0);
-			// values.put(Attack.ATTACK_TIME, "" + cal.getTimeInMillis());
-			values.put(Attack.H, "6");
-			values.put(Attack.M, "0");
-			values.put(Attack.S, "0");
+			cal = Calendar.getInstance();
+			cal.setTimeInMillis(System.currentTimeMillis());
+			cal.set(Calendar.HOUR_OF_DAY, 6);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			values.put(Attack.ATTACK_TIME, "" + cal.getTimeInMillis());
 
 			Uri uri = getContentResolver().insert(Attack.CONTENT_URI, values);
 			newGroupId = new Integer((uri.getPathSegments().get(1)));
 			Log.d(TAG, "new group ID=" + newGroupId);
-			// String[] projection3 = { Attack.NAME, Attack.ATTACK_TIME };
-			String[] projection3 = { Attack.NAME, Attack.YEAR, Attack.MONTH,
-					Attack.DAY, Attack.H, Attack.M, Attack.S };
+			String[] projection3 = { Attack.NAME, Attack.ATTACK_TIME };
 			String selection3 = Attack._ID + "=" + newGroupId;
 			cursor = getContentResolver().query(Attack.CONTENT_URI,
 					projection3, selection3, null, null);
+			cursor.moveToFirst();
+			name = Utils.getStringFromCol(cursor, Attack.NAME);
+			attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
+			cal = Calendar.getInstance();
+			cal.setTimeInMillis(attackTime);
+			h = Utils.getFromCalendar(cal, Utils.HOUR_OF_DAY_24H);
+			m = Utils.getFromCalendar(cal, Utils.MINUTES);
+			s = Utils.getFromCalendar(cal, Utils.SECONDS);
 			newlyInsertedGroupId = newGroupId;
 			break;
 		case EDITION_GROUP:
 			HIDE_DELTA = true;
-			// String[] projection2 = { Attack.NAME, Attack.ATTACK_TIME };
-			String[] projection2 = { Attack.NAME, Attack.YEAR, Attack.MONTH,
-					Attack.DAY, Attack.H, Attack.M, Attack.S };
+			String[] projection2 = { Attack.NAME, Attack.ATTACK_TIME };
 			String selection2 = Attack._ID + "=" + groupId;
 			cursor = getContentResolver().query(Attack.CONTENT_URI,
 					projection2, selection2, null, null);
+			cursor.moveToFirst();
+			name = Utils.getStringFromCol(cursor, Attack.NAME);
+			attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
+			cal = Calendar.getInstance();
+			cal.setTimeInMillis(attackTime);
+			h = Utils.getFromCalendar(cal, Utils.HOUR_OF_DAY_24H);
+			m = Utils.getFromCalendar(cal, Utils.MINUTES);
+			s = Utils.getFromCalendar(cal, Utils.SECONDS);
 			break;
 		case EDITION_ADD_CHILD:
 			values = new ContentValues();
@@ -124,6 +137,10 @@ public class Edit1 extends Activity implements OnClickListener {
 			cursor = getContentResolver().query(Fleet.CONTENT_URI, projection4,
 					selection4, null, null);
 			cursor.moveToFirst();
+			name = Utils.getStringFromCol(cursor, Fleet.NAME);
+			h = Utils.getStringFromCol(cursor, Fleet.H);
+			m = Utils.getStringFromCol(cursor, Fleet.M);
+			s = Utils.getStringFromCol(cursor, Fleet.S);
 			d = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.DELTA));
 			mD = (EditText) findViewById(R.id.d);
 			mD.setText(d);
@@ -136,6 +153,10 @@ public class Edit1 extends Activity implements OnClickListener {
 			cursor = getContentResolver().query(Fleet.CONTENT_URI, projection,
 					selection, null, null);
 			cursor.moveToFirst();
+			name = Utils.getStringFromCol(cursor, Fleet.NAME);
+			h = Utils.getStringFromCol(cursor, Fleet.H);
+			m = Utils.getStringFromCol(cursor, Fleet.M);
+			s = Utils.getStringFromCol(cursor, Fleet.S);
 			d = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.DELTA));
 			mD = (EditText) findViewById(R.id.d);
 			int delta = 0;
@@ -150,26 +171,7 @@ public class Edit1 extends Activity implements OnClickListener {
 			throw new IllegalArgumentException("Wrong Code");
 		}
 
-		cursor.moveToFirst();
-		String name = Utils.getStringFromCol(cursor, Attack.NAME);
-		// long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
-		// Calendar cal = Calendar.getInstance();
-		// cal.setTimeInMillis(attackTime);
-		// String h = Utils.getFromCalendar(cal, Utils.HOUR_OF_DAY_24H);
-		// String m = Utils.getFromCalendar(cal, Utils.MINUTES);
-		// String s = Utils.getFromCalendar(cal, Utils.SECONDS);
-		String h = Utils.getStringFromCol(cursor, Attack.H);
-		String m = Utils.getStringFromCol(cursor, Attack.M);
-		String s = Utils.getStringFromCol(cursor, Attack.S);
 		if (childId == -1) {
-			Calendar cal = Calendar.getInstance();
-			int year = Utils.getIntFromCol(cursor, Attack.YEAR);
-			int month = Utils.getIntFromCol(cursor, Attack.MONTH);
-			int day = Utils.getIntFromCol(cursor, Attack.DAY);
-			cal.set(Calendar.YEAR, year);
-			cal.set(Calendar.MONTH, month - 1);
-			cal.set(Calendar.DAY_OF_MONTH, day);
-
 			date = (TextView) findViewById(R.id.date);
 			date.setText(Utils.getFromCalendar(cal, Utils.FULL_DATE));
 		}
@@ -313,22 +315,28 @@ public class Edit1 extends Activity implements OnClickListener {
 				// Utils.getLongFromCol(attackCursor, Attack.ATTACK_TIME);
 				values = new ContentValues();
 				values.put(Attack.NAME, mName.getText().toString());
-				// Calendar cal = Calendar.getInstance();
-				// String h = mH.getText().toString();
-				// String m = mM.getText().toString();
-				// String s = mS.getText().toString();
-
-				values.put(Attack.H, mH.getText().toString());
-				values.put(Attack.M, mM.getText().toString());
-				values.put(Attack.S, mS.getText().toString());
+				Calendar cal = Calendar.getInstance();
+				cal.clear();
+				int h = Utils.sToI(mH.getText().toString());
+				int m = Utils.sToI(mM.getText().toString());
+				int s = Utils.sToI(mS.getText().toString());
 
 				CharSequence dateString = date.getText();
 				CharSequence yearS = dateString.subSequence(0, 4);
 				CharSequence monthS = dateString.subSequence(5, 7);
 				CharSequence dayS = dateString.subSequence(8, 10);
-				values.put(Attack.YEAR, (String) yearS);
-				values.put(Attack.MONTH, (String) monthS);
-				values.put(Attack.DAY, (String) dayS);
+				int years = Utils.sToI((String) yearS);
+				int monthes = Utils.sToI((String) monthS);
+				int days = Utils.sToI((String) dayS);
+
+				cal.set(Calendar.YEAR, years);
+				cal.set(Calendar.MONTH, monthes - 1);
+				cal.set(Calendar.DAY_OF_MONTH, days);
+				cal.set(Calendar.HOUR_OF_DAY, h);
+				cal.set(Calendar.MINUTE, m);
+				cal.set(Calendar.SECOND, s);
+				values.put(Attack.ATTACK_TIME, cal.getTimeInMillis());
+
 				int updatedgroup = getContentResolver().update(
 						Attack.CONTENT_URI, values, Attack._ID + "=" + groupId,
 						null);
@@ -336,17 +344,28 @@ public class Edit1 extends Activity implements OnClickListener {
 			} else if (code == EDITION_ADD_GROUP) {
 				values = new ContentValues();
 				values.put(Attack.NAME, mName.getText().toString());
-				values.put(Attack.H, mH.getText().toString());
-				values.put(Attack.M, mM.getText().toString());
-				values.put(Attack.S, mS.getText().toString());
+				Calendar cal = Calendar.getInstance();
+				cal.clear();
+				int h = Utils.sToI(mH.getText().toString());
+				int m = Utils.sToI(mM.getText().toString());
+				int s = Utils.sToI(mS.getText().toString());
 
 				CharSequence dateString = date.getText();
 				CharSequence yearS = dateString.subSequence(0, 4);
 				CharSequence monthS = dateString.subSequence(5, 7);
 				CharSequence dayS = dateString.subSequence(8, 10);
-				values.put(Attack.YEAR, (String) yearS);
-				values.put(Attack.MONTH, (String) monthS);
-				values.put(Attack.DAY, (String) dayS);
+				int years = Utils.sToI((String) yearS);
+				int monthes = Utils.sToI((String) monthS);
+				int days = Utils.sToI((String) dayS);
+
+				cal.set(Calendar.YEAR, years);
+				cal.set(Calendar.MONTH, monthes - 1);
+				cal.set(Calendar.DAY_OF_MONTH, days);
+				cal.set(Calendar.HOUR_OF_DAY, h);
+				cal.set(Calendar.MINUTE, m);
+				cal.set(Calendar.SECOND, s);
+				values.put(Attack.ATTACK_TIME, cal.getTimeInMillis());
+
 				int updatedgroup = getContentResolver().update(
 						Attack.CONTENT_URI, values,
 						Attack._ID + "=" + newGroupId, null);

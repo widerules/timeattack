@@ -34,23 +34,12 @@ public class TimeAttack {
 
 		public static final String _ID = "_id";
 		public static final String NAME = "name";
-		// public static final String ATTACK_TIME = "attack_time";
-		public static final String YEAR = "year";
-		public static final String MONTH = "month";
-		public static final String DAY = "day";
-		public static final String H = "h";
-		public static final String M = "m";
-		public static final String S = "s";
+		public static final String ATTACK_TIME = "attack_time";
 
 		public static final String TABLE_CREATE = "CREATE TABLE '" + TABLE_NAME
 				+ "' ('" + _ID
 				+ "' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , '" + NAME
-				+ "' TEXT , '" + YEAR + "' TEXT , '" + MONTH + "' TEXT , '"
-				+ DAY + "' TEXT , '" + H + "' TEXT , '" + M + "' TEXT , '" + S
-				+ "' TEXT );";
-
-		// + "' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , '"
-		// + ATTACK_TIME + "' TEXT );";
+				+ "' TEXT, '" + ATTACK_TIME + "' TEXT );";
 
 	}
 
