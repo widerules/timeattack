@@ -19,7 +19,7 @@
 <activity android:name="FleetDetails"></activity>
 
 <receiver android:name="AlarmReceiver"></receiver>
-<activity android:name="EditAlarm"></activity>
+<activity android:name="EditAlarm" android:windowSoftInputMode="stateAlwaysVisible"></activity>
 </application>
     <uses-sdk android:targetSdkVersion="4" android:minSdkVersion="4"/>
 

@@ -1,6 +1,9 @@
 package com.game.timeattack;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -26,7 +29,6 @@ public class EditAlarm extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.edit_alarm);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
@@ -40,8 +42,8 @@ public class EditAlarm extends Activity implements OnClickListener {
 		attackCursor = getContentResolver().query(uri, null, null, null, null);
 		attackCursor.moveToFirst();
 		uri = Uri.withAppendedPath(Fleet.CONTENT_URI, "" + childId);
-		getContentResolver().query(uri, null, null, null, null);
-
+		fleetCursor = getContentResolver().query(uri, null, null, null, null);
+		fleetCursor.moveToFirst();
 		mH = (EditText) findViewById(R.id.h);
 		mM = (EditText) findViewById(R.id.m);
 		mS = (EditText) findViewById(R.id.s);
@@ -67,9 +69,22 @@ public class EditAlarm extends Activity implements OnClickListener {
 			break;
 		case R.id.ok:
 			checkTextValues();
-			Intent data = getIntent();
+			Calendar cal = Calendar.getInstance();
+			long attackTime = Utils.getLongFromCol(attackCursor,
+					Attack.ATTACK_TIME);
+			cal.setTimeInMillis(attackTime);
+			int delta = Utils.getIntFromCol(fleetCursor, Fleet.DELTA);
+			cal.add(Calendar.SECOND, -delta);
 
-			setResult(CODE_OK, data);
+			int hours = Utils.sToI(mH.getText().toString());
+			int minutes = Utils.sToI(mM.getText().toString());
+			int seconds = Utils.sToI(mS.getText().toString());
+			Utils.addToCalendar(cal, 0, 0, 0, -hours, -minutes, -seconds);
+			ContentValues values = new ContentValues();
+			values.put(Fleet.ALARM, cal.getTimeInMillis());
+			getContentResolver().update(Fleet.CONTENT_URI, values,
+					Fleet._ID + "=" + childId, null);
+			setResult(CODE_OK);
 			finish();
 			break;
 		default:
