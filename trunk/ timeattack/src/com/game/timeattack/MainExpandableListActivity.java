@@ -509,7 +509,6 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			intent = new Intent(this, FleetDetails.class);
 			intent.putExtra("groupId", (int) groupId);
 			intent.putExtra("childId", (int) childId);
-			startActivity(intent);
 			Log.d(TAG, "edited Group=" + groupId + " child=" + childId);
 			startActivity(intent);
 			break;

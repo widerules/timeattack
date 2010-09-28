@@ -9,7 +9,7 @@
 <string name="seconds">Seconds</string>
 <string name="delta">Delta : </string>
 <string name="fleet_name">Fleet Name</string>
-<string name="travel_duration">Travel Duration : </string>
+<string name="duration">Duration : </string>
 <string name="before">Before</string>
 <string name="after">After</string>
 <string name="alarm">Alarm :</string>

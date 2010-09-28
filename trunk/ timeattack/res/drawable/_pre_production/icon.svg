@@ -99,7 +99,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="9.8994949"
      inkscape:cx="32.045057"
-     inkscape:cy="28.797244"
+     inkscape:cy="21.317797"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -130,9 +130,9 @@
        d="M 9.7854298,4.2146954 C 9.5232924,18.188407 14.910888,38.746178 26.533597,43.689071 c 0.234956,0.09737 0.131936,0.05388 0.235705,0.09624 l 0.235706,-0.0825 C 38.637337,38.770435 44.015415,18.193983 43.753175,4.2146933 38.173181,5.5609332 32.621523,6.1970354 27.005008,4.7096702 26.7749,4.6427083 27.004726,4.709151 26.769302,4.6409207 l -0.235705,0.06875 C 20.918928,6.1951837 15.363625,5.5604995 9.7854298,4.2146933 z"
        id="path3656"
        sodipodi:nodetypes="ccccccccc"
-       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\icon.png"
-       inkscape:export-xdpi="90.000008"
-       inkscape:export-ydpi="90.000008" />
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable-ldpi\icon.png"
+       inkscape:export-xdpi="67.538826"
+       inkscape:export-ydpi="67.538826" />
     <path
        sodipodi:type="arc"
        style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#6699ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -143,15 +143,15 @@
        sodipodi:ry="13.081475"
        d="m 6.9700522,26.433243 a 13.081475,13.081475 0 1 1 -26.1629502,0 13.081475,13.081475 0 1 1 26.1629502,0 z"
        transform="matrix(0.96919143,0,0,0.9691974,24.05538,-0.21375391)"
-       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\icon.png"
-       inkscape:export-xdpi="90.000008"
-       inkscape:export-ydpi="90.000008" />
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable-ldpi\icon.png"
+       inkscape:export-xdpi="67.538826"
+       inkscape:export-ydpi="67.538826" />
     <g
        id="g3733"
        style="stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
-       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable\icon.png"
-       inkscape:export-xdpi="90.000008"
-       inkscape:export-ydpi="90.000008">
+       inkscape:export-filename="C:\Documents and Settings\wqtg2733\workspace\Time Attack\res\drawable-ldpi\icon.png"
+       inkscape:export-xdpi="67.538826"
+       inkscape:export-ydpi="67.538826">
       <rect
          transform="matrix(0,-1,-1,0,0,0)"
          ry="0.96919137"
