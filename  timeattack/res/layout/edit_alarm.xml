@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="250dip">
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/label_name" android:text="@string/alarm_label"></TextView><TableRow
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+	android:id="@+id/titles">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:text="@string/hours"
+		></TextView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:text="@string/minutes"
+		></TextView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:text="@string/seconds"
+		></TextView>
+		
+	
+
+</TableRow>
+	
+	<TableRow
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+	android:id="@+id/values">
+		<EditText
+			android:layout_height="wrap_content"
+			android:id="@+id/h"
+			android:hint="h"
+			android:text="0"
+			android:layout_weight="1"
+			android:layout_width="fill_parent" android:selectAllOnFocus="true" android:inputType="number" android:maxLength="2"></EditText>
+		<EditText
+			android:layout_height="wrap_content"
+			android:hint="m"
+			android:id="@+id/m"
+			android:layout_weight="1"
+		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number" android:text="0"></EditText>
+		<EditText
+			android:layout_height="wrap_content"
+			android:hint="s"
+			android:id="@+id/s"
+			android:layout_weight="1"
+		android:layout_width="fill_parent" android:selectAllOnFocus="true" android:maxLength="2" android:inputType="number" android:text="0"></EditText>
+		
+	</TableRow>
+	<TableRow android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_marginTop="10dip"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/cancel" android:layout_weight="1" android:text="@string/cancel"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ok" android:layout_weight="1" android:text="@string/ok"></Button></TableRow>
+
+
+</TableLayout>

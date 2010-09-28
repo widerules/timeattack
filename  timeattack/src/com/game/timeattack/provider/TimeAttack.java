@@ -34,6 +34,7 @@ public class TimeAttack {
 
 		public static final String _ID = "_id";
 		public static final String NAME = "name";
+		// public static final String ATTACK_TIME = "attack_time";
 		public static final String YEAR = "year";
 		public static final String MONTH = "month";
 		public static final String DAY = "day";
@@ -47,6 +48,9 @@ public class TimeAttack {
 				+ "' TEXT , '" + YEAR + "' TEXT , '" + MONTH + "' TEXT , '"
 				+ DAY + "' TEXT , '" + H + "' TEXT , '" + M + "' TEXT , '" + S
 				+ "' TEXT );";
+
+		// + "' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , '"
+		// + ATTACK_TIME + "' TEXT );";
 
 	}
 
@@ -84,6 +88,8 @@ public class TimeAttack {
 		public static final String M = "m";
 		public static final String S = "s";
 		public static final String DELTA = "delta";
+		public static final String ALARM = "alarm";
+		public static final String ALARM_ACTIVATED = "alarm_activated";
 		public static final String LAUNCH_TIME = "launch_time";
 
 		public static final String TABLE_CREATE = "CREATE TABLE '" + TABLE_NAME
@@ -91,6 +97,7 @@ public class TimeAttack {
 				+ "' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , '"
 				+ GROUP_ID + "' INTEGER ,'" + NAME + "' TEXT , '" + H
 				+ "' TEXT , '" + M + "' TEXT, '" + S + "' TEXT , '" + DELTA
+				+ "' TEXT, '" + ALARM_ACTIVATED + "' TEXT, '" + ALARM
 				+ "' TEXT, '" + LAUNCH_TIME + "' TEXT );";
 
 	}

@@ -3,7 +3,10 @@ package com.game.timeattack;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,10 +26,12 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.game.timeattack.provider.TimeAttack.Fleet;
 
 public class FleetDetails extends Activity implements OnClickListener,
-		OnCheckedChangeListener {
-
+		OnCheckedChangeListener,
+		android.widget.CompoundButton.OnCheckedChangeListener {
+	private AlarmManager mAlarmManager;
 	private static final int EDITION_CHILD = 2;
 	private static final String TAG = "FleetDetails";
+	private static final int ALARM_ID = 1;
 	int mGroupId, mChildId;
 	EditText mName, mDuration, mDelta, mAlarm;
 	RadioGroup mRadioGroup;
@@ -41,6 +47,7 @@ public class FleetDetails extends Activity implements OnClickListener,
 		setContentView(R.layout.table_fleet_edit_layout);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 				R.layout.custom_fleet_detail_title);
+		mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		Bundle extras = getIntent().getExtras();
 		if (extras == null) {
 			throw new IllegalArgumentException(
@@ -63,16 +70,23 @@ public class FleetDetails extends Activity implements OnClickListener,
 		mDuration.setOnClickListener(this);
 		mDelta.setOnClickListener(this);
 		mName.setOnClickListener(this);
+		mAlarm.setOnClickListener(this);
 		mRadioGroup.setOnCheckedChangeListener(this);
+		mAlarmCheckBox.setOnCheckedChangeListener(this);
 
 		Cursor fleetCursor = getContentResolver().query(Fleet.CONTENT_URI,
-				new String[] { Fleet.DELTA }, Fleet._ID + "=" + mChildId, null,
-				null);
+				new String[] { Fleet.DELTA, Fleet.ALARM_ACTIVATED },
+				Fleet._ID + "=" + mChildId, null, null);
 		fleetCursor.moveToFirst();
 
 		int delta = Utils.getIntFromCol(fleetCursor, Fleet.DELTA);
 		if (delta < 0) {
 			mAfter.setChecked(true);
+		}
+		Boolean isAlarmActive = new Boolean(Utils.getStringFromCol(fleetCursor,
+				Fleet.ALARM_ACTIVATED));
+		if (isAlarmActive) {
+			mAlarmCheckBox.setChecked(true);
 		}
 
 		TextView timeOfTheAttack = (TextView) findViewById(R.id.time_of_the_attack);
@@ -139,23 +153,28 @@ public class FleetDetails extends Activity implements OnClickListener,
 		Intent intent = new Intent(this, Edit1.class);
 		intent.putExtra("groupId", (int) mGroupId);
 		intent.putExtra("childId", (int) mChildId);
-		intent.putExtra("code", EDITION_CHILD);
 		Log.d(TAG, "edited Group=" + mGroupId + " child=" + mChildId);
 		switch (v.getId()) {
 		case R.id.travel_duration_edittext:
+			intent.putExtra("code", EDITION_CHILD);
 			intent.putExtra("HIDE_DELTA", true);
 			intent.putExtra("HIDE_NAME", true);
 			intent.putExtra("HIDE_DATE", true);
 			break;
 		case R.id.delta_edittext:
+			intent.putExtra("code", EDITION_CHILD);
 			intent.putExtra("HIDE_H_M_S", true);
 			intent.putExtra("HIDE_NAME", true);
 			intent.putExtra("HIDE_DATE", true);
 			break;
 		case R.id.fleet_name_edittext:
+			intent.putExtra("code", EDITION_CHILD);
 			intent.putExtra("HIDE_DELTA", true);
 			intent.putExtra("HIDE_H_M_S", true);
 			intent.putExtra("HIDE_DATE", true);
+			break;
+		case R.id.alarm_edittext:
+			intent.setClass(this, EditAlarm.class);
 			break;
 		default:
 			throw new IllegalArgumentException("Button not handled");
@@ -195,5 +214,49 @@ public class FleetDetails extends Activity implements OnClickListener,
 			throw new IllegalArgumentException("Radio Button not handled");
 		}
 		update();
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+		switch (buttonView.getId()) {
+		case R.id.alarm_checkbox:
+			if (isChecked) {
+				Cursor fleetCursor = getContentResolver().query(
+						Fleet.CONTENT_URI,
+						new String[] { Fleet.ALARM, Fleet.NAME,
+								Fleet.ALARM_ACTIVATED },
+						Fleet._ID + "=" + mChildId, null, null);
+				fleetCursor.moveToFirst();
+				String name = Utils.getStringFromCol(fleetCursor, Fleet.NAME);
+				// long when = Utils.getLongFromCol(cursor, Fleet.ALARM);
+				long when = System.currentTimeMillis() + 10000;
+				Intent intent = new Intent(this, AlarmReceiver.class);
+				intent.putExtra("fleetName", name);
+				intent.putExtra("childId", mChildId);
+				PendingIntent pendingIntent = PendingIntent
+						.getBroadcast(getApplicationContext(), ALARM_ID
+								+ mChildId, intent, 0);
+				mAlarmManager.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
+
+				ContentValues values = new ContentValues();
+				values.put(Fleet.ALARM_ACTIVATED, "true");
+				getContentResolver().update(Fleet.CONTENT_URI, values,
+						Fleet._ID + "=" + mChildId, null);
+			} else {
+				PendingIntent pendingIntent = PendingIntent
+						.getBroadcast(getApplicationContext(), ALARM_ID
+								+ mChildId, new Intent(getApplicationContext(),
+								AlarmReceiver.class), 0);
+				mAlarmManager.cancel(pendingIntent);
+				ContentValues values = new ContentValues();
+				values.put(Fleet.ALARM_ACTIVATED, "false");
+				getContentResolver().update(Fleet.CONTENT_URI, values,
+						Fleet._ID + "=" + mChildId, null);
+			}
+			break;
+		default:
+			throw new IllegalArgumentException("CheckButton not handled");
+		}
 	}
 }
