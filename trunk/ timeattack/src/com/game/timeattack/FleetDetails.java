@@ -105,7 +105,7 @@ public class FleetDetails extends Activity implements OnClickListener,
 
 	private void update() {
 		String[] projection = { Fleet.NAME, Fleet.H, Fleet.M, Fleet.S,
-				Fleet.DELTA, Fleet.LAUNCH_TIME };
+				Fleet.DELTA, Fleet.LAUNCH_TIME, Fleet.ALARM };
 		String selection = Fleet._ID + "=" + mChildId;
 		Cursor cursor = getContentResolver().query(Fleet.CONTENT_URI,
 				projection, selection, null, null);
@@ -125,7 +125,6 @@ public class FleetDetails extends Activity implements OnClickListener,
 		}
 		mDelta.setText("" + Math.abs(delta));
 		Calendar cal = Calendar.getInstance();
-		cal.setLenient(true);
 		cal.set(Calendar.MINUTE, Utils.getIntFromCol(cursor, Fleet.M));
 		cal.set(Calendar.SECOND, Utils.getIntFromCol(cursor, Fleet.S));
 		String h = Utils.getStringFromCol(cursor, Fleet.H);
@@ -140,12 +139,26 @@ public class FleetDetails extends Activity implements OnClickListener,
 				+ ":" + Utils.formatCalendar(cal, Utils.SECONDS);
 		mDuration.setText(duration);
 
-		long time = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
+		long launchTime = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
 		cal = Calendar.getInstance();
-		cal.setTimeInMillis(time);
+		cal.setTimeInMillis(launchTime);
 		mLaunchAt.setText(Utils.formatCalendar(cal, Utils.DAY_2_DIGITS) + " "
 				+ Utils.formatCalendar(cal, Utils.LOCALIZED_MONTH_ABR) + " "
 				+ Utils.formatCalendar(cal, Utils.FULL_12H_TIME));
+		Calendar alarmCal = Calendar.getInstance();
+		long alarmTime = Utils.getLongFromCol(cursor, Fleet.ALARM);
+		alarmCal.setTimeInMillis(alarmTime);
+		long difference = cal.getTimeInMillis() - alarmCal.getTimeInMillis();
+		Calendar diffCal = Calendar.getInstance();
+		diffCal.clear();
+		diffCal.setTimeInMillis(difference);
+		String alarmDelta = Utils.getFromCalendar(diffCal,
+				Utils.HOUR_OF_DAY_24H)
+				+ ":"
+				+ Utils.getFromCalendar(diffCal, Utils.MINUTES)
+				+ ":"
+				+ Utils.getFromCalendar(diffCal, Utils.SECONDS);
+		mAlarm.setText(alarmDelta);
 	}
 
 	@Override
