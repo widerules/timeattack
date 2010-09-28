@@ -288,7 +288,6 @@ public class Edit1 extends Activity implements OnClickListener {
 				int updatedchild = getContentResolver().update(
 						Fleet.CONTENT_URI, values, Fleet._ID + "=" + childId,
 						null);
-				// calcChild(groupId, childId);
 				Log.d(TAG, "URI Updated=" + updatedchild);
 			} else if (code == EDITION_GROUP) {
 				values = new ContentValues();
@@ -308,7 +307,6 @@ public class Edit1 extends Activity implements OnClickListener {
 						Attack.CONTENT_URI, values, Attack._ID + "=" + groupId,
 						null);
 				Log.d(TAG, "URI Updated=" + updatedgroup);
-				// calcGroup(groupId);
 			} else if (code == EDITION_ADD_GROUP) {
 				values = new ContentValues();
 				values.put(Attack.NAME, mName.getText().toString());
@@ -339,7 +337,6 @@ public class Edit1 extends Activity implements OnClickListener {
 						Fleet.CONTENT_URI, values,
 						Fleet._ID + "=" + newChildId, null);
 				Log.d(TAG, "groupId=" + groupId + " newChildId=" + newChildId);
-				// calcChild(groupId, newChildId);
 				Log.d(TAG, "URI Updated=" + updatedchild);
 				newlyInsertedChildId = -1;
 			}
@@ -409,7 +406,6 @@ public class Edit1 extends Activity implements OnClickListener {
 
 	private void checkTextValues() {
 		Editable h, m, s, d;
-		// int hVal, mVal, sVal, dVal;
 		h = mH.getText();
 		m = mM.getText();
 		s = mS.getText();
