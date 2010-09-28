@@ -157,29 +157,18 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 			int fleetDelta = Utils.sToI(delta);
 
-			String[] projection = { Attack.YEAR, Attack.MONTH, Attack.DAY,
-					Attack.H, Attack.M, Attack.S };
+			String[] projection = { Attack.ATTACK_TIME };
 			Cursor attackCursor = getContentResolver().query(
 					Attack.CONTENT_URI, projection, Attack._ID + "=" + groupId,
 					null, null);
 			attackCursor.moveToFirst();
-			int attack_year = Utils.getIntFromCol(attackCursor, Attack.YEAR);
-			int attack_month = Utils.getIntFromCol(attackCursor, Attack.MONTH);
-			int attack_day = Utils.getIntFromCol(attackCursor, Attack.DAY);
-			int attack_h = Utils.getIntFromCol(attackCursor, Attack.H);
-			int attack_m = Utils.getIntFromCol(attackCursor, Attack.M);
-			int attack_s = Utils.getIntFromCol(attackCursor, Attack.S);
-
+			long attackTime = Utils.getLongFromCol(attackCursor,
+					Attack.ATTACK_TIME);
 			/**
 			 * Arrival time
 			 */
 			cal = Calendar.getInstance();
-			cal.set(Calendar.YEAR, attack_year);
-			cal.set(Calendar.MONTH, attack_month - 1);
-			cal.set(Calendar.DAY_OF_MONTH, attack_day);
-			cal.set(Calendar.HOUR_OF_DAY, attack_h);
-			cal.set(Calendar.MINUTE, attack_m);
-			cal.set(Calendar.SECOND, attack_s);
+			cal.setTimeInMillis(attackTime);
 			cal.add(Calendar.SECOND, -fleetDelta);
 			String arrivalTime = Utils.formatCalendar(cal, "%td") + " "
 					+ Utils.formatCalendar(cal, "%tb") + " "
@@ -222,20 +211,10 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 
 			int groupId = Utils.getIntFromCol(cursor, Attack._ID);
 			String name = Utils.getStringFromCol(cursor, Attack.NAME);
-			int year = Utils.getIntFromCol(cursor, Attack.YEAR);
-			int month = Utils.getIntFromCol(cursor, Attack.MONTH);
-			int day = Utils.getIntFromCol(cursor, Attack.DAY);
-			int h = Utils.getIntFromCol(cursor, Attack.H);
-			int m = Utils.getIntFromCol(cursor, Attack.M);
-			int s = Utils.getIntFromCol(cursor, Attack.S);
+			long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
 
 			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.YEAR, year);
-			cal.set(Calendar.MONTH, month - 1);
-			cal.set(Calendar.DAY_OF_MONTH, day);
-			cal.set(Calendar.HOUR_OF_DAY, h);
-			cal.set(Calendar.MINUTE, m);
-			cal.set(Calendar.SECOND, s);
+			cal.setTimeInMillis(attackTime);
 			holder.time.setText(""
 					+ Utils.getFromCalendar(cal, Utils.FULL_12H_TIME));
 			holder.date.setText(""
@@ -425,8 +404,7 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 		setContentView(R.layout.expandablelist);
 
 		Cursor cursor = managedQuery(Attack.CONTENT_URI, new String[] {
-				Attack._ID, Attack.NAME, Attack.YEAR, Attack.MONTH, Attack.DAY,
-				Attack.H, Attack.M, Attack.S }, null, null, null);
+				Attack._ID, Attack.NAME, Attack.ATTACK_TIME }, null, null, null);
 
 		MyCursorTreeAdapter adapter = new MyCursorTreeAdapter(cursor, this);
 		setListAdapter(adapter);
