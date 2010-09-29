@@ -31,11 +31,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 		int icon = R.drawable.status;
 		CharSequence tickerText = context
 				.getString(R.string.notification_ticker)
-				+ mFleetName;
+				+ " " + mFleetName;
 		CharSequence contentTitle = context
 				.getString(R.string.notification_title);
 		CharSequence contentText = context
 				.getString(R.string.notification_content_start)
+				+ " "
 				+ mFleetName
 				+ " "
 				+ context.getString(R.string.notification_content_end);
