@@ -1,6 +1,7 @@
 package com.game.timeattack;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -148,15 +149,18 @@ public class FleetDetails extends Activity implements OnClickListener,
 		long launchTime = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
 		Calendar launchCal = Calendar.getInstance();
 		launchCal.setTimeInMillis(launchTime);
-		Calendar alarmDeltaCal = Calendar.getInstance();
-		alarmDeltaCal.setTimeInMillis(alarmDelta);
-		long difference = launchCal.getTimeInMillis()
-				- alarmDeltaCal.getTimeInMillis();
 
-		Calendar diffCal = Calendar.getInstance();
-		diffCal.clear();
-		diffCal.setTimeInMillis(difference);
-		alarmDeltaCal.add(Calendar.HOUR_OF_DAY, -1);
+		TimeZone timezone = TimeZone.getTimeZone("GMT+00:00");
+		Calendar alarmDeltaCal = Calendar.getInstance(timezone);
+		alarmDeltaCal.setTimeInMillis(alarmDelta);
+		// long difference = launchCal.getTimeInMillis()
+		// - alarmDeltaCal.getTimeInMillis();
+
+		// Calendar diffCal = Calendar.getInstance();
+		// diffCal.clear();
+		// diffCal.setTimeInMillis(difference);
+		// Log.d(TAG, "TimeZone Offset=" +
+		// diffCal.getTimeZone().getRawOffset());
 		String alarmDeltaString = Utils.getFromCalendar(alarmDeltaCal,
 				Utils.HOUR_OF_DAY_24H)
 				+ ":"
@@ -171,6 +175,7 @@ public class FleetDetails extends Activity implements OnClickListener,
 			mAlarmRow.setVisibility(View.GONE);
 		}
 		long alarmTime = launchTime - alarmDelta;
+
 		Calendar alarmCal = Calendar.getInstance();
 		alarmCal.setTimeInMillis(alarmTime);
 		mAlarmAt.setText(Utils.formatCalendar(alarmCal,

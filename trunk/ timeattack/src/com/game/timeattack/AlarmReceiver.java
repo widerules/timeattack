@@ -37,6 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		CharSequence contentText = context
 				.getString(R.string.notification_content_start)
 				+ mFleetName
+				+ " "
 				+ context.getString(R.string.notification_content_end);
 		Intent notificationIntent = new Intent(context,
 				MainExpandableListActivity.class);

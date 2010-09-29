@@ -1,6 +1,7 @@
 package com.game.timeattack;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -46,9 +47,10 @@ public class EditAlarm extends Activity implements OnClickListener {
 		mS = (EditText) findViewById(R.id.s);
 
 		long alarmDelta = Utils.getLongFromCol(fleetCursor, Fleet.ALARM_DELTA);
-		Calendar alarmCal = Calendar.getInstance();
+		TimeZone timezone = TimeZone.getTimeZone("GMT+00:00");
+		Calendar alarmCal = Calendar.getInstance(timezone);
+		alarmCal.clear();
 		alarmCal.setTimeInMillis(alarmDelta);
-		alarmCal.add(Calendar.HOUR_OF_DAY, -1);
 		mH.setText(Utils.getFromCalendar(alarmCal, Utils.HOUR_OF_DAY_24H));
 		mM.setText(Utils.getFromCalendar(alarmCal, Utils.MINUTES));
 		mS.setText(Utils.getFromCalendar(alarmCal, Utils.SECONDS));
@@ -72,9 +74,6 @@ public class EditAlarm extends Activity implements OnClickListener {
 			int hours = Utils.sToI(mH.getText().toString());
 			int minutes = Utils.sToI(mM.getText().toString());
 			int seconds = Utils.sToI(mS.getText().toString());
-			// alarmDeltaCal.set(Calendar.HOUR_OF_DAY, hours + 1);
-			// alarmDeltaCal.set(Calendar.MINUTE, minutes);
-			// alarmDeltaCal.set(Calendar.SECOND, seconds);
 
 			ContentValues values = new ContentValues();
 			values.put(Fleet.ALARM_DELTA,
