@@ -3,10 +3,7 @@ package com.game.timeattack;
 import java.util.Calendar;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -29,10 +26,8 @@ import com.game.timeattack.provider.TimeAttack.Fleet;
 public class FleetDetails extends Activity implements OnClickListener,
 		OnCheckedChangeListener,
 		android.widget.CompoundButton.OnCheckedChangeListener {
-	private AlarmManager mAlarmManager;
 	private static final int EDITION_CHILD = 2;
 	private static final String TAG = "FleetDetails";
-	private static final int ALARM_ID = 1;
 	int mGroupId, mChildId;
 	EditText mName, mDuration, mDelta, mAlarm;
 	RadioGroup mRadioGroup;
@@ -49,7 +44,6 @@ public class FleetDetails extends Activity implements OnClickListener,
 		setContentView(R.layout.table_fleet_edit_layout);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 				R.layout.custom_fleet_detail_title);
-		mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		Bundle extras = getIntent().getExtras();
 		if (extras == null) {
 			throw new IllegalArgumentException(
@@ -109,27 +103,32 @@ public class FleetDetails extends Activity implements OnClickListener,
 
 	private void update() {
 		String[] projection = { Fleet.NAME, Fleet.H, Fleet.M, Fleet.S,
-				Fleet.DELTA, Fleet.LAUNCH_TIME, Fleet.ALARM };
-		String selection = Fleet._ID + "=" + mChildId;
+				Fleet.DELTA, Fleet.LAUNCH_TIME, Fleet.ALARM_DELTA,
+				Fleet.ALARM_ACTIVATED };
 		Cursor cursor = getContentResolver().query(Fleet.CONTENT_URI,
-				projection, selection, null, null);
+				projection, Fleet._ID + "=" + mChildId, null, null);
 		cursor.moveToFirst();
-		mName.setText(cursor
-				.getString(cursor.getColumnIndexOrThrow(Fleet.NAME)));
-		String d = cursor.getString(cursor.getColumnIndexOrThrow(Fleet.DELTA));
-		int delta;
-		try {
-			delta = new Integer(d);
-		} catch (Exception e) {
-			delta = 0;
-		}
+
+		/**
+		 * Name
+		 */
+		mName.setText(Utils.getStringFromCol(cursor, Fleet.NAME));
+
+		/**
+		 * Delta
+		 */
+		int delta = Utils.getIntFromCol(cursor, Fleet.DELTA);
 		if (delta < 0) {
 			mAfter.setChecked(true);
 		}
 		mDelta.setText("" + Math.abs(delta));
-		Calendar launchCal = Calendar.getInstance();
-		launchCal.set(Calendar.MINUTE, Utils.getIntFromCol(cursor, Fleet.M));
-		launchCal.set(Calendar.SECOND, Utils.getIntFromCol(cursor, Fleet.S));
+
+		/**
+		 * Remaining time
+		 */
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MINUTE, Utils.getIntFromCol(cursor, Fleet.M));
+		cal.set(Calendar.SECOND, Utils.getIntFromCol(cursor, Fleet.S));
 		String h = Utils.getStringFromCol(cursor, Fleet.H);
 		if (h.length() < 2) {
 			if (h.length() == 0) {
@@ -138,52 +137,56 @@ public class FleetDetails extends Activity implements OnClickListener,
 				h = "0" + h;
 			}
 		}
-		String duration = h + ":"
-				+ Utils.formatCalendar(launchCal, Utils.MINUTES) + ":"
-				+ Utils.formatCalendar(launchCal, Utils.SECONDS);
+		String duration = h + ":" + Utils.formatCalendar(cal, Utils.MINUTES)
+				+ ":" + Utils.formatCalendar(cal, Utils.SECONDS);
 		mDuration.setText(duration);
 
-		long alarmTime = Utils.getLongFromCol(cursor, Fleet.ALARM);
+		/**
+		 * Alarm
+		 */
+		long alarmDelta = Utils.getLongFromCol(cursor, Fleet.ALARM_DELTA);
 		long launchTime = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
-		launchCal = Calendar.getInstance();
+		Calendar launchCal = Calendar.getInstance();
 		launchCal.setTimeInMillis(launchTime);
-		Calendar alarmCal = Calendar.getInstance();
-		alarmCal.setTimeInMillis(alarmTime);
+		Calendar alarmDeltaCal = Calendar.getInstance();
+		alarmDeltaCal.setTimeInMillis(alarmDelta);
 		long difference = launchCal.getTimeInMillis()
-				- alarmCal.getTimeInMillis();
+				- alarmDeltaCal.getTimeInMillis();
 
 		Calendar diffCal = Calendar.getInstance();
 		diffCal.clear();
 		diffCal.setTimeInMillis(difference);
-		diffCal.add(Calendar.HOUR_OF_DAY, -1);
-		if (alarmTime == 0) {
-			mAlarm.setText("00:05:00");
-			launchCal.add(Calendar.MINUTE, -5);
-			ContentValues values = new ContentValues();
-			values.put(Fleet.ALARM, launchCal.getTimeInMillis());
-			getContentResolver().update(Fleet.CONTENT_URI, values,
-					Fleet._ID + "=" + mChildId, null);
-			Log.d(TAG, "Details:"
-					+ Utils.getFromCalendar(launchCal, Utils.FULL_24H_TIME));
-			launchCal.setTimeInMillis(launchTime);
+		alarmDeltaCal.add(Calendar.HOUR_OF_DAY, -1);
+		String alarmDeltaString = Utils.getFromCalendar(alarmDeltaCal,
+				Utils.HOUR_OF_DAY_24H)
+				+ ":"
+				+ Utils.getFromCalendar(alarmDeltaCal, Utils.MINUTES)
+				+ ":" + Utils.getFromCalendar(alarmDeltaCal, Utils.SECONDS);
+		mAlarm.setText(alarmDeltaString);
+		Boolean isActive = new Boolean(Utils.getStringFromCol(cursor,
+				Fleet.ALARM_ACTIVATED));
+		if (isActive) {
+			mAlarmRow.setVisibility(View.VISIBLE);
 		} else {
-			String alarmDelta = Utils.getFromCalendar(diffCal,
-					Utils.HOUR_OF_DAY_24H)
-					+ ":"
-					+ Utils.getFromCalendar(diffCal, Utils.MINUTES)
-					+ ":"
-					+ Utils.getFromCalendar(diffCal, Utils.SECONDS);
-			mAlarm.setText(alarmDelta);
-			Log.d(TAG, "Details:"
-					+ Utils.getFromCalendar(diffCal, "diff="
-							+ Utils.FULL_24H_TIME));
+			mAlarmRow.setVisibility(View.GONE);
 		}
+		long alarmTime = launchTime - alarmDelta;
+		Calendar alarmCal = Calendar.getInstance();
+		alarmCal.setTimeInMillis(alarmTime);
+		mAlarmAt.setText(Utils.formatCalendar(alarmCal,
+				Utils.LOCALIZED_MONTH_ABR)
+				+ " "
+				+ Utils.formatCalendar(alarmCal, Utils.DAY_2_DIGITS)
+				+ " " + Utils.formatCalendar(alarmCal, Utils.FULL_12H_TIME));
+
+		/**
+		 * Launch time
+		 */
 		mLaunchAt.setText(Utils.getFromCalendar(launchCal, Utils
 				.formatCalendar(launchCal, Utils.LOCALIZED_MONTH_ABR)
 				+ " "
 				+ Utils.formatCalendar(launchCal, Utils.DAY_2_DIGITS)
 				+ " " + Utils.formatCalendar(launchCal, Utils.FULL_12H_TIME)));
-		updateAlarmTime();
 	}
 
 	@Override
@@ -264,51 +267,17 @@ public class FleetDetails extends Activity implements OnClickListener,
 				values.put(Fleet.ALARM_ACTIVATED, "true");
 				getContentResolver().update(Fleet.CONTENT_URI, values,
 						Fleet._ID + "=" + mChildId, null);
-				updateAlarmTime();
-
+				update();
 			} else {
 				ContentValues values = new ContentValues();
 				values.put(Fleet.ALARM_ACTIVATED, "false");
 				getContentResolver().update(Fleet.CONTENT_URI, values,
 						Fleet._ID + "=" + mChildId, null);
-				updateAlarmTime();
+				update();
 			}
 			break;
 		default:
 			throw new IllegalArgumentException("CheckButton not handled");
 		}
-	}
-
-	private void updateAlarmTime() {
-		Cursor fleetCursor = getContentResolver()
-				.query(
-						Fleet.CONTENT_URI,
-						new String[] { Fleet.NAME, Fleet.ALARM,
-								Fleet.ALARM_ACTIVATED },
-						Fleet._ID + "=" + mChildId, null, null);
-		fleetCursor.moveToFirst();
-		long when = Utils.getLongFromCol(fleetCursor, Fleet.ALARM);
-		String name = Utils.getStringFromCol(fleetCursor, Fleet.NAME);
-		Intent intent = new Intent(this, AlarmReceiver.class);
-		intent.putExtra("fleetName", name);
-		intent.putExtra("childId", mChildId);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(
-				getApplicationContext(), ALARM_ID + mChildId, intent, 0);
-		Boolean isActive = new Boolean(Utils.getStringFromCol(fleetCursor,
-				Fleet.ALARM_ACTIVATED));
-		if (isActive) {
-			mAlarmManager.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
-			mAlarmRow.setVisibility(View.VISIBLE);
-		} else {
-			mAlarmManager.cancel(pendingIntent);
-			mAlarmRow.setVisibility(View.GONE);
-		}
-		Calendar alarmCal = Calendar.getInstance();
-		alarmCal.setTimeInMillis(when);
-		mAlarmAt.setText(Utils.formatCalendar(alarmCal,
-				Utils.LOCALIZED_MONTH_ABR)
-				+ " "
-				+ Utils.formatCalendar(alarmCal, Utils.DAY_2_DIGITS)
-				+ " " + Utils.formatCalendar(alarmCal, Utils.FULL_12H_TIME));
 	}
 }

@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.game.timeattack.provider.TimeAttack.Attack;
 import com.game.timeattack.provider.TimeAttack.Fleet;
 
 public class EditAlarm extends Activity implements OnClickListener {
@@ -25,6 +24,7 @@ public class EditAlarm extends Activity implements OnClickListener {
 	private int CODE_OK = 1;
 	int groupId, childId;
 	Cursor attackCursor, fleetCursor;
+	Uri uri;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,33 +33,25 @@ public class EditAlarm extends Activity implements OnClickListener {
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
 		if (extras == null) {
-			throw new IllegalArgumentException(
-					"Need groupId, childId and code to launch");
+			throw new IllegalArgumentException("Need childId to launch");
 		}
-		groupId = extras.getInt("groupId");
 		childId = extras.getInt("childId");
-		Uri uri = Uri.withAppendedPath(Attack.CONTENT_URI, "" + groupId);
-		attackCursor = getContentResolver().query(uri, null, null, null, null);
-		attackCursor.moveToFirst();
 		uri = Uri.withAppendedPath(Fleet.CONTENT_URI, "" + childId);
-		fleetCursor = getContentResolver().query(uri, null, null, null, null);
+		fleetCursor = getContentResolver().query(uri,
+				new String[] { Fleet.LAUNCH_TIME, Fleet.ALARM_DELTA }, null,
+				null, null);
 		fleetCursor.moveToFirst();
 		mH = (EditText) findViewById(R.id.h);
 		mM = (EditText) findViewById(R.id.m);
 		mS = (EditText) findViewById(R.id.s);
 
-		long alarmTime = Utils.getLongFromCol(fleetCursor, Fleet.ALARM);
-		Calendar cal = Calendar.getInstance();
-		long launchTime = Utils.getLongFromCol(fleetCursor, Fleet.LAUNCH_TIME);
-		cal.setTimeInMillis(launchTime);
-		long difference = launchTime - alarmTime;
-		Calendar diff = Calendar.getInstance();
-		diff.clear();
-		diff.setTimeInMillis(difference);
-		diff.add(Calendar.HOUR_OF_DAY, -1);
-		mH.setText(Utils.getFromCalendar(diff, Utils.HOUR_OF_DAY_24H));
-		mM.setText(Utils.getFromCalendar(diff, Utils.MINUTES));
-		mS.setText(Utils.getFromCalendar(diff, Utils.SECONDS));
+		long alarmDelta = Utils.getLongFromCol(fleetCursor, Fleet.ALARM_DELTA);
+		Calendar alarmCal = Calendar.getInstance();
+		alarmCal.setTimeInMillis(alarmDelta);
+		alarmCal.add(Calendar.HOUR_OF_DAY, -1);
+		mH.setText(Utils.getFromCalendar(alarmCal, Utils.HOUR_OF_DAY_24H));
+		mM.setText(Utils.getFromCalendar(alarmCal, Utils.MINUTES));
+		mS.setText(Utils.getFromCalendar(alarmCal, Utils.SECONDS));
 		cancel = (Button) findViewById(R.id.cancel);
 		cancel.setOnClickListener(this);
 		ok = (Button) findViewById(R.id.ok);
@@ -76,17 +68,17 @@ public class EditAlarm extends Activity implements OnClickListener {
 			break;
 		case R.id.ok:
 			checkTextValues();
-			Calendar cal = Calendar.getInstance();
-			long launchTime = Utils.getLongFromCol(fleetCursor,
-					Fleet.LAUNCH_TIME);
-			cal.setTimeInMillis(launchTime);
-
+			// Calendar alarmDeltaCal = Calendar.getInstance();
 			int hours = Utils.sToI(mH.getText().toString());
 			int minutes = Utils.sToI(mM.getText().toString());
 			int seconds = Utils.sToI(mS.getText().toString());
-			Utils.addToCalendar(cal, 0, 0, 0, -hours, -minutes, -seconds);
+			// alarmDeltaCal.set(Calendar.HOUR_OF_DAY, hours + 1);
+			// alarmDeltaCal.set(Calendar.MINUTE, minutes);
+			// alarmDeltaCal.set(Calendar.SECOND, seconds);
+
 			ContentValues values = new ContentValues();
-			values.put(Fleet.ALARM, cal.getTimeInMillis());
+			values.put(Fleet.ALARM_DELTA,
+					1000 * (seconds + 60 * minutes + 3600 * hours));
 			getContentResolver().update(Fleet.CONTENT_URI, values,
 					Fleet._ID + "=" + childId, null);
 			setResult(CODE_OK);

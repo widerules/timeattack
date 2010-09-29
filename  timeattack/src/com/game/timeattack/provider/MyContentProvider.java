@@ -5,10 +5,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -19,11 +22,14 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.game.timeattack.AlarmReceiver;
 import com.game.timeattack.Utils;
 import com.game.timeattack.provider.TimeAttack.Attack;
 import com.game.timeattack.provider.TimeAttack.Fleet;
 
 public class MyContentProvider extends ContentProvider {
+	private AlarmManager mAlarmManager;
+
 	public static final String PROVIDER_NAME = "com.game.timeattack.provider.MyContentProvider";
 
 	public static final Uri CONTENT_URI = Uri.parse("content://"
@@ -31,7 +37,7 @@ public class MyContentProvider extends ContentProvider {
 
 	private static final String pre = "DBOpenHelper: ";
 	private static final String DATABASE_NAME = "timeattackdb";
-	private static final int DATABASE_VERSION = 12;
+	private static final int DATABASE_VERSION = 13;
 
 	private static final UriMatcher uriMatcher;
 
@@ -44,6 +50,8 @@ public class MyContentProvider extends ContentProvider {
 	private static final int FLEET_ID = 4;
 
 	private static final String TAG = "MyContentProvider";
+
+	private static final int ALARM_ID = 1;
 
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("kk:mm:ss");
 
@@ -174,8 +182,8 @@ public class MyContentProvider extends ContentProvider {
 			if (values.containsKey(Fleet.LAUNCH_TIME) == false) {
 				values.put(Fleet.LAUNCH_TIME, "0");
 			}
-			if (values.containsKey(Fleet.ALARM) == false) {
-				values.put(Fleet.ALARM, "0");
+			if (values.containsKey(Fleet.ALARM_DELTA) == false) {
+				values.put(Fleet.ALARM_DELTA, "300000");
 			}
 			if (values.containsKey(Fleet.ALARM_ACTIVATED) == false) {
 				values.put(Fleet.ALARM_ACTIVATED, "false");
@@ -334,7 +342,7 @@ public class MyContentProvider extends ContentProvider {
 		sFleetProjectionMap.put(Fleet.S, Fleet.S);
 		sFleetProjectionMap.put(Fleet.DELTA, Fleet.DELTA);
 		sFleetProjectionMap.put(Fleet.LAUNCH_TIME, Fleet.LAUNCH_TIME);
-		sFleetProjectionMap.put(Fleet.ALARM, Fleet.ALARM);
+		sFleetProjectionMap.put(Fleet.ALARM_DELTA, Fleet.ALARM_DELTA);
 		sFleetProjectionMap.put(Fleet.ALARM_ACTIVATED, Fleet.ALARM_ACTIVATED);
 
 	}
@@ -351,33 +359,53 @@ public class MyContentProvider extends ContentProvider {
 	}
 
 	public void calcChild(SQLiteDatabase aDb, int agroupId, int achildId) {
+		mAlarmManager = (AlarmManager) getContext().getSystemService(
+				Context.ALARM_SERVICE);
 		String[] projection = { Attack.ATTACK_TIME };
-		String selection = Attack._ID + "=" + agroupId;
-		Cursor cursor = aDb.query(Attack.TABLE_NAME, projection, selection,
-				null, null, null, null);
+		Cursor cursor = aDb.query(Attack.TABLE_NAME, projection, Attack._ID
+				+ "=" + agroupId, null, null, null, null);
 		cursor.moveToFirst();
 		long attackTime = Utils.getLongFromCol(cursor, Attack.ATTACK_TIME);
 
-		String[] projection2 = { Fleet.H, Fleet.M, Fleet.S, Fleet.DELTA };
-		String selection2 = Fleet._ID + "=" + achildId;
-		Cursor cursor2 = aDb.query(Fleet.TABLE_NAME, projection2, selection2,
-				null, null, null, null);
+		String[] projection2 = { Fleet.NAME, Fleet.H, Fleet.M, Fleet.S,
+				Fleet.DELTA, Fleet.ALARM_DELTA, Fleet.ALARM_ACTIVATED,
+				Fleet.LAUNCH_TIME };
+		Cursor cursor2 = aDb.query(Fleet.TABLE_NAME, projection2, Fleet._ID
+				+ "=" + achildId, null, null, null, null);
 		cursor2.moveToFirst();
 		int fleetH = Utils.getIntFromCol(cursor2, Fleet.H);
 		int fleetM = Utils.getIntFromCol(cursor2, Fleet.M);
 		int fleetS = Utils.getIntFromCol(cursor2, Fleet.S);
 		int fleetDelta = Utils.getIntFromCol(cursor2, Fleet.DELTA);
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(attackTime);
-
-		Utils.addToCalendar(cal, 0, 0, 0, -fleetH, -fleetM, -fleetS
+		Calendar launchCal = Calendar.getInstance();
+		launchCal.setTimeInMillis(attackTime);
+		Utils.addToCalendar(launchCal, 0, 0, 0, -fleetH, -fleetM, -fleetS
 				- fleetDelta);
 		ContentValues values = new ContentValues();
-		values.put(Fleet.LAUNCH_TIME, Utils.getFromCalendar(cal,
-				Utils.MILLISECONDS_SINCE_EPOCH));
-		String where = "_id=" + achildId;
-		int update = aDb.update(Fleet.TABLE_NAME, values, where, null);
+		values.put(Fleet.LAUNCH_TIME, launchCal.getTimeInMillis());
+
+		long launchTime = Utils.getLongFromCol(cursor2, Fleet.LAUNCH_TIME);
+		long alarmDelta = Utils.getLongFromCol(cursor2, Fleet.ALARM_DELTA);
+		Log.d(TAG, "launchTime=" + launchTime + ", alarmDelta=" + alarmDelta);
+		long alarmTime = launchTime - alarmDelta;
+		String name = Utils.getStringFromCol(cursor2, Fleet.NAME);
+		Intent intent = new Intent(getContext(), AlarmReceiver.class);
+		intent.putExtra("fleetName", name);
+		intent.putExtra("childId", achildId);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),
+				ALARM_ID + achildId, intent, 0);
+		Boolean isActive = new Boolean(Utils.getStringFromCol(cursor2,
+				Fleet.ALARM_ACTIVATED));
+		if (isActive) {
+			mAlarmManager
+					.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+		} else {
+			mAlarmManager.cancel(pendingIntent);
+		}
+
+		int update = aDb.update(Fleet.TABLE_NAME, values, "_id=" + achildId,
+				null);
 		Log.d(TAG, "number of lines modified after calculation:" + update);
 
 	}
