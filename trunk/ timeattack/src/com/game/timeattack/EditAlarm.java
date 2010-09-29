@@ -48,15 +48,22 @@ public class EditAlarm extends Activity implements OnClickListener {
 		mM = (EditText) findViewById(R.id.m);
 		mS = (EditText) findViewById(R.id.s);
 
-		mH.setText("0");
-		mM.setText("5");
-		mS.setText("0");
-
+		long alarmTime = Utils.getLongFromCol(fleetCursor, Fleet.ALARM);
+		Calendar cal = Calendar.getInstance();
+		long launchTime = Utils.getLongFromCol(fleetCursor, Fleet.LAUNCH_TIME);
+		cal.setTimeInMillis(launchTime);
+		long difference = launchTime - alarmTime;
+		Calendar diff = Calendar.getInstance();
+		diff.clear();
+		diff.setTimeInMillis(difference);
+		diff.add(Calendar.HOUR_OF_DAY, -1);
+		mH.setText(Utils.getFromCalendar(diff, Utils.HOUR_OF_DAY_24H));
+		mM.setText(Utils.getFromCalendar(diff, Utils.MINUTES));
+		mS.setText(Utils.getFromCalendar(diff, Utils.SECONDS));
 		cancel = (Button) findViewById(R.id.cancel);
 		cancel.setOnClickListener(this);
 		ok = (Button) findViewById(R.id.ok);
 		ok.setOnClickListener(this);
-
 	}
 
 	@Override
@@ -70,11 +77,9 @@ public class EditAlarm extends Activity implements OnClickListener {
 		case R.id.ok:
 			checkTextValues();
 			Calendar cal = Calendar.getInstance();
-			long attackTime = Utils.getLongFromCol(attackCursor,
-					Attack.ATTACK_TIME);
-			cal.setTimeInMillis(attackTime);
-			int delta = Utils.getIntFromCol(fleetCursor, Fleet.DELTA);
-			cal.add(Calendar.SECOND, -delta);
+			long launchTime = Utils.getLongFromCol(fleetCursor,
+					Fleet.LAUNCH_TIME);
+			cal.setTimeInMillis(launchTime);
 
 			int hours = Utils.sToI(mH.getText().toString());
 			int minutes = Utils.sToI(mM.getText().toString());
