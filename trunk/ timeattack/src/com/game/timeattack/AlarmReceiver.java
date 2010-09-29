@@ -1,7 +1,5 @@
 package com.game.timeattack;
 
-import com.game.timeattack.provider.TimeAttack.Fleet;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,7 +8,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import com.game.timeattack.provider.TimeAttack.Fleet;
 
 public class AlarmReceiver extends BroadcastReceiver {
 	private static final int ALARM_ID = 1;
@@ -20,7 +19,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Toast.makeText(context, "Alarme activée", Toast.LENGTH_LONG).show();
 
 		Bundle extras = intent.getExtras();
 		if (extras.isEmpty()) {
@@ -45,6 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		notification.setLatestEventInfo(context, contentTitle, contentText,
 				contentIntent);
 		notification.vibrate = new long[] { 0, 200, 100, 200, 100, 200 };
+		notification.defaults |= Notification.DEFAULT_SOUND;
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notificationManager.notify(ALARM_ID + mChildId, notification);
 

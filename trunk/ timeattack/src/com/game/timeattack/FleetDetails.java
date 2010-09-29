@@ -260,49 +260,17 @@ public class FleetDetails extends Activity implements OnClickListener,
 		switch (buttonView.getId()) {
 		case R.id.alarm_checkbox:
 			if (isChecked) {
-				Cursor fleetCursor = getContentResolver().query(
-						Fleet.CONTENT_URI, new String[] { Fleet.NAME },
-						Fleet._ID + "=" + mChildId, null, null);
-				fleetCursor.moveToFirst();
-				String name = Utils.getStringFromCol(fleetCursor, Fleet.NAME);
-				// long when = Utils.getLongFromCol(fleetCursor, Fleet.ALARM);
-				Intent intent = new Intent(this, AlarmReceiver.class);
-				intent.putExtra("fleetName", name);
-				intent.putExtra("childId", mChildId);
-				// PendingIntent pendingIntent = PendingIntent
-				// .getBroadcast(getApplicationContext(), ALARM_ID
-				// + mChildId, intent, 0);
-				// mAlarmManager.set(AlarmManager.RTC_WAKEUP, when,
-				// pendingIntent);
-
 				ContentValues values = new ContentValues();
 				values.put(Fleet.ALARM_ACTIVATED, "true");
 				getContentResolver().update(Fleet.CONTENT_URI, values,
 						Fleet._ID + "=" + mChildId, null);
-				// Calendar alarmCal = Calendar.getInstance();
-				// alarmCal.setTimeInMillis(when);
-				// mAlarmRow.setVisibility(View.VISIBLE);
-				// mAlarmAt.setText(Utils.formatCalendar(alarmCal,
-				// Utils.DAY_2_DIGITS)
-				// + " "
-				// + Utils.formatCalendar(alarmCal,
-				// Utils.LOCALIZED_MONTH_ABR)
-				// + " "
-				// + Utils.formatCalendar(alarmCal, Utils.FULL_12H_TIME));
-
 				updateAlarmTime();
 
 			} else {
-				// PendingIntent pendingIntent = PendingIntent
-				// .getBroadcast(getApplicationContext(), ALARM_ID
-				// + mChildId, new Intent(getApplicationContext(),
-				// AlarmReceiver.class), 0);
-				// mAlarmManager.cancel(pendingIntent);
 				ContentValues values = new ContentValues();
 				values.put(Fleet.ALARM_ACTIVATED, "false");
 				getContentResolver().update(Fleet.CONTENT_URI, values,
 						Fleet._ID + "=" + mChildId, null);
-				// mAlarmRow.setVisibility(View.GONE);
 				updateAlarmTime();
 			}
 			break;
@@ -312,14 +280,20 @@ public class FleetDetails extends Activity implements OnClickListener,
 	}
 
 	private void updateAlarmTime() {
-		Cursor fleetCursor = getContentResolver().query(Fleet.CONTENT_URI,
-				new String[] { Fleet.ALARM, Fleet.ALARM_ACTIVATED },
-				Fleet._ID + "=" + mChildId, null, null);
+		Cursor fleetCursor = getContentResolver()
+				.query(
+						Fleet.CONTENT_URI,
+						new String[] { Fleet.NAME, Fleet.ALARM,
+								Fleet.ALARM_ACTIVATED },
+						Fleet._ID + "=" + mChildId, null, null);
 		fleetCursor.moveToFirst();
 		long when = Utils.getLongFromCol(fleetCursor, Fleet.ALARM);
+		String name = Utils.getStringFromCol(fleetCursor, Fleet.NAME);
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		intent.putExtra("fleetName", name);
+		intent.putExtra("childId", mChildId);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(
-				getApplicationContext(), ALARM_ID + mChildId, new Intent(
-						getApplicationContext(), AlarmReceiver.class), 0);
+				getApplicationContext(), ALARM_ID + mChildId, intent, 0);
 		Boolean isActive = new Boolean(Utils.getStringFromCol(fleetCursor,
 				Fleet.ALARM_ACTIVATED));
 		if (isActive) {
