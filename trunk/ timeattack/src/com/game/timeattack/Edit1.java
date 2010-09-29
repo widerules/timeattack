@@ -48,7 +48,6 @@ public class Edit1 extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.edit1);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
@@ -370,6 +369,12 @@ public class Edit1 extends Activity implements OnClickListener {
 						Attack.CONTENT_URI, values,
 						Attack._ID + "=" + newGroupId, null);
 				Log.d(TAG, "URI Updated=" + updatedgroup);
+				Intent intent = new Intent(this, Edit1.class);
+				intent.putExtra("code", EDITION_ADD_CHILD);
+				intent.putExtra("groupId", (int) newlyInsertedGroupId);
+				intent.putExtra("childId", -2);
+				intent.putExtra("HIDE_DATE", true);
+				startActivity(intent);
 				newlyInsertedGroupId = -1;
 			} else if (code == EDITION_ADD_CHILD) {
 				values = new ContentValues();
