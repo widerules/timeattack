@@ -12,7 +12,7 @@
 <string name="duration">Duration : </string>
 <string name="before">Before</string>
 <string name="after">After</string>
-<string name="alarm">Alarm delta :</string>
+<string name="alarm_delta">Alarm delta :</string>
 <string name="launch_at">Launch at : </string>
 <string name="ok">OK</string>
 <string name="cancel">Cancel</string>
@@ -33,4 +33,10 @@
 <string name="yes">Yes</string>
 <string name="no">No</string>
 <string name="alarm_label">Time before launch : </string>
+<string name="alarm_set">Alarm set for :</string>
+<string name="alarm_for">Alarm for </string>
+<string name="disabled">disabled</string>
+
+
+<string name="alarm">Alarm : </string>
 </resources>

@@ -45,6 +45,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		notification.setLatestEventInfo(context, contentTitle, contentText,
 				contentIntent);
 		notification.vibrate = new long[] { 0, 200, 100, 200, 100, 200 };
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notificationManager.notify(ALARM_ID + mChildId, notification);
 
 		ContentValues values = new ContentValues();

@@ -21,7 +21,7 @@
 			android:gravity="center"
 			android:layout_centerInParent="true"
 			android:textStyle="bold" style="@style/ChildText"></TextView>
-		<TextView
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/alarm_icon" android:id="@+id/alarm_icon" android:layout_alignParentRight="true" android:visibility="invisible"></ImageView><TextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:text="Delta : "
@@ -41,7 +41,8 @@
 			android:layout_width="wrap_content"
 			android:text=" s "
 			android:textSize="10sp" style="@style/ChildText"></TextView>
-	</RelativeLayout>
+	
+</RelativeLayout>
 	<TableRow
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"

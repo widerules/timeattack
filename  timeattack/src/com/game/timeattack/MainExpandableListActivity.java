@@ -135,19 +135,28 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 						.findViewById(R.id.arrival_time);
 				holder.remainingTime = (TextView) v
 						.findViewById(R.id.remaining_time);
+				holder.alarm = (ImageView) v.findViewById(R.id.alarm_icon);
 			}
 			int id = Utils.getIntFromCol(cursor, Fleet._ID);
 			int groupId = Utils.getIntFromCol(cursor, Fleet.GROUP_ID);
 			String name = Utils.getStringFromCol(cursor, Fleet.NAME);
 			String delta = Utils.getStringFromCol(cursor, Fleet.DELTA);
 			long time = Utils.getLongFromCol(cursor, Fleet.LAUNCH_TIME);
+			Boolean alarmActivated = new Boolean(Utils.getStringFromCol(cursor,
+					Fleet.ALARM_ACTIVATED));
+			if (alarmActivated) {
+				holder.alarm.setVisibility(View.VISIBLE);
+			} else {
+				holder.alarm.setVisibility(View.INVISIBLE);
+			}
 			cal = Calendar.getInstance();
 			cal.setTimeInMillis(time);
 			String launchTime = Utils.getFromCalendar(cal, Utils
-					.formatCalendar(cal, Utils.DAY_2_DIGITS)
+					.formatCalendar(cal, Utils.LOCALIZED_MONTH_ABR)
 					+ " "
-					+ Utils.formatCalendar(cal, Utils.LOCALIZED_MONTH_ABR)
-					+ " " + Utils.formatCalendar(cal, Utils.FULL_12H_TIME));
+					+ Utils.formatCalendar(cal, Utils.DAY_2_DIGITS)
+					+ " "
+					+ Utils.formatCalendar(cal, Utils.FULL_12H_TIME));
 
 			holder.id = id;
 			holder.groupId = groupId;
@@ -170,9 +179,12 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			cal = Calendar.getInstance();
 			cal.setTimeInMillis(attackTime);
 			cal.add(Calendar.SECOND, -fleetDelta);
-			String arrivalTime = Utils.formatCalendar(cal, "%td") + " "
-					+ Utils.formatCalendar(cal, "%tb") + " "
-					+ Utils.formatCalendar(cal, "%tr");
+			String arrivalTime = Utils.getFromCalendar(cal, Utils
+					.formatCalendar(cal, Utils.LOCALIZED_MONTH_ABR)
+					+ " "
+					+ Utils.formatCalendar(cal, Utils.DAY_2_DIGITS)
+					+ " "
+					+ Utils.formatCalendar(cal, Utils.FULL_12H_TIME));
 			holder.arrivalTime.setText(arrivalTime);
 
 			/**
@@ -298,10 +310,11 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 			Uri.Builder builder = Fleet.CONTENT_URI.buildUpon();
 			return managedQuery(builder.build(), new String[] { Fleet._ID,
 					Fleet.GROUP_ID, Fleet.NAME, Fleet.H, Fleet.M, Fleet.S,
-					Fleet.DELTA, Fleet.LAUNCH_TIME }, Fleet.GROUP_ID
-					+ "=="
-					+ groupCursor.getInt(groupCursor
-							.getColumnIndexOrThrow(Fleet._ID)), null,
+					Fleet.DELTA, Fleet.LAUNCH_TIME, Fleet.ALARM_ACTIVATED },
+					Fleet.GROUP_ID
+							+ "=="
+							+ groupCursor.getInt(groupCursor
+									.getColumnIndexOrThrow(Fleet._ID)), null,
 					Fleet.DEFAULT_SORT_ORDER);
 		}
 
@@ -386,6 +399,7 @@ public class MainExpandableListActivity extends ExpandableListActivity {
 	static class ChildViewHolder implements Holder {
 		int id, groupId;
 		TextView name, delta, timeToLaunch, arrivalTime, remainingTime;
+		ImageView alarm;
 
 		@Override
 		public int getGroupId() {
