@@ -77,7 +77,7 @@ public class TimeAttack {
 		public static final String M = "m";
 		public static final String S = "s";
 		public static final String DELTA = "delta";
-		public static final String ALARM = "alarm";
+		public static final String ALARM_DELTA = "alarm_delta";
 		public static final String ALARM_ACTIVATED = "alarm_activated";
 		public static final String LAUNCH_TIME = "launch_time";
 
@@ -86,7 +86,7 @@ public class TimeAttack {
 				+ "' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , '"
 				+ GROUP_ID + "' INTEGER ,'" + NAME + "' TEXT , '" + H
 				+ "' TEXT , '" + M + "' TEXT, '" + S + "' TEXT , '" + DELTA
-				+ "' TEXT, '" + ALARM_ACTIVATED + "' TEXT, '" + ALARM
+				+ "' TEXT, '" + ALARM_ACTIVATED + "' TEXT, '" + ALARM_DELTA
 				+ "' TEXT, '" + LAUNCH_TIME + "' TEXT );";
 
 	}

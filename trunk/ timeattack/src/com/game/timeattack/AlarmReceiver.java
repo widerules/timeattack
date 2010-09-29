@@ -29,10 +29,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 		notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		int icon = R.drawable.status;
-		CharSequence tickerText = "Alarm fleet : " + mFleetName;
-		CharSequence contentTitle = "Alarm";
-		CharSequence contentText = "The fleet " + mFleetName
-				+ " is about to be launched !";
+		CharSequence tickerText = context
+				.getString(R.string.notification_ticker)
+				+ mFleetName;
+		CharSequence contentTitle = context
+				.getString(R.string.notification_title);
+		CharSequence contentText = context
+				.getString(R.string.notification_content_start)
+				+ mFleetName
+				+ context.getString(R.string.notification_content_end);
 		Intent notificationIntent = new Intent(context,
 				MainExpandableListActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
@@ -53,5 +58,4 @@ public class AlarmReceiver extends BroadcastReceiver {
 				Fleet._ID + "=" + mChildId, null);
 
 	}
-
 }
